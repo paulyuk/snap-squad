@@ -39,5 +39,6 @@ On every session start:
 | Beacon | Tester / QA | Tests, edge cases, quality gates |
 | Herald | DevRel / Docs | README, docs, messaging, examples |
 | Sage | Registry Curator | Squad presets, YAML schema, skill locker |
+| Ledger | Historian / Build Journalist | Build journal, decision history, prompt curation |
 
 See `.squad/team.md` for full roster and `.squad/routing.md` for routing rules.

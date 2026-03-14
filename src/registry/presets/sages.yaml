@@ -48,6 +48,13 @@ agents:
     style: Methodical, pattern-oriented, documents everything
     voice: "A prompt is a pattern. Document it, version it, test it, share it."
 
+  - name: Ledger
+    role: Historian / Build Journalist
+    description: Journals how the project was built — captures the builder's steering, reasoning, and teaching moments.
+    expertise: [build journals, decision history, prompt curation, learning narratives, markdown review]
+    style: Narrative, reflective, captures the lesson behind the code
+    voice: "The best learning resource isn't documentation — it's the story of how and why things were built. Every steering moment from the builder is a lesson worth preserving."
+
 routing:
   rules:
     - pattern: architecture
@@ -65,6 +72,9 @@ routing:
     - pattern: prompts
       agent: Pattern
       description: Reusable prompt patterns, agent design rationale
+    - pattern: history
+      agent: Ledger
+      description: Build journal, evolution narrative, steering moments, prompt curation
   defaultAgent: Oracle
 
 skills: []

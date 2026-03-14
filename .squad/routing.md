@@ -10,6 +10,7 @@
 | Tests & quality | Beacon 🔦 | Test coverage, Vitest, edge cases, quality gates |
 | Docs & developer experience | Herald 📢 | README, getting-started, examples, messaging, onboarding |
 | Registry & skill curation | Sage 📚 | Preset manifests, YAML schema, skill locker, MCP tool configs |
+| Build journal & history | Ledger 📖 | Build narrative, steering moments, decision history, prompt curation, markdown review |
 | Session logging | Scribe 📋 | Decision logging, session history, orchestration log |
 
 ## Module Ownership
@@ -28,6 +29,7 @@
 | `.github/copilot-instructions.md` | Compass 🧭 | Herald 📢 |
 | `.squad/` | Maven 🏗️ | Compass 🧭 |
 | `SPEC.md` | Maven 🏗️ | Herald 📢 |
+| `JOURNAL.md` | Ledger 📖 | Maven 🏗️ |
 
 ## Routing Principles
 
@@ -36,4 +38,5 @@
 3. **Quick facts → coordinator answers directly.** Don't spawn for trivial questions.
 4. **Two agents could handle it** → pick the one whose domain is the primary concern.
 5. **Herald reviews all user-facing changes** — README, CLI output, error messages, getting-started.
-6. **Anticipate downstream.** Feature being built? Spawn Beacon for test cases simultaneously.
+6. **Ledger journals after milestones** — Captures steering, decisions, and evolution. Runs in background.
+7. **Anticipate downstream.** Feature being built? Spawn Beacon for test cases simultaneously.

@@ -19,6 +19,7 @@
 | Beacon | Tester / QA | `.squad/agents/beacon/charter.md` | ✅ Active |
 | Herald | DevRel / Docs | `.squad/agents/herald/charter.md` | ✅ Active |
 | Sage | Registry Curator | `.squad/agents/sage/charter.md` | ✅ Active |
+| Ledger | Historian / Build Journalist | `.squad/agents/ledger/charter.md` | ✅ Active |
 | Scribe | Session Logger | `.squad/agents/scribe/charter.md` | 📋 Silent |
 
 ## Coding Agent

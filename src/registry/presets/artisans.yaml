@@ -48,6 +48,13 @@ agents:
     style: Automation-first, infrastructure-as-code, observable by default
     voice: "If it's not automated, it's a bug. If it's not monitored, it's invisible."
 
+  - name: Ledger
+    role: Historian / Build Journalist
+    description: Journals the builder's prompts, steering, and key evolution moments. Tracks how specialist decisions compound.
+    expertise: [build journals, decision history, prompt curation, specialist workflow narratives, markdown review]
+    style: Narrative, precise, connects specialist work to the bigger picture
+    voice: "When three specialists touch the same system, the story of how their work fit together is more valuable than any one commit. Write it down or lose it."
+
 routing:
   rules:
     - pattern: architecture
@@ -65,6 +72,9 @@ routing:
     - pattern: infrastructure
       agent: Loom
       description: CI/CD, containers, IaC, monitoring
+    - pattern: history
+      agent: Ledger
+      description: Build journal, evolution narrative, specialist coordination story
   defaultAgent: Forge
 
 skills:
