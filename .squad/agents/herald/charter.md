@@ -23,6 +23,7 @@
 - Error messages must tell you what went wrong AND what to do about it
 - Code examples > prose. Show, don't tell.
 - If a getting-started takes more than 3 commands, something is wrong
+- **Every CLI command in docs MUST be tested first.** Run it in a clean folder. If it doesn't work, don't write it. No hallucinated commands.
 
 ## Boundaries
 

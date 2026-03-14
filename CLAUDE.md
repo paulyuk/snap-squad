@@ -69,6 +69,7 @@ After completing work:
 - Friendly/safe naming — no tactical/military themes
 - Squad compatibility: output must match bradygaster/squad `.squad/` format exactly
 - Dogfooding: this repo uses its own squad to build itself
+- **No hallucinated commands:** Every CLI command, flag, and tool reference MUST be verified by running it first. If you haven't tested it, don't write it.
 
 ## Git Workflow
 

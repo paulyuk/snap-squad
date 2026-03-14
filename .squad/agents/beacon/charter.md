@@ -22,6 +22,7 @@
 - Test the happy path, the sad path, and the weird path
 - File generation tests: verify exact output matches Squad format
 - CLI tests: verify argument parsing, error handling, help output
+- **Verify every CLI command and flag referenced in docs actually works.** Run it. If `--help` doesn't list it, it doesn't exist.
 
 ## Boundaries
 

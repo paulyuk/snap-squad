@@ -34,8 +34,8 @@
 - **Context:** Squad upstream uses movie universes. We use community/neighborhood theme.
 - **Decision:** No tactical/military/violent themes. Community Builders aesthetic.
 
-### D-006: Dogfooding
-- **By:** Maven
+### D-007: No hallucinated commands
+- **By:** Maven, Herald
 - **Date:** 2026-03-14
-- **Context:** Practice what we preach
-- **Decision:** This repo uses its own squad. The squad that builds snap-squad IS a snap-squad.
+- **Context:** Caught `squad up` (doesn't exist) and `ghcs` (doesn't exist) in README
+- **Decision:** Every CLI command, flag, and tool reference in docs MUST be verified by running it first. If you haven't run it, don't write it. Test instructions in a clean folder before committing.
