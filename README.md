@@ -49,10 +49,10 @@ The catch? Setting up a new squad takes time. Interviews, charters, routing conf
 
 | Preset | Vibe | Agents | Best For |
 |--------|------|--------|----------|
-| [**neighbors**](docs/presets/neighbors.md) | Generalist | Blueprint, Wrench, Lens, Quill, Mosaic, Relay, Val *(light evals)*, Scout, Ledger | General-purpose projects, reliable building |
-| [**dash**](docs/presets/dash.md) | Speed | Turbo, Bolt, Flash | Rapid POCs, hackathons, zero fluff |
-| [**sages**](docs/presets/sages.md) | Mentor | Oracle, Scriptor, Proof, Chronicle, Pattern, Measure, Scout, Ledger | Learning, best practices, architecture review |
-| [**specialists**](docs/presets/specialists.md) | Precision | Chuck 🥋, Forge, Anvil, Chisel, Prism, Loom, Caliber *(deep evals)*, Sensei, Waza, Blitz, Recon, Ledger | DB tuning, security hardening, mass ops, troubleshooting |
+| [**neighbors**](docs/presets/neighbors.md) | Generalist | Blueprint *(architect)*, Wrench *(dev)*, Lens *(QA)*, Quill *(docs)*, Mosaic *(prompts)*, Relay *(GitOps)*, Val *(light evals)*, Scout *(researcher)*, Ledger *(historian)* | General-purpose projects, reliable building |
+| [**dash**](docs/presets/dash.md) | Speed | Turbo *(architect)*, Bolt *(full-stack)*, Flash *(test + docs)* | Rapid POCs, hackathons, zero fluff |
+| [**sages**](docs/presets/sages.md) | Mentor | Oracle *(architect)*, Scriptor *(mentor dev)*, Proof *(test mentor)*, Chronicle *(docs)*, Pattern *(prompts)*, Measure *(evals)*, Scout *(researcher)*, Ledger *(historian)* | Learning, best practices, architecture review |
+| [**specialists**](docs/presets/specialists.md) | Precision | Chuck 🥋 *(debugger)*, Forge *(architect)*, Anvil *(data)*, Chisel *(security)*, Prism *(UI/UX)*, Loom *(infra)*, Caliber *(deep evals)*, Sensei *(skill audit)*, Waza *(skill bench)*, Blitz *(mass ops)*, Recon *(deep research)*, Ledger *(historian)* | DB tuning, security hardening, mass ops, troubleshooting |
 
 > **Neighbors** does light evals (Val spots-checks baselines). Need a full eval pipeline? **Specialists** brings Caliber for deep eval architecture plus Sensei and Waza for skill benchmarking.
 
