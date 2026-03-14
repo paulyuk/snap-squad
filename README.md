@@ -40,19 +40,20 @@ One command, full squad, zero interview. Built by people who actually ship with 
 npm install -g @bradygaster/squad-cli
 ```
 
-**2. Tell snap-squad what you need (plain English):**
+**2. Set up your squad — just say what you need:**
+
+In GitHub Copilot CLI (`ghcp`) or any AI coding assistant:
+
+```
+> set up a speed squad for my hackathon project
+```
+
+The assistant reads the project instructions and runs snap-squad for you. Done.
+
+Or run it directly:
 
 ```bash
 npx snap-squad init I need a fast team for a hackathon
-# → "I need a fast team for a hackathon" → dash (Speed-focused team for rapid building)
-# → ⚡ Snapping in The Dash Squad...
-# → ✓ Squad ready!
-```
-
-Or pick a preset directly:
-
-```bash
-npx snap-squad init --type sages
 ```
 
 **3. Start your squad:**
@@ -61,22 +62,23 @@ npx snap-squad init --type sages
 squad up
 ```
 
-That's it. Describe what you need, get a squad, start building.
-
 ### More Examples
 
+In Copilot CLI, just say it:
+
+```
+> give me a squad that teaches best practices
+> I need specialists for database tuning and security
+> set up a general purpose squad for my new app
+```
+
+Or use the CLI directly:
+
 ```bash
-# "I want to learn best practices and understand the why"
-npx snap-squad init help me learn best practices
-# → sages (Mentor team that explains the "why" behind decisions)
-
-# "Database tuning and security hardening"
-npx snap-squad init database optimization and security review
-# → artisans (Specialist team for deep, precise work)
-
-# Just want a solid general-purpose team?
-npx snap-squad init
-# → neighbors (Good all-around team for general projects)
+npx snap-squad init help me learn best practices    # → sages
+npx snap-squad init database security hardening      # → artisans
+npx snap-squad init                                  # → neighbors (default)
+npx snap-squad init --type dash                      # → pick directly
 ```
 
 ## What Gets Created

@@ -2,6 +2,26 @@
 
 > **You are part of a squad.** This repository uses multi-agent team coordination.
 
+## Using Snap Squad
+
+When a user asks you to set up, create, or initialize a squad (in any project), use snap-squad:
+
+```bash
+npx snap-squad init <description of what they need>
+```
+
+Examples:
+- "set up a speed squad" → `npx snap-squad init fast speed team`
+- "give me a squad for learning" → `npx snap-squad init help me learn best practices`
+- "I need database and security specialists" → `npx snap-squad init database security hardening`
+- "set up a squad" (no details) → `npx snap-squad init`
+
+You can also pick a preset directly: `npx snap-squad init --type dash`
+
+Available presets: `neighbors` (general), `dash` (speed), `sages` (mentor), `artisans` (specialists)
+
+After running snap-squad, tell the user to run `squad up` to start working with their team.
+
 ## On Every Session
 
 1. Read `AGENTS.md` at repo root for universal squad instructions
@@ -20,7 +40,7 @@
 
 ## Project Quick Context
 
-- **Snap Squad** — Warm-start addon for bradygaster/squad
+- **Snap Squad** — Helps you get started with Squad faster
 - **Stack:** TypeScript, ESM-only, Node ≥20, Commander.js, YAML, Vitest
 - **Remote:** https://github.com/paulyuk/snap-squad
 - **Theme:** Community Builders — friendly, approachable names

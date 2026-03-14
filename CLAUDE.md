@@ -20,8 +20,25 @@ You are working in the **Snap Squad** repository — a warm-start addon for [bra
 
 1. **Snap Registry** (`src/registry/`) — YAML manifests defining 4 squad presets
 2. **CLI** (`src/cli.ts`) — `snap-squad init --type <preset>` command
-3. **Generator** (`src/generator/`) — Reads manifests, writes `.squad/` + hook chain files
-4. **Skill Locker** (`src/skills/`) — Pre-configured MCP tool definitions
+3. **Matcher** (`src/matcher.ts`) — Maps plain English descriptions to the right preset
+4. **Generator** (`src/generator/`) — Reads manifests, writes `.squad/` + hook chain files
+5. **Skill Locker** (`src/skills/`) — Pre-configured MCP tool definitions
+
+## Using Snap Squad (for any project)
+
+When someone asks to set up a squad, run:
+
+```bash
+npx snap-squad init <plain English description>
+```
+
+Examples:
+- `npx snap-squad init I need a fast team for a hackathon` → dash
+- `npx snap-squad init help me learn best practices` → sages
+- `npx snap-squad init database security hardening` → artisans
+- `npx snap-squad init` → neighbors (default)
+
+Then tell them to run `squad up`.
 
 ## The Hook Chain (Critical Concept)
 
