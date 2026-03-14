@@ -47,12 +47,16 @@ The catch? Setting up a new squad takes time. Interviews, charters, routing conf
 
 ## Presets
 
-| Preset | Vibe | Best For |
-|--------|------|----------|
-| **neighbors** | Generalist | General-purpose projects, reliable building |
-| **dash** | Speed | Rapid POCs, hackathons, zero fluff |
-| **sages** | Mentor | Learning, best practices, architecture review |
-| **specialists** | Precision | Niche specialization, DB tuning, security hardening |
+| Preset | Vibe | Agents | Best For |
+|--------|------|--------|----------|
+| [**neighbors**](docs/presets/neighbors.md) | Generalist | Blueprint, Wrench, Lens, Quill, Mosaic, Relay, Val *(light evals)*, Scout, Ledger | General-purpose projects, reliable building |
+| [**dash**](docs/presets/dash.md) | Speed | Turbo, Bolt, Flash | Rapid POCs, hackathons, zero fluff |
+| [**sages**](docs/presets/sages.md) | Mentor | Oracle, Scriptor, Proof, Chronicle, Pattern, Measure, Scout, Ledger | Learning, best practices, architecture review |
+| [**specialists**](docs/presets/specialists.md) | Precision | Chuck 🥋, Forge, Anvil, Chisel, Prism, Loom, Caliber *(deep evals)*, Sensei, Waza, Blitz, Recon, Ledger | DB tuning, security hardening, mass ops, troubleshooting |
+
+> **Neighbors** does light evals (Val spots-checks baselines). Need a full eval pipeline? **Specialists** brings Caliber for deep eval architecture plus Sensei and Waza for skill benchmarking.
+
+Click any preset name above to see the full roster — every agent's role, personality, routing rules, and when to use them.
 
 These aren't blank templates. They're squad configurations shaped by real project experience at CoreAI — tested routing rules, proven agent roles, and practical defaults.
 

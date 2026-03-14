@@ -64,6 +64,16 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   logs: [{ preset: 'specialists', weight: 2 }],
   firefight: [{ preset: 'specialists', weight: 5 }],
 
+  // Mass ops signals → specialists (Blitz's domain)
+  'multi-repo': [{ preset: 'specialists', weight: 5 }],
+  'mass update': [{ preset: 'specialists', weight: 5 }],
+  migration: [{ preset: 'specialists', weight: 4 }],
+  'at scale': [{ preset: 'specialists', weight: 4 }],
+  'bulk fix': [{ preset: 'specialists', weight: 5 }],
+  campaign: [{ preset: 'specialists', weight: 3 }],
+  blitz: [{ preset: 'specialists', weight: 5 }],
+  'file issues': [{ preset: 'specialists', weight: 3 }],
+
   // Neighbors signals (general/default)
   general: [{ preset: 'neighbors', weight: 3 }],
   'all purpose': [{ preset: 'neighbors', weight: 3 }],
