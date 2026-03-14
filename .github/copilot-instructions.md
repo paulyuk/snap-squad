@@ -20,7 +20,7 @@ You can also pick a preset directly: `npx snap-squad init --type dash`
 
 Available presets: `neighbors` (general), `dash` (speed), `sages` (mentor), `artisans` (specialists)
 
-After running snap-squad, tell the user to run `squad up` to start working with their team.
+After running snap-squad, the user is already in a squad-aware session — Copilot CLI and VS Code read the hook chain automatically. No extra install needed.
 
 ## On Every Session
 

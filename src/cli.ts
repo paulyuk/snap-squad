@@ -3,7 +3,6 @@
 import { Command } from 'commander';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { execSync } from 'node:child_process';
 import chalk from 'chalk';
 import { loadPreset, listPresets } from './registry/loader.js';
 import { generateSquad } from './generator/index.js';
@@ -25,7 +24,6 @@ program
   .option('-n, --name <name>', 'project name')
   .option('-o, --owner <owner>', 'project owner')
   .option('-f, --force', 'overwrite existing .squad/ directory', false)
-  .option('--no-up', 'skip running squad up after init')
   .action((descriptionWords: string[], opts) => {
     const targetDir = resolve(opts.dir);
     const squadDir = resolve(targetDir, '.squad');
@@ -70,22 +68,9 @@ program
     for (const file of created) {
       console.log(chalk.dim(`  ${file}`));
     }
-
-    // Run squad up unless --no-up
-    if (opts.up !== false) {
-      try {
-        execSync('squad --version', { stdio: 'ignore' });
-        console.log(chalk.blue(`\n🚀 Running ${chalk.bold('squad up')}...\n`));
-        execSync('squad up', { cwd: targetDir, stdio: 'inherit' });
-      } catch {
-        console.log(
-          `\n${chalk.yellow('Note:')} Squad CLI not found. Install it to run your squad:\n`
-        );
-        console.log(chalk.dim('  npm install -g @bradygaster/squad-cli'));
-        console.log(chalk.dim(`  cd ${targetDir}`));
-        console.log(chalk.dim('  squad up\n'));
-      }
-    }
+    console.log(
+      `\n${chalk.yellow('Next:')} Open ${chalk.bold('Copilot CLI')} or ${chalk.bold('VS Code')} in this folder — your AI is already squad-aware.\n`
+    );
   });
 
 program

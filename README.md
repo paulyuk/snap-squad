@@ -18,7 +18,7 @@ Snap Squad gives you **ready-to-hire squads trained by builders at CoreAI**. The
 npx snap-squad init --type dash
 # → .squad/ created with a speed-focused team
 # → Hook chain (AGENTS.md, CLAUDE.md, copilot-instructions) wired up
-# → Ready for squad up
+# → Ready to run squad
 ```
 
 One command, full squad, zero interview. Built by people who actually ship with Squad.
@@ -46,19 +46,17 @@ That's it. One command does everything:
 2. Picks the right squad preset from your description (`dash` for speed)
 3. Creates the full `.squad/` directory with agents, routing, and decisions
 4. Writes the hook chain (`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`)
-5. Runs `squad up` to start your team
 
-If Squad isn't installed yet, snap-squad tells you exactly what to do:
+**Now open Copilot CLI or VS Code in that folder.** Your AI reads the hook chain and is already squad-aware — it knows the team, follows routing rules, and logs decisions. No other install needed.
 
-```
-Note: Squad CLI not found. Install it to run your squad:
-  npm install -g @bradygaster/squad-cli
-  squad up
+```bash
+# Copilot CLI — your squad is already active
+ghcs "help me build a REST API"
 ```
 
 ### After Bootstrap: Plain English Works
 
-Once snap-squad has run, your AI assistant knows your squad. In Copilot CLI or any AI tool:
+Once snap-squad has run, your AI assistant knows your squad. In Copilot CLI or VS Code:
 
 ```
 > switch my squad to the sages preset
@@ -67,6 +65,15 @@ Once snap-squad has run, your AI assistant knows your squad. In Copilot CLI or a
 ```
 
 The generated copilot-instructions teach the assistant how to manage your squad.
+
+### Want the Full Squad Runtime?
+
+The [Squad CLI](https://github.com/bradygaster/squad) adds interactive shell, triage, hire, and more:
+
+```bash
+npm install -g @bradygaster/squad-cli
+squad
+```
 
 ### More Examples
 

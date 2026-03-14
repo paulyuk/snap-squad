@@ -38,7 +38,7 @@ Examples:
 - `npx snap-squad init database security hardening` → artisans
 - `npx snap-squad init` → neighbors (default)
 
-Then tell them to run `squad up`.
+Then tell them to open Copilot CLI or VS Code — the hook chain makes the session squad-aware automatically.
 
 ## The Hook Chain (Critical Concept)
 

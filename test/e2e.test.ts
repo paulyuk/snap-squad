@@ -7,9 +7,7 @@ import { tmpdir } from 'node:os';
 const CLI = join(process.cwd(), 'dist', 'cli.js');
 
 function run(args: string, cwd?: string): string {
-  // Always pass --no-up in tests since Squad CLI isn't installed
-  const noUp = args.startsWith('init') ? ' --no-up' : '';
-  return execSync(`node ${CLI} ${args}${noUp}`, {
+  return execSync(`node ${CLI} ${args}`, {
     cwd: cwd || process.cwd(),
     encoding: 'utf-8',
     timeout: 10_000,

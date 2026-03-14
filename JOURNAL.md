@@ -33,7 +33,7 @@ That output became `SPEC.md` — the document that was already in this repo when
 | 4 | `12bfe26` | 12 E2E tests covering full CLI lifecycle | "build a test to ensure this works e2e, and run it" |
 | 5 | `10327b9` | Copilot CLI as primary quickstart path | "when you're in copilot cli, you can bootstrap with English" |
 | 6 | `b4315dd` | Honest bootstrap flow from empty folder | "make sure the reasoning works on a new folder for someone who has not yet bootstrapped" |
-| 7 | `2843404` | Auto `squad up` after init | "i want to actually run the squad every time" |
+| 7 | `2843404` | Auto `squad` launch after init | "i want to actually run the squad every time" |
 | 8 | `732393b` | Hired Ledger (Historian), wrote this journal | "journal what we did to build this repo" |
 | 9 | `5829c4d` | Generator creates JOURNAL.md, README links to it | "the readme does not have evidence that the ledger did their job" |
 
