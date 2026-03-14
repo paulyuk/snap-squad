@@ -14,10 +14,10 @@ describe('Matcher', () => {
     expect(matchPreset('training project for new developers').preset).toBe('sages');
   });
 
-  it('matches specialist keywords to artisans', () => {
-    expect(matchPreset('I need database tuning and security hardening').preset).toBe('artisans');
-    expect(matchPreset('postgres optimization and performance').preset).toBe('artisans');
-    expect(matchPreset('deep infrastructure and devops work').preset).toBe('artisans');
+  it('matches specialist keywords to specialists', () => {
+    expect(matchPreset('I need database tuning and security hardening').preset).toBe('specialists');
+    expect(matchPreset('postgres optimization and performance').preset).toBe('specialists');
+    expect(matchPreset('deep infrastructure and devops work').preset).toBe('specialists');
   });
 
   it('defaults to neighbors for general descriptions', () => {

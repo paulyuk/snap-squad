@@ -83,12 +83,14 @@ describe('Generator', () => {
     expect(copilotMd).toContain('.squad/team.md');
   });
 
-  it('generates skill references for artisans', () => {
-    const preset = loadPreset('artisans');
+  it('generates skill references for specialists', () => {
+    const preset = loadPreset('specialists');
     generateSquad({ targetDir: tempDir, preset });
 
     const mcpMd = readFileSync(join(tempDir, '.squad', 'mcp-config.md'), 'utf-8');
     expect(mcpMd).toContain('postgres-toolbox');
     expect(mcpMd).toContain('security-scanner');
+    expect(mcpMd).toContain('sensei');
+    expect(mcpMd).toContain('waza');
   });
 });

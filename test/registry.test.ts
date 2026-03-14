@@ -7,7 +7,7 @@ describe('Registry Loader', () => {
     expect(presets).toContain('neighbors');
     expect(presets).toContain('dash');
     expect(presets).toContain('sages');
-    expect(presets).toContain('artisans');
+    expect(presets).toContain('specialists');
     expect(presets.length).toBe(4);
   });
 
@@ -31,9 +31,9 @@ describe('Registry Loader', () => {
     expect(preset.vibe).toBe('mentor');
   });
 
-  it('loads the artisans preset', () => {
-    const preset = loadPreset('artisans');
-    expect(preset.name).toBe('artisans');
+  it('loads the specialists preset', () => {
+    const preset = loadPreset('specialists');
+    expect(preset.name).toBe('specialists');
     expect(preset.skills.length).toBeGreaterThan(0);
   });
 

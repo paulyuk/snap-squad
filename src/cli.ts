@@ -13,13 +13,13 @@ const program = new Command();
 program
   .name('snap-squad')
   .description('Get started with Squad faster — ready-made squad presets')
-  .version('0.1.0');
+  .version('0.3.0');
 
 program
   .command('init')
   .description('Initialize a squad — describe what you need or pick a preset')
   .argument('[description...]', 'describe your project in plain English')
-  .option('-t, --type <preset>', 'pick a preset directly (neighbors, dash, sages, artisans)')
+  .option('-t, --type <preset>', 'pick a preset directly (neighbors, dash, sages, specialists)')
   .option('-d, --dir <directory>', 'target directory', '.')
   .option('-n, --name <name>', 'project name')
   .option('-o, --owner <owner>', 'project owner')

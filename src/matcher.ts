@@ -31,21 +31,29 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   why: [{ preset: 'sages', weight: 2 }],
   review: [{ preset: 'sages', weight: 2 }],
 
-  // Artisans signals
-  database: [{ preset: 'artisans', weight: 4 }],
-  postgres: [{ preset: 'artisans', weight: 5 }],
-  security: [{ preset: 'artisans', weight: 5 }],
-  hardening: [{ preset: 'artisans', weight: 5 }],
-  performance: [{ preset: 'artisans', weight: 3 }],
-  optimize: [{ preset: 'artisans', weight: 3 }],
-  specialist: [{ preset: 'artisans', weight: 4 }],
-  deep: [{ preset: 'artisans', weight: 2 }],
-  tuning: [{ preset: 'artisans', weight: 4 }],
-  infrastructure: [{ preset: 'artisans', weight: 3 }],
-  devops: [{ preset: 'artisans', weight: 3 }],
-  ui: [{ preset: 'artisans', weight: 2 }],
-  accessibility: [{ preset: 'artisans', weight: 4 }],
-  cicd: [{ preset: 'artisans', weight: 3 }],
+  // Artisans → Specialists signals
+  database: [{ preset: 'specialists', weight: 4 }],
+  postgres: [{ preset: 'specialists', weight: 5 }],
+  security: [{ preset: 'specialists', weight: 5 }],
+  hardening: [{ preset: 'specialists', weight: 5 }],
+  performance: [{ preset: 'specialists', weight: 3 }],
+  optimize: [{ preset: 'specialists', weight: 3 }],
+  specialist: [{ preset: 'specialists', weight: 4 }],
+  deep: [{ preset: 'specialists', weight: 2 }],
+  tuning: [{ preset: 'specialists', weight: 4 }],
+  infrastructure: [{ preset: 'specialists', weight: 3 }],
+  devops: [{ preset: 'specialists', weight: 3 }],
+  ui: [{ preset: 'specialists', weight: 2 }],
+  accessibility: [{ preset: 'specialists', weight: 4 }],
+  cicd: [{ preset: 'specialists', weight: 3 }],
+
+  // Eval signals → specialists (deepest eval tooling)
+  eval: [{ preset: 'specialists', weight: 3 }],
+  evals: [{ preset: 'specialists', weight: 3 }],
+  benchmark: [{ preset: 'specialists', weight: 3 }],
+  'agent-as-judge': [{ preset: 'specialists', weight: 4 }],
+  baseline: [{ preset: 'specialists', weight: 2 }],
+  'skill quality': [{ preset: 'specialists', weight: 4 }],
 
   // Neighbors signals (general/default)
   general: [{ preset: 'neighbors', weight: 3 }],
@@ -64,7 +72,7 @@ export function matchPreset(description: string): PresetMatch {
     neighbors: 0,
     dash: 0,
     sages: 0,
-    artisans: 0,
+    specialists: 0,
   };
 
   for (const [keyword, mappings] of Object.entries(KEYWORDS)) {
@@ -89,7 +97,7 @@ export function matchPreset(description: string): PresetMatch {
     neighbors: 'Good all-around team for general projects',
     dash: 'Speed-focused team for rapid building',
     sages: 'Mentor team that explains the "why" behind decisions',
-    artisans: 'Specialist team for deep, precise work',
+    specialists: 'Specialist team for deep, precise work',
   };
 
   return {

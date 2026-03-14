@@ -32,7 +32,7 @@ describe('E2E: snap-squad CLI', () => {
     expect(output).toContain('neighbors');
     expect(output).toContain('dash');
     expect(output).toContain('sages');
-    expect(output).toContain('artisans');
+    expect(output).toContain('specialists');
   });
 
   // --- snap-squad init --type <preset> ---
@@ -79,12 +79,14 @@ describe('E2E: snap-squad CLI', () => {
     expect(teamMd).toContain('Bolt');
   });
 
-  it('init --type artisans includes skill references', () => {
-    run(`init --type artisans --dir "${tempDir}"`);
+  it('init --type specialists includes skill references', () => {
+    run(`init --type specialists --dir "${tempDir}"`);
 
     const mcpMd = readFileSync(join(tempDir, '.squad', 'mcp-config.md'), 'utf-8');
     expect(mcpMd).toContain('postgres-toolbox');
     expect(mcpMd).toContain('security-scanner');
+    expect(mcpMd).toContain('sensei');
+    expect(mcpMd).toContain('waza');
   });
 
   // --- Plain English init ---
@@ -103,10 +105,10 @@ describe('E2E: snap-squad CLI', () => {
     expect(output).toContain('Sages');
   });
 
-  it('plain English: "database security" resolves to artisans', () => {
+  it('plain English: "database security" resolves to specialists', () => {
     const output = run(`init database security hardening --dir "${tempDir}"`);
-    expect(output).toContain('artisans');
-    expect(output).toContain('Artisans');
+    expect(output).toContain('specialists');
+    expect(output).toContain('Specialists');
   });
 
   it('plain English: no description defaults to neighbors', () => {
