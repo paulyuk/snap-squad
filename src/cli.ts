@@ -1,29 +1,38 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve, dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import chalk from 'chalk';
 import { loadPreset, listPresets } from './registry/loader.js';
 import { generateSquad } from './generator/index.js';
 import { matchPreset } from './matcher.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const pkg = JSON.parse(readFileSync(join(__dirname, '..', 'package.json'), 'utf-8'));
+
+const availablePresets = listPresets();
 
 const program = new Command();
 
 program
   .name('snap-squad')
   .description('Get started with Squad faster — ready-made squad presets')
-  .version('0.3.0');
+  .version(pkg.version);
 
 program
   .command('init')
   .description('Initialize a squad — describe what you need or pick a preset')
   .argument('[description...]', 'describe your project in plain English')
-  .option('-t, --type <preset>', 'pick a preset directly (neighbors, dash, sages, specialists)')
+  .option('-t, --type <preset>', `pick a preset directly (${availablePresets.join(', ')})`)
   .option('-d, --dir <directory>', 'target directory', '.')
   .option('-n, --name <name>', 'project name')
   .option('-o, --owner <owner>', 'project owner')
   .option('-f, --force', 'overwrite existing .squad/ directory', false)
+  .option('--explain', 'show why a preset was chosen')
+  .option('--dry-run', 'show what would be created without writing files')
   .action((descriptionWords: string[], opts) => {
     const targetDir = resolve(opts.dir);
     const squadDir = resolve(targetDir, '.squad');
@@ -42,16 +51,32 @@ program
       const match = matchPreset(description);
       presetName = match.preset;
       console.log(chalk.dim(`  "${description}" → ${chalk.bold(match.preset)} (${match.why})\n`));
+      if (opts.explain && match.matchedKeywords.length > 0) {
+        console.log(chalk.dim('  Matched keywords:'));
+        for (const kw of match.matchedKeywords) {
+          console.log(chalk.dim(`    • "${kw.keyword}" → ${kw.preset} (+${kw.weight})`));
+        }
+        console.log();
+      }
     } else {
-      presetName = 'neighbors';
+      presetName = availablePresets.includes('neighbors') ? 'neighbors' : availablePresets[0] ?? 'neighbors';
     }
 
     let preset;
     try {
       preset = loadPreset(presetName);
     } catch (err) {
-      console.error(chalk.red(`✗ ${(err as Error).message}`));
+      const message = err instanceof Error ? err.message : String(err);
+      console.error(chalk.red(`✗ ${message}`));
       process.exit(1);
+    }
+
+    if (opts.dryRun) {
+      console.log(chalk.blue(`🔍 Dry run: would create ${chalk.bold(preset.displayName)} squad\n`));
+      console.log(chalk.dim(`  Agents: ${preset.agents.map(a => a.name).join(', ')}`));
+      console.log(chalk.dim(`  Files: .squad/, AGENTS.md, CLAUDE.md, JOURNAL.md, .github/copilot-instructions.md`));
+      console.log(chalk.dim(`  Target: ${targetDir}\n`));
+      return;
     }
 
     console.log(chalk.blue(`⚡ Snapping in ${chalk.bold(preset.displayName)}...`));

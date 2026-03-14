@@ -1,11 +1,18 @@
-interface PresetMatch {
+export interface KeywordMatch {
+  keyword: string;
+  preset: string;
+  weight: number;
+}
+
+export interface PresetMatch {
   preset: string;
   score: number;
   why: string;
+  matchedKeywords: KeywordMatch[];
 }
 
 const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
-  // Dash signals
+  // --- Dash: speed, POCs, hackathons ---
   fast: [{ preset: 'dash', weight: 3 }],
   quick: [{ preset: 'dash', weight: 3 }],
   speed: [{ preset: 'dash', weight: 3 }],
@@ -18,7 +25,7 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   'ship fast': [{ preset: 'dash', weight: 5 }],
   'no fluff': [{ preset: 'dash', weight: 4 }],
 
-  // Sages signals
+  // --- Sages: learning, mentoring, best practices ---
   learn: [{ preset: 'sages', weight: 4 }],
   teach: [{ preset: 'sages', weight: 4 }],
   mentor: [{ preset: 'sages', weight: 5 }],
@@ -31,7 +38,7 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   why: [{ preset: 'sages', weight: 2 }],
   review: [{ preset: 'sages', weight: 2 }],
 
-  // Artisans → Specialists signals
+  // --- Specialists: deep domain expertise ---
   database: [{ preset: 'specialists', weight: 4 }],
   postgres: [{ preset: 'specialists', weight: 5 }],
   security: [{ preset: 'specialists', weight: 5 }],
@@ -47,7 +54,7 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   accessibility: [{ preset: 'specialists', weight: 4 }],
   cicd: [{ preset: 'specialists', weight: 3 }],
 
-  // Eval signals → specialists (deepest eval tooling)
+  // --- Specialists: evals (Caliber, Sensei, Waza) ---
   eval: [{ preset: 'specialists', weight: 3 }],
   evals: [{ preset: 'specialists', weight: 3 }],
   benchmark: [{ preset: 'specialists', weight: 3 }],
@@ -55,7 +62,7 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   baseline: [{ preset: 'specialists', weight: 2 }],
   'skill quality': [{ preset: 'specialists', weight: 4 }],
 
-  // Troubleshooting signals → specialists (Chuck's domain)
+  // --- Specialists: troubleshooting (Chuck) ---
   debug: [{ preset: 'specialists', weight: 3 }],
   troubleshoot: [{ preset: 'specialists', weight: 4 }],
   'root cause': [{ preset: 'specialists', weight: 5 }],
@@ -64,7 +71,7 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   logs: [{ preset: 'specialists', weight: 2 }],
   firefight: [{ preset: 'specialists', weight: 5 }],
 
-  // Mass ops signals → specialists (Blitz's domain)
+  // --- Specialists: mass ops (Blitz) ---
   'multi-repo': [{ preset: 'specialists', weight: 5 }],
   'mass update': [{ preset: 'specialists', weight: 5 }],
   migration: [{ preset: 'specialists', weight: 4 }],
@@ -74,7 +81,7 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   blitz: [{ preset: 'specialists', weight: 5 }],
   'file issues': [{ preset: 'specialists', weight: 3 }],
 
-  // Neighbors signals (general/default)
+  // --- Neighbors: general / default ---
   general: [{ preset: 'neighbors', weight: 3 }],
   'all purpose': [{ preset: 'neighbors', weight: 3 }],
   balanced: [{ preset: 'neighbors', weight: 3 }],
@@ -85,24 +92,34 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   build: [{ preset: 'neighbors', weight: 1 }],
 };
 
+const REASONS: Record<string, string> = {
+  neighbors: 'Good all-around team for general projects',
+  dash: 'Speed-focused team for rapid building',
+  sages: 'Mentor team that explains the "why" behind decisions',
+  specialists: 'Specialist team for deep, precise work',
+};
+
 export function matchPreset(description: string): PresetMatch {
   const lower = description.toLowerCase();
-  const scores: Record<string, number> = {
-    neighbors: 0,
-    dash: 0,
-    sages: 0,
-    specialists: 0,
-  };
+  const scores: Record<string, number> = {};
+  const matchedKeywords: KeywordMatch[] = [];
 
   for (const [keyword, mappings] of Object.entries(KEYWORDS)) {
-    if (lower.includes(keyword)) {
+    // Use word boundary matching for single words to avoid substring false positives
+    // Multi-word phrases use includes() since they're specific enough
+    const isMatch = keyword.includes(' ')
+      ? lower.includes(keyword)
+      : new RegExp(`\\b${keyword}\\b`).test(lower);
+
+    if (isMatch) {
       for (const { preset, weight } of mappings) {
-        scores[preset] += weight;
+        scores[preset] = (scores[preset] || 0) + weight;
+        matchedKeywords.push({ keyword, preset, weight });
       }
     }
   }
 
-  // Find winner
+  // Find winner (default to neighbors)
   let best = 'neighbors';
   let bestScore = 0;
   for (const [preset, score] of Object.entries(scores)) {
@@ -112,16 +129,10 @@ export function matchPreset(description: string): PresetMatch {
     }
   }
 
-  const reasons: Record<string, string> = {
-    neighbors: 'Good all-around team for general projects',
-    dash: 'Speed-focused team for rapid building',
-    sages: 'Mentor team that explains the "why" behind decisions',
-    specialists: 'Specialist team for deep, precise work',
-  };
-
   return {
     preset: best,
     score: bestScore,
-    why: reasons[best],
+    why: REASONS[best] || `Matched preset: ${best}`,
+    matchedKeywords: matchedKeywords.sort((a, b) => b.weight - a.weight),
   };
 }

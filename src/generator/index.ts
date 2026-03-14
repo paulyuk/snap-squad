@@ -1,6 +1,7 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { join, dirname } from 'node:path';
 import type { Preset, Agent } from '../registry/loader.js';
+import { listPresets } from '../registry/loader.js';
 
 export interface GenerateOptions {
   targetDir: string;
@@ -9,66 +10,65 @@ export interface GenerateOptions {
   owner?: string;
 }
 
+// Sanitize user input for markdown templates
+function sanitize(input: string): string {
+  return input.replace(/[[\](){}|`*_~<>#]/g, '\\$&');
+}
+
 export function generateSquad(options: GenerateOptions): string[] {
   const { targetDir, preset, projectName, owner } = options;
+  const safeName = projectName ? sanitize(projectName) : undefined;
+  const safeOwner = owner ? sanitize(owner) : undefined;
   const squadDir = join(targetDir, '.squad');
   const githubDir = join(targetDir, '.github');
-  const created: string[] = [];
 
-  // Create directories
-  mkdirSync(squadDir, { recursive: true });
-  mkdirSync(githubDir, { recursive: true });
+  // Phase 1: Generate all content in memory (no I/O)
+  const files: { path: string; content: string; label: string }[] = [];
+
+  files.push({ path: join(squadDir, 'team.md'), content: generateTeamMd(preset, safeName, safeOwner), label: '.squad/team.md' });
+  files.push({ path: join(squadDir, 'routing.md'), content: generateRoutingMd(preset), label: '.squad/routing.md' });
+
   for (const agent of preset.agents) {
-    mkdirSync(join(squadDir, 'agents', agent.name.toLowerCase()), { recursive: true });
+    files.push({
+      path: join(squadDir, 'agents', agent.name.toLowerCase(), 'charter.md'),
+      content: generateCharter(agent),
+      label: `.squad/agents/${agent.name.toLowerCase()}/charter.md`,
+    });
   }
 
-  // Generate team.md
-  const teamMd = generateTeamMd(preset, projectName, owner);
-  writeFileSync(join(squadDir, 'team.md'), teamMd);
-  created.push('.squad/team.md');
+  files.push({ path: join(squadDir, 'decisions.md'), content: generateDecisionsMd(preset), label: '.squad/decisions.md' });
+  files.push({ path: join(squadDir, 'mcp-config.md'), content: generateMcpConfigMd(preset), label: '.squad/mcp-config.md' });
+  files.push({ path: join(targetDir, 'AGENTS.md'), content: generateAgentsMd(preset, safeName), label: 'AGENTS.md' });
+  files.push({ path: join(targetDir, 'CLAUDE.md'), content: generateClaudeMd(preset, safeName, safeOwner), label: 'CLAUDE.md' });
+  files.push({ path: join(githubDir, 'copilot-instructions.md'), content: generateCopilotInstructions(preset), label: '.github/copilot-instructions.md' });
+  files.push({ path: join(targetDir, 'JOURNAL.md'), content: generateJournalMd(preset, safeName), label: 'JOURNAL.md' });
 
-  // Generate routing.md
-  const routingMd = generateRoutingMd(preset);
-  writeFileSync(join(squadDir, 'routing.md'), routingMd);
-  created.push('.squad/routing.md');
-
-  // Generate agent charters
-  for (const agent of preset.agents) {
-    const charter = generateCharter(agent);
-    const charterPath = join(squadDir, 'agents', agent.name.toLowerCase(), 'charter.md');
-    writeFileSync(charterPath, charter);
-    created.push(`.squad/agents/${agent.name.toLowerCase()}/charter.md`);
+  // Phase 2: Create directories
+  const dirs = new Set(files.map(f => dirname(f.path)));
+  for (const dir of dirs) {
+    try {
+      mkdirSync(dir, { recursive: true });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      throw new Error(`Failed to create directory "${dir}": ${message}`);
+    }
   }
 
-  // Generate decisions.md
-  const decisionsMd = generateDecisionsMd(preset);
-  writeFileSync(join(squadDir, 'decisions.md'), decisionsMd);
-  created.push('.squad/decisions.md');
+  // Phase 3: Write all files (with error context)
+  const written: string[] = [];
+  try {
+    for (const { path, content, label } of files) {
+      writeFileSync(path, content);
+      written.push(label);
+    }
+  } catch (err) {
+    // Rollback: remove .squad/ if we created it
+    try { rmSync(squadDir, { recursive: true, force: true }); } catch {}
+    const message = err instanceof Error ? err.message : String(err);
+    throw new Error(`Squad generation failed after writing ${written.length}/${files.length} files: ${message}`);
+  }
 
-  // Generate mcp-config.md
-  const mcpMd = generateMcpConfigMd(preset);
-  writeFileSync(join(squadDir, 'mcp-config.md'), mcpMd);
-  created.push('.squad/mcp-config.md');
-
-  // Generate hook chain: AGENTS.md, CLAUDE.md, .github/copilot-instructions.md
-  const agentsMd = generateAgentsMd(preset, projectName);
-  writeFileSync(join(targetDir, 'AGENTS.md'), agentsMd);
-  created.push('AGENTS.md');
-
-  const claudeMd = generateClaudeMd(preset, projectName, owner);
-  writeFileSync(join(targetDir, 'CLAUDE.md'), claudeMd);
-  created.push('CLAUDE.md');
-
-  const copilotMd = generateCopilotInstructions(preset);
-  writeFileSync(join(githubDir, 'copilot-instructions.md'), copilotMd);
-  created.push('.github/copilot-instructions.md');
-
-  // Generate JOURNAL.md (Ledger's home)
-  const journalMd = generateJournalMd(preset, projectName);
-  writeFileSync(join(targetDir, 'JOURNAL.md'), journalMd);
-  created.push('JOURNAL.md');
-
-  return created;
+  return written;
 }
 
 function generateTeamMd(arch: Preset, projectName?: string, owner?: string): string {
@@ -274,6 +274,9 @@ After completing work:
 }
 
 function generateCopilotInstructions(arch: Preset): string {
+  const presetNames = listPresets();
+  const presetList = presetNames.length > 0 ? presetNames.join(', ') : 'neighbors, dash, sages, specialists';
+
   return `# Copilot Instructions — ${arch.team.name}
 
 > **You are part of a squad.** This repository uses multi-agent team coordination.
@@ -302,7 +305,7 @@ npx snap-squad init --type <preset> --force    # switch to a different preset
 npx snap-squad list                            # see available presets
 \`\`\`
 
-Available presets: neighbors (general), dash (speed), sages (mentor), specialists (deep expertise)
+Available presets: ${presetList}
 `;
 }
 

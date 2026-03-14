@@ -34,6 +34,10 @@
     "type": "git",
     "url": "https://github.com/paulyuk/snap-squad.git"
   },
+  "homepage": "https://github.com/paulyuk/snap-squad#readme",
+  "bugs": {
+    "url": "https://github.com/paulyuk/snap-squad/issues"
+  },
   "dependencies": {
     "commander": "^13.0.0",
     "yaml": "^2.7.0",
