@@ -50,8 +50,8 @@ That's it. One command does everything:
 **Now open Copilot CLI or VS Code in that folder.** Your AI reads the hook chain and is already squad-aware — it knows the team, follows routing rules, and logs decisions. No other install needed.
 
 ```bash
-# Start Copilot CLI in your project folder
-gh copilot
+# Start Copilot CLI in your project folder — your squad is already active
+copilot
 # Or just open VS Code — Copilot reads .github/copilot-instructions.md automatically
 ```
 
