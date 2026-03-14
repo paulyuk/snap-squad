@@ -1,42 +1,22 @@
-# Routing Rules — Community Builders
+# Routing Rules — The Neighbors
 
 ## Work Type → Agent
 
 | Work Type | Agent | Examples |
 |-----------|-------|---------|
-| Architecture & scope | Maven 🏗️ | Product direction, system design, trade-offs, code review |
-| Core runtime | Dash ⚡ | CLI implementation, template engine, registry loader, file generation |
-| Prompt & manifest design | Compass 🧭 | Agent charters, system prompts, YAML manifests, preset design |
-| Tests & quality | Beacon 🔦 | Test coverage, Vitest, edge cases, quality gates |
-| Docs & developer experience | Herald 📢 | README, getting-started, examples, messaging, onboarding |
-| Registry & skill curation | Sage 📚 | Preset manifests, YAML schema, skill locker, MCP tool configs |
-| Build journal & history | Ledger 📖 | Build narrative, steering moments, decision history, prompt curation, markdown review |
-| Session logging | Scribe 📋 | Decision logging, session history, orchestration log |
-
-## Module Ownership
-
-| Module | Primary | Secondary |
-|--------|---------|-----------|
-| `src/cli.ts` | Dash ⚡ | Maven 🏗️ |
-| `src/generator/` | Dash ⚡ | Compass 🧭 |
-| `src/registry/` | Sage 📚 | Compass 🧭 |
-| `src/registry/presets/` | Compass 🧭 | Sage 📚 |
-| `src/skills/` | Sage 📚 | Dash ⚡ |
-| `test/` | Beacon 🔦 | Dash ⚡ |
-| `README.md` | Herald 📢 | Maven 🏗️ |
-| `AGENTS.md` | Compass 🧭 | Herald 📢 |
-| `CLAUDE.md` | Compass 🧭 | Herald 📢 |
-| `.github/copilot-instructions.md` | Compass 🧭 | Herald 📢 |
-| `.squad/` | Maven 🏗️ | Compass 🧭 |
-| `SPEC.md` | Maven 🏗️ | Herald 📢 |
-| `JOURNAL.md` | Ledger 📖 | Maven 🏗️ |
+| architecture | Blueprint | System design, scope, trade-offs, code review |
+| implementation | Wrench | Feature code, CLI, runtime, file operations |
+| testing | Lens | Tests, quality gates, edge cases, CI/CD |
+| documentation | Quill | README, docs, messaging, onboarding, examples |
+| prompts | Mosaic | Agent charters, system prompts, manifest design |
+| git | Relay | Git workflow, pushes, PRs, releases, GitHub auth, CI/CD |
+| evals | Val | Eval design, baselines, agent-as-judge, quality scoring |
+| history | Ledger | Build journal, decision history, evolution narrative, prompt curation, markdown review |
 
 ## Routing Principles
 
-1. **Eager by default** — spawn agents who could usefully start work, including anticipatory downstream work.
-2. **Scribe always runs** after substantial work, always in background. Never blocks.
+1. **Eager by default** — spawn agents who could usefully start work.
+2. **Scribe always runs** after substantial work, in background. Never blocks.
 3. **Quick facts → coordinator answers directly.** Don't spawn for trivial questions.
 4. **Two agents could handle it** → pick the one whose domain is the primary concern.
-5. **Herald reviews all user-facing changes** — README, CLI output, error messages, getting-started.
-6. **Ledger journals after milestones** — Captures steering, decisions, and evolution. Runs in background.
-7. **Anticipate downstream.** Feature being built? Spawn Beacon for test cases simultaneously.
+5. **Anticipate downstream.** Feature being built? Spawn tester simultaneously.
