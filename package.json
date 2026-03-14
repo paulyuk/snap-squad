@@ -6,8 +6,13 @@
   "bin": {
     "snap-squad": "./dist/cli.js"
   },
+  "files": [
+    "dist",
+    "src/registry/presets"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "dev": "tsc --watch",
     "test": "vitest run",
     "test:watch": "vitest",
