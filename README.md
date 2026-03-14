@@ -120,6 +120,10 @@ The goal is to contribute these presets upstream to Squad if the maintainer agre
 
 🚧 **Alpha** — Built by its own squad (dogfooding FTW).
 
+## How This Was Built
+
+This project was built with AI assistance, steered by a human builder. The full story — every steering moment, key decision, and evolution arc — is in the [build journal](JOURNAL.md).
+
 ## License
 
 MIT

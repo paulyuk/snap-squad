@@ -63,6 +63,11 @@ export function generateSquad(options: GenerateOptions): string[] {
   writeFileSync(join(githubDir, 'copilot-instructions.md'), copilotMd);
   created.push('.github/copilot-instructions.md');
 
+  // Generate JOURNAL.md (Ledger's home)
+  const journalMd = generateJournalMd(preset, projectName);
+  writeFileSync(join(targetDir, 'JOURNAL.md'), journalMd);
+  created.push('JOURNAL.md');
+
   return created;
 }
 
@@ -220,6 +225,7 @@ Before doing any work, read and follow the squad configuration:
 3. **Read agent charters in \`.squad/agents/*/charter.md\`** — Understand expertise and boundaries
 4. **Check \`.squad/decisions.md\`** — Review existing decisions
 5. **Check \`.squad/mcp-config.md\`** — Know available tools
+6. **Update \`JOURNAL.md\`** after milestones — capture steering moments and key decisions
 
 ## Quick Reference
 
@@ -262,7 +268,8 @@ Before starting work:
 
 After completing work:
 1. Log decisions to \`.squad/decisions.md\`
-2. Update relevant docs if behavior changed
+2. Update \`JOURNAL.md\` with what happened and why
+3. Update relevant docs if behavior changed
 `;
 }
 
@@ -296,5 +303,39 @@ npx snap-squad list                            # see available presets
 \`\`\`
 
 Available presets: neighbors (general), dash (speed), sages (mentor), artisans (specialists)
+`;
+}
+
+function generateJournalMd(arch: Preset, projectName?: string): string {
+  const name = projectName || arch.team.name;
+  const date = new Date().toISOString().split('T')[0];
+
+  return `# JOURNAL.md — Build Story
+
+> How this project was built, the steering moments that shaped it, and why things are the way they are.
+> Maintained by the Historian / Build Journalist. Update after milestones.
+
+---
+
+## ${date} — Project Bootstrapped
+
+### Setup
+
+- **Squad:** ${arch.displayName} (${arch.vibe})
+- **Preset:** ${arch.name}
+- **Theme:** ${arch.theme}
+- **Created with:** \`npx snap-squad init\`
+
+### What Happened
+
+Project initialized with the ${arch.displayName} squad preset. The full \`.squad/\` directory, hook chain (AGENTS.md, CLAUDE.md, copilot-instructions.md), and this journal were generated automatically.
+
+### Next
+
+Start building. Update this journal as the project evolves — capture steering moments, key decisions, and the reasoning behind changes.
+
+---
+
+*Keep this journal alive. The code shows what was built. The journal shows why.*
 `;
 }
