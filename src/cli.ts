@@ -6,48 +6,56 @@ import { resolve } from 'node:path';
 import chalk from 'chalk';
 import { loadPreset, listPresets } from './registry/loader.js';
 import { generateSquad } from './generator/index.js';
+import { matchPreset } from './matcher.js';
 
 const program = new Command();
 
 program
   .name('snap-squad')
-  .description('Warm-start addon for Squad — pre-baked squad presets for instant deployment')
+  .description('Get started with Squad faster — ready-made squad presets')
   .version('0.1.0');
 
 program
   .command('init')
-  .description('Initialize a squad from a pre-baked preset')
-  .option('-t, --type <preset>', 'squad preset to use', 'neighbors')
+  .description('Initialize a squad — describe what you need or pick a preset')
+  .argument('[description...]', 'describe your project in plain English')
+  .option('-t, --type <preset>', 'pick a preset directly (neighbors, dash, sages, artisans)')
   .option('-d, --dir <directory>', 'target directory', '.')
   .option('-n, --name <name>', 'project name')
   .option('-o, --owner <owner>', 'project owner')
   .option('-f, --force', 'overwrite existing .squad/ directory', false)
-  .action((opts) => {
+  .action((descriptionWords: string[], opts) => {
     const targetDir = resolve(opts.dir);
     const squadDir = resolve(targetDir, '.squad');
 
-    // Check for existing .squad/
     if (existsSync(squadDir) && !opts.force) {
-      console.error(
-        chalk.red('✗ .squad/ already exists. Use --force to overwrite.')
-      );
+      console.error(chalk.red('✗ .squad/ already exists. Use --force to overwrite.'));
       process.exit(1);
     }
 
-    // Load preset
+    // Resolve preset: explicit --type wins, otherwise match from description
+    let presetName: string;
+    if (opts.type) {
+      presetName = opts.type;
+    } else if (descriptionWords.length > 0) {
+      const description = descriptionWords.join(' ');
+      const match = matchPreset(description);
+      presetName = match.preset;
+      console.log(chalk.dim(`  "${description}" → ${chalk.bold(match.preset)} (${match.why})\n`));
+    } else {
+      presetName = 'neighbors';
+    }
+
     let preset;
     try {
-      preset = loadPreset(opts.type);
+      preset = loadPreset(presetName);
     } catch (err) {
       console.error(chalk.red(`✗ ${(err as Error).message}`));
       process.exit(1);
     }
 
-    console.log(
-      chalk.blue(`⚡ Snapping in ${chalk.bold(preset.displayName)}...`)
-    );
+    console.log(chalk.blue(`⚡ Snapping in ${chalk.bold(preset.displayName)}...`));
 
-    // Generate
     const created = generateSquad({
       targetDir,
       preset,
@@ -55,20 +63,13 @@ program
       owner: opts.owner,
     });
 
-    // Report
-    console.log(chalk.green(`\n✓ Squad initialized with ${preset.displayName}!\n`));
+    console.log(chalk.green(`\n✓ Squad ready! (${preset.displayName})\n`));
     console.log(chalk.dim('Created:'));
     for (const file of created) {
       console.log(chalk.dim(`  ${file}`));
     }
     console.log(
-      `\n${chalk.yellow('Next:')} Your squad is ready. Every AI session in this workspace is now squad-aware.`
-    );
-    console.log(
-      chalk.dim('  The hook chain (AGENTS.md + CLAUDE.md + .github/copilot-instructions.md)')
-    );
-    console.log(
-      chalk.dim('  ensures your squad identity persists across every session, every tool.\n')
+      `\n${chalk.yellow('Next:')} Run ${chalk.bold('squad up')} to start working with your team.\n`
     );
   });
 

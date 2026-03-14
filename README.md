@@ -34,17 +34,25 @@ One command, full squad, zero interview. Built by people who actually ship with 
 
 ## Quick Start
 
-**1. You need Squad first:**
+**1. Install Squad:**
 
 ```bash
 npm install -g @bradygaster/squad-cli
 ```
 
-**2. Snap in a preset:**
+**2. Tell snap-squad what you need (plain English):**
 
 ```bash
-cd your-project
-npx snap-squad init --type neighbors
+npx snap-squad init I need a fast team for a hackathon
+# → "I need a fast team for a hackathon" → dash (Speed-focused team for rapid building)
+# → ⚡ Snapping in The Dash Squad...
+# → ✓ Squad ready!
+```
+
+Or pick a preset directly:
+
+```bash
+npx snap-squad init --type sages
 ```
 
 **3. Start your squad:**
@@ -53,7 +61,23 @@ npx snap-squad init --type neighbors
 squad up
 ```
 
-Your AI team is live. Every agent knows their role, routing is configured, and decisions get logged.
+That's it. Describe what you need, get a squad, start building.
+
+### More Examples
+
+```bash
+# "I want to learn best practices and understand the why"
+npx snap-squad init help me learn best practices
+# → sages (Mentor team that explains the "why" behind decisions)
+
+# "Database tuning and security hardening"
+npx snap-squad init database optimization and security review
+# → artisans (Specialist team for deep, precise work)
+
+# Just want a solid general-purpose team?
+npx snap-squad init
+# → neighbors (Good all-around team for general projects)
+```
 
 ## What Gets Created
 
