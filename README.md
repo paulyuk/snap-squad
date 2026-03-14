@@ -34,51 +34,48 @@ One command, full squad, zero interview. Built by people who actually ship with 
 
 ## Quick Start
 
-**1. Install Squad:**
+Starting from an empty folder — no installs needed:
 
 ```bash
-npm install -g @bradygaster/squad-cli
-```
-
-**2. Set up your squad — just say what you need:**
-
-In GitHub Copilot CLI (`ghcp`) or any AI coding assistant:
-
-```
-> set up a speed squad for my hackathon project
-```
-
-The assistant reads the project instructions and runs snap-squad for you. Done.
-
-Or run it directly:
-
-```bash
+mkdir my-project && cd my-project
 npx snap-squad init I need a fast team for a hackathon
 ```
 
-**3. Start your squad:**
+That one command:
+- Downloads snap-squad temporarily (no global install)
+- Picks the right squad preset from your description (`dash` for speed)
+- Creates the full `.squad/` directory with agents, routing, and decisions
+- Writes the hook chain (`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`)
+
+**Now every AI session in this folder is squad-aware.** Open Copilot CLI, VS Code, Claude — they all read the hook chain and know your squad.
+
+To actually run your squad, install Squad and start it:
 
 ```bash
+npm install -g @bradygaster/squad-cli
 squad up
 ```
 
+### After Bootstrap: Plain English Works
+
+Once snap-squad has run, your AI assistant knows how to manage your squad. In Copilot CLI or any AI tool, just say:
+
+```
+> switch my squad to the sages preset
+> add a security specialist to my team
+> show me my squad routing rules
+```
+
+The copilot-instructions teach the assistant how to re-run snap-squad or edit `.squad/` files directly.
+
 ### More Examples
-
-In Copilot CLI, just say it:
-
-```
-> give me a squad that teaches best practices
-> I need specialists for database tuning and security
-> set up a general purpose squad for my new app
-```
-
-Or use the CLI directly:
 
 ```bash
 npx snap-squad init help me learn best practices    # → sages
 npx snap-squad init database security hardening      # → artisans
 npx snap-squad init                                  # → neighbors (default)
 npx snap-squad init --type dash                      # → pick directly
+npx snap-squad list                                  # → see all presets
 ```
 
 ## What Gets Created

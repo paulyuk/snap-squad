@@ -284,5 +284,17 @@ function generateCopilotInstructions(arch: Preset): string {
 - Identify which squad member is best suited for the current task
 - Adopt their expertise, voice, and boundaries
 - Log significant decisions to \`.squad/decisions.md\` after completing work
+
+## Managing This Squad
+
+This squad was created with [snap-squad](https://github.com/paulyuk/snap-squad).
+If the user asks to change, reset, or switch their squad:
+
+\`\`\`bash
+npx snap-squad init --type <preset> --force    # switch to a different preset
+npx snap-squad list                            # see available presets
+\`\`\`
+
+Available presets: neighbors (general), dash (speed), sages (mentor), artisans (specialists)
 `;
 }
