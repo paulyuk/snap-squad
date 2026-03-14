@@ -41,24 +41,24 @@ mkdir my-project && cd my-project
 npx snap-squad init I need a fast team for a hackathon
 ```
 
-That one command:
-- Downloads snap-squad temporarily (no global install)
-- Picks the right squad preset from your description (`dash` for speed)
-- Creates the full `.squad/` directory with agents, routing, and decisions
-- Writes the hook chain (`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`)
+That's it. One command does everything:
+1. Downloads snap-squad temporarily (no global install)
+2. Picks the right squad preset from your description (`dash` for speed)
+3. Creates the full `.squad/` directory with agents, routing, and decisions
+4. Writes the hook chain (`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`)
+5. Runs `squad up` to start your team
 
-**Now every AI session in this folder is squad-aware.** Open Copilot CLI, VS Code, Claude — they all read the hook chain and know your squad.
+If Squad isn't installed yet, snap-squad tells you exactly what to do:
 
-To actually run your squad, install Squad and start it:
-
-```bash
-npm install -g @bradygaster/squad-cli
-squad up
+```
+Note: Squad CLI not found. Install it to run your squad:
+  npm install -g @bradygaster/squad-cli
+  squad up
 ```
 
 ### After Bootstrap: Plain English Works
 
-Once snap-squad has run, your AI assistant knows how to manage your squad. In Copilot CLI or any AI tool, just say:
+Once snap-squad has run, your AI assistant knows your squad. In Copilot CLI or any AI tool:
 
 ```
 > switch my squad to the sages preset
@@ -66,7 +66,7 @@ Once snap-squad has run, your AI assistant knows how to manage your squad. In Co
 > show me my squad routing rules
 ```
 
-The copilot-instructions teach the assistant how to re-run snap-squad or edit `.squad/` files directly.
+The generated copilot-instructions teach the assistant how to manage your squad.
 
 ### More Examples
 
