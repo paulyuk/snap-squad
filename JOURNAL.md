@@ -3,6 +3,22 @@
 > Snap Squad: get started with [Squad](https://github.com/bradygaster/squad) faster.
 > Built by its own squad. Steered by a human. Journaled by Ledger.
 
+## Origin
+
+The idea started as a prompt to Gemini in a browser. The builder (paulyuk) had three frustrations with Squad:
+
+1. **Initializing is too slow** for rapid POCs
+2. **Keep re-hiring the same squads** — same charters, same skills, every time
+3. **Need a "very particular set of skills"** but don't want to build from scratch
+
+The spark prompt:
+
+> *"my idea is to have some 'rapid response' squads that basically live in cache somewhere... so initializing is rapid and automatic. Then I want a few different squads for hire that are well known, like a default squad that is well rounded, a rapid one that can get the mission done fast, and maybe a learning focused one."*
+
+The naming constraint was set early: *"while I like the strike team themes personally lets be careful and keep things feeling safe and friendly, not scary or violent."*
+
+Gemini helped with research and naming. The builder liked the output enough to take it into Copilot CLI on the dev rig, where the actual building started.
+
 ## Evolution
 
 | # | Commit | What Changed | Why (Builder Steering) |
