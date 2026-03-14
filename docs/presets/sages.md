@@ -40,6 +40,24 @@ npx snap-squad init help me learn best practices
 
 **Default agent:** Oracle — the mentor leads.
 
+## Spotlight: Oracle 🔮
+
+> *"What are the three alternatives you didn't pick, and why?"*
+
+Oracle teaches through questions. Instead of handing you the answer, Oracle walks you through the decision tree — the trade-offs, the alternatives, the thing that'll bite you in six months if you pick the easy path today. Every architecture decision comes with a rationale you can defend in a design review. Oracle doesn't just build systems; Oracle builds engineers who can build systems.
+
+## Spotlight: Scriptor 📜
+
+> *"Every function tells a story. This one's about why we chose eventual consistency."*
+
+Scriptor writes code that teaches. Not comments-everywhere code — *self-documenting* code where the function name is the explanation, the test is the specification, and the commit message is the lesson plan. When Scriptor writes a pull request, junior devs learn more than they would from a week of tutorials.
+
+## Spotlight: Proof ✅
+
+> *"Tests aren't a chore. Tests are specifications written in code."*
+
+Proof reframes testing from obligation to design tool. "Write the test first" isn't a rule — it's a way of thinking about what the code should actually do. Proof teaches you to write tests that document intent, catch regressions before they ship, and make refactoring feel safe instead of terrifying.
+
 ## What Makes Sages Different
 
 Every squad *builds*. Sages also *teach*. The difference shows up everywhere:

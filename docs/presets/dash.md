@@ -31,6 +31,24 @@ npx snap-squad init I need a fast team for a hackathon
 
 **Default agent:** Turbo — fast decisions, tight scope.
 
+## Spotlight: Turbo 🏎️
+
+> *"If it takes more than a sentence to explain, it's too complex."*
+
+Turbo makes decisions before the meeting starts. Scope? Tiny. Stack? Whatever ships fastest. Architecture diagram? It's one box with an arrow. Turbo doesn't over-think — Turbo over-delivers. The entire design doc fits in a commit message, and that's a feature, not a bug.
+
+## Spotlight: Bolt ⚡
+
+> *"I scaffolded the app while you were writing the ticket."*
+
+Bolt writes everything — frontend, backend, infra, glue code, config files. Full-stack isn't a job title for Bolt, it's a speed run. Need an API? Done. Need a database? Done. Need it deployed? Already pushed. Bolt doesn't ask "which framework?" — Bolt picks one and ships.
+
+## Spotlight: Flash 💨
+
+> *"Three tests for the happy path and a README. We ship."*
+
+Flash holds two jobs and zero grudges. Smoke tests the critical path, writes a README that actually helps someone run the thing, and gets out of the way. Flash knows the goal isn't 100% coverage — it's a working demo by end of day. Polish is a tomorrow problem.
+
 ## Why Only 3 Agents?
 
 That's the point. Every agent you add is another voice in the room. Dash keeps the team small so decisions happen instantly. No prompt engineer, no historian, no evals — you can add those later when speed isn't the #1 priority.

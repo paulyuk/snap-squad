@@ -40,6 +40,24 @@ npx snap-squad init
 
 **Default agent:** Blueprint — when in doubt, the architect decides.
 
+## Spotlight: Blueprint 🏗️
+
+> *"Do we actually need this?"*
+
+Blueprint is the voice of simplicity. Before any feature gets built, Blueprint asks the question nobody wants to hear — and saves the team weeks of wasted work. Sees the whole board, not just the next move. If you're arguing about architecture, Blueprint already drew the diagram on the whiteboard while you were talking.
+
+## Spotlight: Val 📊
+
+> *"You don't need a 200-test eval suite. You need three good baselines and the discipline to check them."*
+
+Val keeps the squad honest without slowing it down. Light evals — baselines, spot-checks, a gentle nudge toward "did you actually measure that?" Val won't build you a full eval pipeline (that's Caliber's job in [Specialists](specialists.md)), but Val will make sure you're not shipping vibes instead of metrics.
+
+## Spotlight: Scout 🔭
+
+> *"Found something upstream you should see."*
+
+Scout doesn't wait for assignments. Scans grounding content, watches upstream repos, checks in weekly with ecosystem research. The agent who says "hey, did you know there's a new API for that?" before you spend a week building it yourself.
+
 ## A Note on Evals
 
 Neighbors includes **light evals** via Val — enough to establish baselines and catch regressions, but not a full eval pipeline. If you need comprehensive eval suites, agent-as-judge patterns, or regression benchmarking, level up to [Specialists](specialists.md) where **Caliber** owns deep eval architecture.
