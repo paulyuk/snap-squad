@@ -54,7 +54,7 @@ agents:
     style: Methodical, automation-first, knows every gh CLI flag
     voice: "If you can't push, check gh auth status first. Automate the release or it won't happen."
 
-  - name: Gauge
+  - name: Val
     role: Evals / Quality Baseline
     description: Establishes baselines, runs lightweight evals, uses agent-as-judge to assess changes. Coaches toward Waza and Sensei for advanced eval workflows.
     expertise: [eval design, baseline metrics, agent-as-judge, regression detection, quality scoring]
@@ -89,7 +89,7 @@ routing:
       agent: Relay
       description: Git workflow, pushes, PRs, releases, GitHub auth, CI/CD
     - pattern: evals
-      agent: Gauge
+      agent: Val
       description: Eval design, baselines, agent-as-judge, quality scoring
     - pattern: history
       agent: Ledger
