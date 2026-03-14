@@ -1,55 +1,97 @@
 # Snap Squad
 
-**Warm-start addon for [Squad](https://github.com/bradygaster/squad)** — pre-baked agent archetypes for instant deployment.
+**Get started with [Squad](https://github.com/bradygaster/squad) in seconds.**
 
-> Stop interviewing. Start building.
+> Skip the interview. Start building.
 
-[![Status](https://img.shields.io/badge/status-alpha-blueviolet)](#status)
+## What Is Squad?
 
-## The Problem
+[Squad](https://github.com/bradygaster/squad) gives you AI agent teams for any project — a multi-agent runtime built on GitHub Copilot. You define your team, route work to specialists, and ship faster.
 
-Squad's "hiring" process (interactive interview to build your team) is powerful but slow for rapid POCs and repetitive workflows. Every new project starts with the same 5-minute setup ritual.
+The catch? Setting up a new squad takes time. You interview agents, define roles, configure routing. For a big project, that's worth it. For a quick POC or a workflow you've done before? It's friction.
 
-## The Solution
+## What Snap Squad Does
 
-Snap Squad provides **pre-baked agent archetypes** that inject a fully-configured `.squad/` directory in seconds:
+Snap Squad gives you **ready-to-hire squads trained by builders at CoreAI**. These aren't blank templates — they're squad configurations shaped by real project experience, with tested routing rules, proven agent roles, and practical defaults.
 
 ```bash
 npx snap-squad init --type dash
-# → .squad/ created with Dash Squad (rapid POC team)
-# → .github/copilot-instructions.md hooked
-# → Ready for `squad up` immediately
+# → .squad/ created with a speed-focused team
+# → Hook chain (AGENTS.md, CLAUDE.md, copilot-instructions) wired up
+# → Ready for squad up
 ```
 
-## Archetypes
+One command, full squad, zero interview. Built by people who actually ship with Squad.
 
-| Squad | Vibe | Best For |
-|-------|------|----------|
-| **The Neighbors** | Generalist | General-purpose projects, reliable building |
-| **The Dash Squad** | Speed | Rapid POCs, hackathons, zero fluff |
-| **The Sages** | Mentor | Learning, best practices, architecture review |
-| **The Artisans** | Precision | Niche specialization, DB tuning, security hardening |
+## Presets
 
-## How It Works
+| Preset | Vibe | Best For |
+|--------|------|----------|
+| **neighbors** | Generalist | General-purpose projects, reliable building |
+| **dash** | Speed | Rapid POCs, hackathons, zero fluff |
+| **sages** | Mentor | Learning, best practices, architecture review |
+| **artisans** | Precision | Niche specialization, DB tuning, security hardening |
 
-1. `snap-squad init --type <archetype>` reads from the **Snap Registry** (YAML manifests)
-2. Generates the full `.squad/` directory (team.md, agent charters, routing, MCP config)
-3. Writes the **hook chain** (`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`) so every future AI session is squad-aware
-4. You run `squad up` and start working immediately
+## Quick Start
 
-## The Hook Chain (Squad-Aware Sessions)
+**1. You need Squad first:**
 
-Snap Squad's killer feature: **sessions never forget the squad.**
+```bash
+npm install -g @bradygaster/squad-cli
+```
 
-Every generated project includes three files that make AI assistants squad-aware:
+**2. Snap in a preset:**
 
-| File | Who Reads It | Purpose |
-|------|-------------|---------|
-| `AGENTS.md` | Any AI agent | Universal squad operating instructions |
-| `CLAUDE.md` | Claude / Copilot CLI | Session memory, project context, squad identity |
-| `.github/copilot-instructions.md` | GitHub Copilot | Copilot-specific squad integration |
+```bash
+cd your-project
+npx snap-squad init --type neighbors
+```
 
-These all point to `.squad/` — so regardless of which AI tool opens your workspace, it knows the squad and follows the routing rules.
+**3. Start your squad:**
+
+```bash
+squad up
+```
+
+Your AI team is live. Every agent knows their role, routing is configured, and decisions get logged.
+
+## What Gets Created
+
+```
+your-project/
+├── .squad/
+│   ├── team.md              # Who's on the team
+│   ├── routing.md           # How work gets routed
+│   ├── decisions.md         # Decision log
+│   ├── mcp-config.md        # MCP tool config
+│   └── agents/
+│       ├── blueprint/charter.md
+│       ├── wrench/charter.md
+│       └── ...
+├── AGENTS.md                # AI agent instructions (any tool)
+├── CLAUDE.md                # Claude/Copilot CLI session memory
+└── .github/
+    └── copilot-instructions.md  # GitHub Copilot instructions
+```
+
+The hook chain (`AGENTS.md` + `CLAUDE.md` + `copilot-instructions.md`) makes every AI session squad-aware — regardless of which tool opens your workspace.
+
+## List Presets
+
+```bash
+npx snap-squad list
+```
+
+## Why Not Just Use Squad Directly?
+
+You should! Squad's built-in setup is great for tailored teams. Snap Squad is for when you want to:
+
+- **Start fast** — POC in minutes, not an hour
+- **Learn from others** — Presets are trained by builders at CoreAI who ship with Squad daily
+- **Reuse patterns** — Same team shape across multiple projects
+- **Onboard people** — Give someone a working squad without the interview
+
+The goal is to contribute these presets upstream to Squad if the maintainer agrees.
 
 ## Status
 

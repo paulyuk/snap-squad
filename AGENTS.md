@@ -24,7 +24,7 @@ On every session start:
 
 ## Project: Snap Squad
 
-- **What:** Warm-start addon for bradygaster/squad — pre-baked agent archetypes
+- **What:** Get started with Squad faster — ready-made squad presets
 - **Stack:** TypeScript, ESM-only, Node ≥20, Commander.js, YAML manifests
 - **Repo:** https://github.com/paulyuk/snap-squad
 - **Squad Theme:** Community Builders (friendly, approachable names)
@@ -38,6 +38,6 @@ On every session start:
 | Compass | Prompt Engineer | Agent charters, system prompts, manifest design |
 | Beacon | Tester / QA | Tests, edge cases, quality gates |
 | Herald | DevRel / Docs | README, docs, messaging, examples |
-| Sage | Registry Curator | Archetype manifests, YAML schema, skill locker |
+| Sage | Registry Curator | Squad presets, YAML schema, skill locker |
 
 See `.squad/team.md` for full roster and `.squad/routing.md` for routing rules.

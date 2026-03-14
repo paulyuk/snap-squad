@@ -1,7 +1,7 @@
 {
   "name": "snap-squad",
   "version": "0.1.0",
-  "description": "Warm-start addon for bradygaster/squad — pre-baked agent archetypes for instant deployment",
+  "description": "Get started with Squad faster — ready-made squad presets for instant deployment",
   "type": "module",
   "bin": {
     "snap-squad": "./dist/cli.js"

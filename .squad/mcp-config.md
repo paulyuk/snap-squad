@@ -33,10 +33,10 @@ Used for reading/writing files during generation.
 
 ## Skill Locker Configs
 
-The Skill Locker (`src/skills/`) ships pre-configured MCP definitions that archetypes can reference:
+The Skill Locker (`src/skills/`) ships pre-configured MCP definitions that presets can reference:
 - `github.yaml` — GitHub MCP for issue/PR workflows
 - `azure.yaml` — Azure MCP for cloud resource management
 - `filesystem.yaml` — Local file operations
 - `fetch.yaml` — HTTP fetch for API integrations
 
-Artisans archetype can dynamically "snap in" additional skill configs.
+Artisans preset can dynamically "snap in" additional skill configs.

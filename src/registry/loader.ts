@@ -26,7 +26,7 @@ export interface SkillRef {
   description: string;
 }
 
-export interface Archetype {
+export interface Preset {
   name: string;
   displayName: string;
   description: string;
@@ -45,35 +45,35 @@ export interface Archetype {
   skills: SkillRef[];
 }
 
-const ARCHETYPES_DIR = join(__dirname, '..', 'registry', 'archetypes');
+const PRESETS_DIR = join(__dirname, '..', 'registry', 'presets');
 
-export function loadArchetype(name: string): Archetype {
+export function loadPreset(name: string): Preset {
   // Resolve from compiled dist or source
-  let dir = ARCHETYPES_DIR;
+  let dir = PRESETS_DIR;
   try {
     readdirSync(dir);
   } catch {
     // Fallback: try relative to source
-    dir = join(__dirname, '..', '..', 'src', 'registry', 'archetypes');
+    dir = join(__dirname, '..', '..', 'src', 'registry', 'presets');
   }
 
   const filePath = join(dir, `${name}.yaml`);
   try {
     const content = readFileSync(filePath, 'utf-8');
-    return parseYaml(content) as Archetype;
+    return parseYaml(content) as Preset;
   } catch (err) {
     throw new Error(
-      `Archetype "${name}" not found. Available: ${listArchetypes().join(', ')}`
+      `Preset "${name}" not found. Available: ${listPresets().join(', ')}`
     );
   }
 }
 
-export function listArchetypes(): string[] {
-  let dir = ARCHETYPES_DIR;
+export function listPresets(): string[] {
+  let dir = PRESETS_DIR;
   try {
     readdirSync(dir);
   } catch {
-    dir = join(__dirname, '..', '..', 'src', 'registry', 'archetypes');
+    dir = join(__dirname, '..', '..', 'src', 'registry', 'presets');
   }
 
   try {

@@ -1,6 +1,6 @@
 # Community Builders — Snap Squad
 
-> Pre-baked agent archetypes for instant squad deployment.
+> Pre-baked squad presets for instant deployment.
 > *"Good neighbors build great things."*
 
 ## Coordinator
@@ -43,13 +43,13 @@
 **🟡 Needs review — route to @copilot but flag for squad member PR review:**
 - Medium features with clear specs and acceptance criteria
 - Refactoring with existing test coverage
-- New archetype manifests following established YAML schema
+- New preset manifests following established YAML schema
 - CLI command additions following established patterns
 
 **🔴 Not suitable — route to squad member instead:**
 - Architecture decisions and system design
 - Hook chain design (AGENTS.md, CLAUDE.md, copilot-instructions)
-- Manifest schema changes affecting all archetypes
+- Manifest schema changes affecting all presets
 - Security-critical changes
 - Changes requiring cross-agent discussion
 
@@ -57,8 +57,8 @@
 
 - **Owner:** paulyuk
 - **Stack:** TypeScript (strict mode, ESM-only), Node.js ≥20, Commander.js, YAML, Vitest
-- **Description:** Warm-start addon for bradygaster/squad — pre-baked agent archetypes for instant deployment
-- **Distribution:** npm (`npx snap-squad init --type <archetype>`)
+- **Description:** Get started with Squad faster — ready-made squad presets for instant deployment
+- **Distribution:** npm (`npx snap-squad init --type <preset>`)
 - **Universe:** Community Builders — friendly neighborhood theme
 - **Repo:** https://github.com/paulyuk/snap-squad
 - **Created:** 2026-03-14

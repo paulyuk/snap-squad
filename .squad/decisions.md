@@ -10,13 +10,13 @@
 - **Context:** Match Squad's stack for ecosystem compatibility
 - **Decision:** TypeScript strict mode, ESM-only (`"type": "module"`), Node ≥20
 
-### D-002: YAML for archetype manifests
+### D-002: YAML for preset manifests
 - **By:** Sage
 - **Date:** 2026-03-14
 - **Context:** Manifests are the core data — readability matters for contributors
-- **Decision:** Use YAML over JSON for all archetype manifests. Human-readable, easy to edit.
+- **Decision:** Use YAML over JSON for all preset manifests. Human-readable, easy to edit.
 
-### D-003: Four archetypes at launch
+### D-003: Four presets at launch
 - **By:** Maven, Compass
 - **Date:** 2026-03-14
 - **Context:** Keep scope tight for POC

@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, rmSync, existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { loadArchetype } from '../src/registry/loader.js';
+import { loadPreset } from '../src/registry/loader.js';
 import { generateSquad } from '../src/generator/index.js';
 
 describe('Generator', () => {
@@ -16,11 +16,11 @@ describe('Generator', () => {
     rmSync(tempDir, { recursive: true, force: true });
   });
 
-  it('generates all expected files for neighbors archetype', () => {
-    const archetype = loadArchetype('neighbors');
+  it('generates all expected files for neighbors preset', () => {
+    const preset = loadPreset('neighbors');
     const created = generateSquad({
       targetDir: tempDir,
-      archetype,
+      preset,
       projectName: 'test-project',
       owner: 'testuser',
     });
@@ -37,7 +37,7 @@ describe('Generator', () => {
     expect(created).toContain('.github/copilot-instructions.md');
 
     // Agent charters
-    for (const agent of archetype.agents) {
+    for (const agent of preset.agents) {
       expect(created).toContain(`.squad/agents/${agent.name.toLowerCase()}/charter.md`);
     }
 
@@ -49,10 +49,10 @@ describe('Generator', () => {
   });
 
   it('team.md contains project context', () => {
-    const archetype = loadArchetype('neighbors');
+    const preset = loadPreset('neighbors');
     generateSquad({
       targetDir: tempDir,
-      archetype,
+      preset,
       projectName: 'my-app',
       owner: 'alice',
     });
@@ -64,8 +64,8 @@ describe('Generator', () => {
   });
 
   it('hook chain files reference .squad/', () => {
-    const archetype = loadArchetype('dash');
-    generateSquad({ targetDir: tempDir, archetype });
+    const preset = loadPreset('dash');
+    generateSquad({ targetDir: tempDir, preset });
 
     const agentsMd = readFileSync(join(tempDir, 'AGENTS.md'), 'utf-8');
     expect(agentsMd).toContain('.squad/team.md');
@@ -84,8 +84,8 @@ describe('Generator', () => {
   });
 
   it('generates skill references for artisans', () => {
-    const archetype = loadArchetype('artisans');
-    generateSquad({ targetDir: tempDir, archetype });
+    const preset = loadPreset('artisans');
+    generateSquad({ targetDir: tempDir, preset });
 
     const mcpMd = readFileSync(join(tempDir, '.squad', 'mcp-config.md'), 'utf-8');
     expect(mcpMd).toContain('postgres-toolbox');

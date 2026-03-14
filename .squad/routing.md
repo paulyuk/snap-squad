@@ -6,10 +6,10 @@
 |-----------|-------|---------|
 | Architecture & scope | Maven 🏗️ | Product direction, system design, trade-offs, code review |
 | Core runtime | Dash ⚡ | CLI implementation, template engine, registry loader, file generation |
-| Prompt & manifest design | Compass 🧭 | Agent charters, system prompts, YAML manifests, archetype design |
+| Prompt & manifest design | Compass 🧭 | Agent charters, system prompts, YAML manifests, preset design |
 | Tests & quality | Beacon 🔦 | Test coverage, Vitest, edge cases, quality gates |
 | Docs & developer experience | Herald 📢 | README, getting-started, examples, messaging, onboarding |
-| Registry & skill curation | Sage 📚 | Archetype manifests, YAML schema, skill locker, MCP tool configs |
+| Registry & skill curation | Sage 📚 | Preset manifests, YAML schema, skill locker, MCP tool configs |
 | Session logging | Scribe 📋 | Decision logging, session history, orchestration log |
 
 ## Module Ownership
@@ -19,7 +19,7 @@
 | `src/cli.ts` | Dash ⚡ | Maven 🏗️ |
 | `src/generator/` | Dash ⚡ | Compass 🧭 |
 | `src/registry/` | Sage 📚 | Compass 🧭 |
-| `src/registry/archetypes/` | Compass 🧭 | Sage 📚 |
+| `src/registry/presets/` | Compass 🧭 | Sage 📚 |
 | `src/skills/` | Sage 📚 | Dash ⚡ |
 | `test/` | Beacon 🔦 | Dash ⚡ |
 | `README.md` | Herald 📢 | Maven 🏗️ |

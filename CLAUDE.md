@@ -13,13 +13,13 @@ You are working in the **Snap Squad** repository — a warm-start addon for [bra
 
 - **Repo:** https://github.com/paulyuk/snap-squad
 - **Stack:** TypeScript, ESM-only, Node ≥20, Commander.js, YAML, Vitest
-- **Purpose:** Eliminate cold-start lag in Squad by providing pre-baked agent archetypes
+- **Purpose:** Get started with Squad faster — ready-made squad presets for instant deployment
 - **Status:** Alpha — actively building the POC
 
 ## How This Project Works
 
-1. **Snap Registry** (`src/registry/`) — YAML manifests defining 4 squad archetypes
-2. **CLI** (`src/cli.ts`) — `snap-squad init --type <archetype>` command
+1. **Snap Registry** (`src/registry/`) — YAML manifests defining 4 squad presets
+2. **CLI** (`src/cli.ts`) — `snap-squad init --type <preset>` command
 3. **Generator** (`src/generator/`) — Reads manifests, writes `.squad/` + hook chain files
 4. **Skill Locker** (`src/skills/`) — Pre-configured MCP tool definitions
 
@@ -47,8 +47,8 @@ After completing work:
 ## Current Decisions
 
 - TypeScript ESM-only, Node ≥20
-- YAML for archetype manifests (not JSON — human readability matters)
-- 4 archetypes: Neighbors (generalist), Dash Squad (speed), Sages (mentor), Artisans (precision)
+- YAML for preset manifests (not JSON — human readability matters)
+- 4 presets: Neighbors (generalist), Dash Squad (speed), Sages (mentor), Artisans (precision)
 - Friendly/safe naming — no tactical/military themes
 - Squad compatibility: output must match bradygaster/squad `.squad/` format exactly
 - Dogfooding: this repo uses its own squad to build itself
@@ -59,3 +59,17 @@ After completing work:
 - Branch: `main`
 - Commit frequently, push often
 - Co-authored-by: Copilot trailer on all commits
+
+## GitHub Auth — CRITICAL
+
+paulyuk has **two GitHub accounts**:
+- **paulyuk** — Personal (public OSS, this repo)
+- **paulyuk_microsoft** — Enterprise Managed User (EMU, work)
+
+**Before any git push/PR operation:**
+1. Run `gh auth status` to check which account is active
+2. If `paulyuk_microsoft` is active, run `gh auth switch --user paulyuk`
+3. SSH keys default to EMU — **always use HTTPS remote** for this repo
+4. Remote should be: `https://github.com/paulyuk/snap-squad.git` (not SSH)
+
+This catches the #1 push failure in this workspace.

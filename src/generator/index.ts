@@ -1,16 +1,16 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type { Archetype, Agent } from '../registry/loader.js';
+import type { Preset, Agent } from '../registry/loader.js';
 
 export interface GenerateOptions {
   targetDir: string;
-  archetype: Archetype;
+  preset: Preset;
   projectName?: string;
   owner?: string;
 }
 
 export function generateSquad(options: GenerateOptions): string[] {
-  const { targetDir, archetype, projectName, owner } = options;
+  const { targetDir, preset, projectName, owner } = options;
   const squadDir = join(targetDir, '.squad');
   const githubDir = join(targetDir, '.github');
   const created: string[] = [];
@@ -18,22 +18,22 @@ export function generateSquad(options: GenerateOptions): string[] {
   // Create directories
   mkdirSync(squadDir, { recursive: true });
   mkdirSync(githubDir, { recursive: true });
-  for (const agent of archetype.agents) {
+  for (const agent of preset.agents) {
     mkdirSync(join(squadDir, 'agents', agent.name.toLowerCase()), { recursive: true });
   }
 
   // Generate team.md
-  const teamMd = generateTeamMd(archetype, projectName, owner);
+  const teamMd = generateTeamMd(preset, projectName, owner);
   writeFileSync(join(squadDir, 'team.md'), teamMd);
   created.push('.squad/team.md');
 
   // Generate routing.md
-  const routingMd = generateRoutingMd(archetype);
+  const routingMd = generateRoutingMd(preset);
   writeFileSync(join(squadDir, 'routing.md'), routingMd);
   created.push('.squad/routing.md');
 
   // Generate agent charters
-  for (const agent of archetype.agents) {
+  for (const agent of preset.agents) {
     const charter = generateCharter(agent);
     const charterPath = join(squadDir, 'agents', agent.name.toLowerCase(), 'charter.md');
     writeFileSync(charterPath, charter);
@@ -41,32 +41,32 @@ export function generateSquad(options: GenerateOptions): string[] {
   }
 
   // Generate decisions.md
-  const decisionsMd = generateDecisionsMd(archetype);
+  const decisionsMd = generateDecisionsMd(preset);
   writeFileSync(join(squadDir, 'decisions.md'), decisionsMd);
   created.push('.squad/decisions.md');
 
   // Generate mcp-config.md
-  const mcpMd = generateMcpConfigMd(archetype);
+  const mcpMd = generateMcpConfigMd(preset);
   writeFileSync(join(squadDir, 'mcp-config.md'), mcpMd);
   created.push('.squad/mcp-config.md');
 
   // Generate hook chain: AGENTS.md, CLAUDE.md, .github/copilot-instructions.md
-  const agentsMd = generateAgentsMd(archetype, projectName);
+  const agentsMd = generateAgentsMd(preset, projectName);
   writeFileSync(join(targetDir, 'AGENTS.md'), agentsMd);
   created.push('AGENTS.md');
 
-  const claudeMd = generateClaudeMd(archetype, projectName, owner);
+  const claudeMd = generateClaudeMd(preset, projectName, owner);
   writeFileSync(join(targetDir, 'CLAUDE.md'), claudeMd);
   created.push('CLAUDE.md');
 
-  const copilotMd = generateCopilotInstructions(archetype);
+  const copilotMd = generateCopilotInstructions(preset);
   writeFileSync(join(githubDir, 'copilot-instructions.md'), copilotMd);
   created.push('.github/copilot-instructions.md');
 
   return created;
 }
 
-function generateTeamMd(arch: Archetype, projectName?: string, owner?: string): string {
+function generateTeamMd(arch: Preset, projectName?: string, owner?: string): string {
   const name = projectName || arch.team.name;
   const agentRows = arch.agents
     .map((a) => `| ${a.name} | ${a.role} | \`.squad/agents/${a.name.toLowerCase()}/charter.md\` | ✅ Active |`)
@@ -107,7 +107,7 @@ ${agentRows}
 `;
 }
 
-function generateRoutingMd(arch: Archetype): string {
+function generateRoutingMd(arch: Preset): string {
   const rows = arch.routing.rules
     .map((r) => `| ${r.pattern} | ${r.agent} | ${r.description} |`)
     .join('\n');
@@ -166,22 +166,22 @@ If I need another team member's input, say so — the coordinator will bring the
 `;
 }
 
-function generateDecisionsMd(arch: Archetype): string {
+function generateDecisionsMd(arch: Preset): string {
   return `# Decisions — ${arch.team.name}
 
 > Significant decisions made during development. Check before starting work.
 
 ## Active Decisions
 
-### D-001: Squad initialized with ${arch.displayName} archetype
+### D-001: Squad initialized with ${arch.displayName} preset
 - **By:** snap-squad
 - **Date:** ${new Date().toISOString().split('T')[0]}
 - **Context:** Project initialized using snap-squad warm-start
-- **Decision:** Using the "${arch.name}" archetype (${arch.vibe} vibe, ${arch.theme} theme)
+- **Decision:** Using the "${arch.name}" preset (${arch.vibe} vibe, ${arch.theme} theme)
 `;
 }
 
-function generateMcpConfigMd(arch: Archetype): string {
+function generateMcpConfigMd(arch: Preset): string {
   let skillSection = '';
   if (arch.skills.length > 0) {
     const skillList = arch.skills.map((s) => `- **${s.name}** — ${s.description}`).join('\n');
@@ -200,7 +200,7 @@ ${skillSection}
 `;
 }
 
-function generateAgentsMd(arch: Archetype, projectName?: string): string {
+function generateAgentsMd(arch: Preset, projectName?: string): string {
   const name = projectName || arch.team.name;
   const agentTable = arch.agents
     .map((a) => `| ${a.name} | ${a.role} | ${a.expertise.slice(0, 2).join(', ')} |`)
@@ -227,13 +227,13 @@ Before doing any work, read and follow the squad configuration:
 |-------|------|-------------------|
 ${agentTable}
 
-## Archetype: ${arch.displayName}
+## Preset: ${arch.displayName}
 
 ${arch.description}
 `;
 }
 
-function generateClaudeMd(arch: Archetype, projectName?: string, owner?: string): string {
+function generateClaudeMd(arch: Preset, projectName?: string, owner?: string): string {
   const name = projectName || arch.team.name;
 
   return `# CLAUDE.md — ${name} Session Memory
@@ -242,7 +242,7 @@ function generateClaudeMd(arch: Archetype, projectName?: string, owner?: string)
 
 ## Identity
 
-You are working in a repository using the **${arch.displayName}** squad archetype.
+You are working in a repository using the **${arch.displayName}** squad preset.
 
 **You are part of a squad.** Read \`.squad/team.md\` for the full roster.
 
@@ -266,7 +266,7 @@ After completing work:
 `;
 }
 
-function generateCopilotInstructions(arch: Archetype): string {
+function generateCopilotInstructions(arch: Preset): string {
   return `# Copilot Instructions — ${arch.team.name}
 
 > **You are part of a squad.** This repository uses multi-agent team coordination.

@@ -12,7 +12,7 @@
 ## What I Own
 
 - Agent charter templates and system prompts
-- Archetype personality design (Neighbors, Dash Squad, Sages, Artisans)
+- Preset personality design (Neighbors, Dash Squad, Sages, Artisans)
 - AGENTS.md / CLAUDE.md / copilot-instructions.md design
 - Hook chain architecture (how sessions become squad-aware)
 
