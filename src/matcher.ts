@@ -55,6 +55,15 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   baseline: [{ preset: 'specialists', weight: 2 }],
   'skill quality': [{ preset: 'specialists', weight: 4 }],
 
+  // Troubleshooting signals → specialists (Chuck's domain)
+  debug: [{ preset: 'specialists', weight: 3 }],
+  troubleshoot: [{ preset: 'specialists', weight: 4 }],
+  'root cause': [{ preset: 'specialists', weight: 5 }],
+  crash: [{ preset: 'specialists', weight: 4 }],
+  'stack trace': [{ preset: 'specialists', weight: 4 }],
+  logs: [{ preset: 'specialists', weight: 2 }],
+  firefight: [{ preset: 'specialists', weight: 5 }],
+
   // Neighbors signals (general/default)
   general: [{ preset: 'neighbors', weight: 3 }],
   'all purpose': [{ preset: 'neighbors', weight: 3 }],
