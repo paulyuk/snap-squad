@@ -31,6 +31,7 @@ Snap Squad reads your description and picks **Dash** — a speed-focused squad b
 ```bash
 npx snap-squad init help me learn best practices    # → Sages (mentor)
 npx snap-squad init database security hardening      # → Specialists (precision)
+npx snap-squad init something is on fire debug help  # → Specialists (Chuck is already on his way)
 npx snap-squad init                                  # → Neighbors (default)
 npx snap-squad init --type dash                      # → pick directly
 ```
