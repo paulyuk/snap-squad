@@ -17,7 +17,11 @@ The spark prompt:
 
 The naming constraint was set early: *"while I like the strike team themes personally lets be careful and keep things feeling safe and friendly, not scary or violent."*
 
-Gemini helped with research and naming. The builder liked the output enough to take it into Copilot CLI on the dev rig, where the actual building started.
+Gemini helped with research and naming. The final prompt to Gemini was:
+
+> *"summarize every prompt, key decision and key details here, so i can develop into a spec that i hand off to the coding agent. this should be a detailed markdown file"*
+
+That output became `SPEC.md` — the document that was already in this repo when the Copilot CLI session started. The builder used Gemini as the thinking partner, then handed the spec to Copilot as the builder.
 
 ## Evolution
 
