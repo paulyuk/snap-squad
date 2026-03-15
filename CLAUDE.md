@@ -23,16 +23,17 @@ Immediately after reading this file, before responding to the user:
 3. **Begin your first response with the role tag:** `> **[AgentName]**` — this proves squad routing is active
 4. Check whether `JOURNAL.md` has recent entries — if stale, plan to update it
 5. Identify downstream needs: will this work require tests? docs? evals? decisions? Include them in your plan.
+6. **Dispatch, don't role-play.** Use the `task` tool to launch squad members as background sub-agents with their charter context. See AGENTS.md "Squad Dispatch" section.
 
 ## Non-Optional Operating Behaviors
 
 These apply in **every session**, whether or not the user asks:
 
-- **Code changed → tests reviewed.** Don't skip testing because it wasn't mentioned.
+- **Code changed → run `npm test` before committing.** Never commit without a green test run. If tests fail, fix them or explain why.
 - **Behavior changed → docs updated.** If what the user sees changed, docs must change too.
 - **Trade-off made → decision logged.** Record it in `.squad/decisions.md` with context and reasoning.
 - **Milestone reached → journal updated.** `JOURNAL.md` captures the story, not just the code.
-- **Another role's domain touched → activate that role.** Don't wait to be asked.
+- **Another role's domain touched → dispatch that role as a sub-agent.** Don't role-switch — use the `task` tool.
 
 ## Session Completion Gate
 

@@ -743,7 +743,7 @@ When activating a secondary role (downstream trigger), announce it:
 
 These are not suggestions. They are standing orders for every session:
 
-- **Code changed → check tests.** If implementation changed, testing must be considered.
+- **Code changed → run \`npm test\` before committing.** Never commit without a green test run. If tests fail, fix them or explain why in the commit message.
 - **Behavior changed → check docs.** If user-visible behavior shifted, docs must reflect it.
 - **Decision made → log it.** Any trade-off or design choice goes in \`.squad/decisions.md\`.
 - **Milestone reached → journal it.** Update \`JOURNAL.md\` with what happened and why.
@@ -879,7 +879,7 @@ These fire automatically — they are not optional:
 
 | Trigger | Action |
 |---------|--------|
-| Code changed | Review tests — are they still correct and sufficient? |
+| Code changed | Run \`npm test\` before committing — never commit red |
 | User-visible behavior changed | Update docs and README if affected |
 | Prompt or agent behavior changed | Review eval baselines |
 | Important trade-off made | Log decision to \`.squad/decisions.md\` |

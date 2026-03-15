@@ -16,11 +16,12 @@
 
 ## Routing Principles
 
-1. **Eager by default** — spawn agents who could usefully start work.
-2. **Scribe always runs** after substantial work, in background. Never blocks.
-3. **Quick facts → coordinator answers directly.** Don't spawn for trivial questions.
-4. **Two agents could handle it** → pick the one whose domain is the primary concern.
-5. **Anticipate downstream.** Feature being built? Spawn tester simultaneously.
+1. **Eager by default** — dispatch agents who could usefully start work in parallel.
+2. **"Spawn" means dispatch a sub-agent.** Use the `task` tool with `mode: "background"` to launch squad members as parallel sub-agents. Include the agent's charter from `.squad/agents/<name>/charter.md` in the dispatch prompt.
+3. **Scribe always runs** after substantial work, dispatched in background. Never blocks.
+4. **Quick facts → lead agent answers directly.** Don't dispatch for trivial questions.
+5. **Two agents could handle it** → pick the one whose domain is the primary concern.
+6. **Anticipate downstream.** Feature being built? Dispatch tester simultaneously as a background sub-agent.
 
 ## Automatic Secondary Routing
 

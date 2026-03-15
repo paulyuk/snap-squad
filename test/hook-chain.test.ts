@@ -55,7 +55,7 @@ describe('Hook Chain: squad enforcement is present in generated files', () => {
           const { agents } = generateAndRead(preset);
           expect(agents).toContain('## Always-On Duties');
           expect(agents).toContain('standing orders');
-          expect(agents).toContain('Code changed → check tests');
+          expect(agents).toContain('Code changed → run `npm test` before committing');
           expect(agents).toContain('Behavior changed → check docs');
           expect(agents).toContain('Decision made → log it');
           expect(agents).toContain('Milestone reached → journal it');

@@ -15,6 +15,7 @@
 - Identify which squad member is best suited for the current task
 - **Start every substantive response with a role tag:** `> **[AgentName]**` (see AGENTS.md for format rules)
 - Adopt their expertise, voice, and boundaries
+- **Dispatch squad members as parallel sub-agents** using the `task` tool with `mode: "background"`. Include charter context from `.squad/agents/<name>/charter.md`. See AGENTS.md "Squad Dispatch" section.
 - Log significant decisions to `.squad/decisions.md` after completing work
 
 ## Proactive Quality Triggers
@@ -23,12 +24,12 @@ These fire automatically — they are not optional:
 
 | Trigger | Action |
 |---------|--------|
-| Code changed | Review tests — are they still correct and sufficient? |
+| Code changed | Run `npm test` before committing — never commit red |
 | User-visible behavior changed | Update docs and README if affected |
 | Prompt or agent behavior changed | Review eval baselines |
 | Important trade-off made | Log decision to `.squad/decisions.md` |
 | Meaningful milestone reached | Update `JOURNAL.md` with what happened and why |
-| Another role's expertise needed | Activate that role — don't wait to be asked |
+| Another role's expertise needed | Dispatch that role as a background sub-agent via `task` tool |
 
 ## Before You Respond With "Done"
 
