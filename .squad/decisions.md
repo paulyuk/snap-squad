@@ -33,3 +33,21 @@
 - **Date:** 2026-03-15
 - **Context:** The preset docs and explainer still mixed retired creative agent names into tables, spotlight sections, routing examples, and evaluator guidance after the roster moved to functional names.
 - **Decision:** Keep preset docs, the how-it-works explainer, and evaluator guidance aligned to the functional roster names while preserving canonical YAML deep-link paths and external tool URLs.
+
+### D-006: Squad dispatch uses real sub-agents, not role-switching
+- **By:** Prompter
+- **Date:** 2026-03-15
+- **Context:** Routing.md said "spawn agents" but never told the AI how. The AI defaulted to role-switching (one agent wearing different hats via `[AgentName]` tags) instead of dispatching real parallel sub-agents. The squad was invisible in `/tasks`.
+- **Decision:** Update all four generated instruction templates (AGENTS.md, CLAUDE.md, copilot-instructions.md, routing.md) to explicitly instruct the AI to use Copilot's `task` tool with `mode: "background"` for parallel sub-agent dispatch. Include charter context in dispatch prompts. Fall back to role-switching only for trivial/single-domain work.
+
+### D-007: Dispatch enforcement must be tested, not just present
+- **By:** Evaluator / Prompter
+- **Date:** 2026-03-15
+- **Context:** D-006 added dispatch language to templates, but no tests verified the specific enforcement wording. During a live session, the AI still failed to dispatch — proving the language existed but wasn't tested for correctness or completeness. AGENTS.md was also missing the completion routing check.
+- **Decision:** Add `test/hook-chain-dispatch.test.ts` (20 tests) covering dispatch enforcement (`task` tool, `mode: "background"`, charter context), secondary routing triggers, completion gate specifics, role-tag formatting, and per-preset routing completeness. Test the words, not just the headings.
+
+### D-007: Evaluate hook-chain prompts by behavioral signal, not text overlap
+- **By:** Evaluator
+- **Date:** 2026-03-15
+- **Context:** The current hook-chain suite mostly proves that generated files contain required enforcement text, but it does not prove that an assistant actually follows dispatch, startup, and completion instructions at runtime.
+- **Decision:** Score new hook-chain eval prompts primarily on their ability to expose runtime compliance gaps — especially dispatch behavior, startup/routing fidelity, and completion-gate obedience — using a weighted rubric that favors coverage value and behavioral observability over simple textual similarity.

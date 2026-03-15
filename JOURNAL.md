@@ -95,4 +95,41 @@ The raw log shows the quiet truths too. Not every important move was a big featu
 
 ---
 
+## 2026-03-15 — Hook-chain prompt coverage baseline
+
+### What Happened
+
+Established an evaluation baseline for the current hook-chain prompt coverage work. The full Vitest suite is green at **153/153 passing**, and hook-chain coverage analysis/reporting is prepared for three upcoming test prompts.
+
+### Why
+
+This locks in a known-good starting point before expanding prompt coverage, so future hook-chain prompt additions can be measured against a verified baseline instead of guesswork.
+
+---
+
+## Dispatch Enforcement — The Squad That Wouldn't Squad
+
+**Date:** 2026-03-15
+
+### What Happened
+
+During a live session testing hook chain behavior, the squad failed to dispatch. The user had to explicitly remind the AI to use real sub-agents instead of answering everything directly. This proved that **having dispatch instructions in the templates isn't enough if they aren't tested.**
+
+We designed 3 eval prompts (scored 82, 98, 92 by Evaluator), wrote 20 new dispatch enforcement tests in `test/hook-chain-dispatch.test.ts`, and discovered 7 failures:
+
+- AGENTS.md was missing the "Which squad roles should have touched this work?" completion routing check
+- The routing completeness test assumed all 9 generic routes exist in every preset (they don't — fast has 4, specialists use domain-specific names)
+
+Both were fixed. Suite went from 153 → 173 tests, all green.
+
+### Why
+
+The original hook-chain tests checked that enforcement *sections* existed (headings, role tags, always-on duties). They never checked the specific *language* that makes dispatch actually happen at runtime — things like `task` tool references, `mode: "background"`, charter context inclusion, and secondary trigger mappings. The gap was invisible until a real session exposed it.
+
+### The Lesson
+
+Testing that a prompt section exists is not the same as testing that it says the right thing. Dispatch enforcement is now a first-class test category.
+
+---
+
 *The code shows what was built. This journal shows why.*
