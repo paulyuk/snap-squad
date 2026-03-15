@@ -21,3 +21,9 @@
 - **Date:** 2026-03-15
 - **Context:** The repo already had `JOURNAL.md` for the build story, but it needed a user-facing technical explainer for how snap-squad works as a product.
 - **Decision:** Add `docs/how-it-works.md` as a plain-language product explainer, and keep `JOURNAL.md` focused on the build story while `docs/architecture.md` holds the Mermaid diagrams.
+
+### D-004: Preset detail docs should deep-link to preset YAML sources
+- **By:** Quill / Ledger
+- **Date:** 2026-03-15
+- **Context:** The preset detail docs describe each squad roster, but contributors had no direct path from an agent listed in `docs/presets/*.md` to the canonical YAML definition in `src/registry/presets/*.yaml`.
+- **Decision:** Link each team-table agent name directly to its `- name:` line in the matching preset YAML and add a Source Definition section at the bottom of every preset detail doc so docs stay traceable to the registry source of truth.

@@ -16,14 +16,14 @@ npx snap-squad init help me learn best practices
 
 | Agent | Role | What They Do |
 |-------|------|-------------|
-| **Oracle** 🔮 | Lead / Architect | Explains architectural decisions with context and trade-offs. Teaches through Socratic questions. |
-| **Scriptor** 📜 | Core Dev / Mentor | Writes exemplary code with inline explanations. Every function tells a story. |
-| **Proof** ✅ | Tester / Quality Mentor | Teaches testing as a design tool, not a chore. Tests are specifications written in code. |
-| **Chronicle** 📚 | Docs / Knowledge Manager | Writes docs that teach, not just describe. Maintains decision records and learning paths. |
-| **Pattern** 🧵 | Prompt Engineer / Pattern Curator | Designs prompts as reusable patterns with documented rationale. Document it, version it, test it. |
-| **Measure** 📐 | Evals / Assessment Mentor | Teaches eval-driven development — why baselines matter and how to design evals that reveal real quality. |
-| **Scout** 🔭 | Researcher / Landscape Analyst | Explores the ecosystem for learning opportunities and new patterns. Every discovery is a teaching moment. |
-| **Ledger** 📖 | Historian / Build Journalist | Captures the builder's steering, reasoning, and teaching moments. The lesson behind the code. |
+| [**Oracle**](../../src/registry/presets/sages.yaml#L16) 🔮 | Lead / Architect | Explains architectural decisions with context and trade-offs. Teaches through Socratic questions. |
+| [**Scriptor**](../../src/registry/presets/sages.yaml#L23) 📜 | Core Dev / Mentor | Writes exemplary code with inline explanations. Every function tells a story. |
+| [**Proof**](../../src/registry/presets/sages.yaml#L30) ✅ | Tester / Quality Mentor | Teaches testing as a design tool, not a chore. Tests are specifications written in code. |
+| [**Chronicle**](../../src/registry/presets/sages.yaml#L37) 📚 | Docs / Knowledge Manager | Writes docs that teach, not just describe. Maintains decision records and learning paths. |
+| [**Pattern**](../../src/registry/presets/sages.yaml#L44) 🧵 | Prompt Engineer / Pattern Curator | Designs prompts as reusable patterns with documented rationale. Document it, version it, test it. |
+| [**Measure**](../../src/registry/presets/sages.yaml#L51) 📐 | Evals / Assessment Mentor | Teaches eval-driven development — why baselines matter and how to design evals that reveal real quality. |
+| [**Scout**](../../src/registry/presets/sages.yaml#L58) 🔭 | Researcher / Landscape Analyst | Explores the ecosystem for learning opportunities and new patterns. Every discovery is a teaching moment. |
+| [**Ledger**](../../src/registry/presets/sages.yaml#L65) 📖 | Historian / Build Journalist | Captures the builder's steering, reasoning, and teaching moments. The lesson behind the code. |
 
 ## Routing
 
@@ -79,3 +79,7 @@ Every squad *builds*. Sages also *teach*. The difference shows up everywhere:
 - Need to ship faster? → [Dash](dash.md)
 - Need balanced coverage? → [Neighbors](neighbors.md)
 - Need deep domain expertise? → [Specialists](specialists.md)
+
+## Source Definition
+
+Full preset YAML: [`src/registry/presets/sages.yaml`](../../src/registry/presets/sages.yaml)

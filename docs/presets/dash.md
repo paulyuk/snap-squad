@@ -16,9 +16,9 @@ npx snap-squad init I need a fast team for a hackathon
 
 | Agent | Role | What They Do |
 |-------|------|-------------|
-| **Turbo** 🏎️ | Lead / Architect | Makes fast decisions. Scope is tiny by design. If it takes more than a sentence to explain, it's too complex. |
-| **Bolt** ⚡ | Full-Stack Dev | Writes all the code — frontend, backend, infra, whatever it takes. Will scaffold an entire app while you're writing the spec. |
-| **Flash** 💨 | Tester + DevRel | Smoke tests and writes the README. Two jobs, zero complaints. Three tests for the happy path and we ship. |
+| [**Turbo**](../../src/registry/presets/dash.yaml#L15) 🏎️ | Lead / Architect | Makes fast decisions. Scope is tiny by design. If it takes more than a sentence to explain, it's too complex. |
+| [**Bolt**](../../src/registry/presets/dash.yaml#L22) ⚡ | Full-Stack Dev | Writes all the code — frontend, backend, infra, whatever it takes. Will scaffold an entire app while you're writing the spec. |
+| [**Flash**](../../src/registry/presets/dash.yaml#L29) 💨 | Tester + DevRel | Smoke tests and writes the README. Two jobs, zero complaints. Three tests for the happy path and we ship. |
 
 ## Routing
 
@@ -65,3 +65,7 @@ That's the point. Every agent you add is another voice in the room. Dash keeps t
 - Need more coverage? → [Neighbors](neighbors.md)
 - Want to learn as you build? → [Sages](sages.md)
 - Need deep specialization? → [Specialists](specialists.md)
+
+## Source Definition
+
+Full preset YAML: [`src/registry/presets/dash.yaml`](../../src/registry/presets/dash.yaml)

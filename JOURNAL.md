@@ -53,6 +53,12 @@ The real origin story is delightfully recursive: **snap-squad was built the way 
 | Mar 15 · `423a0fd` | "ensure all agent skills get updated" | 32 agents across 4 presets got operational "How I [verb]" sections. 14 role types with duties and quality gates. | 🎓 **Skill up every agent.** |
 | Mar 15 | "did we break the npm again?" | `--force` had been nuking JOURNAL.md and decisions.md. Chuck debugged it. Files split into structural (safe to overwrite) vs content (protected). `--reset-all` added for true clean slate. Tests: 84 → 87. | 🛡️ **Protect user content from regeneration.** |
 
+### Session 4 — Source-Linked Preset Docs (Mar 14, 6:27 PM PDT)
+
+| Time | Steering Command | What Happened | Level-Up |
+|---|---|---|---|
+| 6:27 PM · — | "Update all 4 preset detail docs ... to deep link agent names to their YAML definitions" | Quill traced every `- name:` entry in the four preset YAML files, converted each team-table agent name into a GitHub line anchor, and added a Source Definition section to every preset detail doc. No build or test run — the user explicitly asked to skip them for this docs-only pass. | 🔗 **Docs now point at source, not just describe it.** |
+
 ## How We Used What We Teach
 
 | snap-squad principle | How snap-squad used it on itself | Evidence |

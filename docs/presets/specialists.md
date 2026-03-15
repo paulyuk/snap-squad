@@ -16,18 +16,18 @@ npx snap-squad init database security hardening
 
 | Agent | Role | What They Do |
 |-------|------|-------------|
-| **Chuck** 🥋 | Troubleshooter / Debugger | The toughest debugger on any squad. Bugs don't hide from Chuck — they turn themselves in. Grounded in TSGs, logs, docs, and forums. Calls on Recon for research backup. |
-| **Forge** ⚒️ | Lead / Integration Architect | Coordinates specialists. Makes sure the DB tuning doesn't break the API contract. |
-| **Anvil** 🔨 | Backend / Data Specialist | Database tuning, query optimization, data modeling, caching. Show him the query plan. |
-| **Chisel** 🔒 | Security / Hardening | Security review, auth patterns, secret management, compliance. Will reject "we'll add auth later." |
-| **Prism** 💎 | UI/UX / Frontend | UI polish, accessibility, responsive design. The 2px margin matters. |
-| **Loom** 🧶 | Infra / DevOps | CI/CD, containers, IaC, monitoring. If it's not automated, it's a bug. |
-| **Caliber** 🎯 | Evals / Quality | Deep eval expertise — comprehensive eval suites, agent-as-judge, regression baselines. |
-| **Sensei** 🥷 | Skill Quality Auditor | Automates skill frontmatter compliance using the Ralph loop. Enforces triggers, anti-triggers, and token budgets. |
-| **Waza** ⚔️ | Skill Evaluation Runner | Go CLI for skill benchmarking — repeatable eval scenarios, invocation accuracy, task completion scoring. |
-| **Blitz** 💥 | Mass Ops / Multi-Repo Campaigns | Executes at scale — audits, issues, PRs, fixes across many repos. **Always audits first, plans, reviews, and waits for approval.** Pairs with Recon for targets and Chuck for fallout. |
-| **Recon** 🔭 | Deep Researcher / Opportunity Hunter | Turns over every rock. Maintains RESEARCH.md. Identifies targets for Blitz campaigns. Never stops digging. |
-| **Ledger** 📖 | Historian / Build Journalist | Journals how specialist decisions compound. The story of how the work fit together. |
+| [**Chuck**](../../src/registry/presets/specialists.yaml#L16) 🥋 | Troubleshooter / Debugger | The toughest debugger on any squad. Bugs don't hide from Chuck — they turn themselves in. Grounded in TSGs, logs, docs, and forums. Calls on Recon for research backup. |
+| [**Forge**](../../src/registry/presets/specialists.yaml#L23) ⚒️ | Lead / Integration Architect | Coordinates specialists. Makes sure the DB tuning doesn't break the API contract. |
+| [**Anvil**](../../src/registry/presets/specialists.yaml#L30) 🔨 | Backend / Data Specialist | Database tuning, query optimization, data modeling, caching. Show him the query plan. |
+| [**Chisel**](../../src/registry/presets/specialists.yaml#L37) 🔒 | Security / Hardening | Security review, auth patterns, secret management, compliance. Will reject "we'll add auth later." |
+| [**Prism**](../../src/registry/presets/specialists.yaml#L44) 💎 | UI/UX / Frontend | UI polish, accessibility, responsive design. The 2px margin matters. |
+| [**Loom**](../../src/registry/presets/specialists.yaml#L51) 🧶 | Infra / DevOps | CI/CD, containers, IaC, monitoring. If it's not automated, it's a bug. |
+| [**Caliber**](../../src/registry/presets/specialists.yaml#L58) 🎯 | Evals / Quality | Deep eval expertise — comprehensive eval suites, agent-as-judge, regression baselines. |
+| [**Sensei**](../../src/registry/presets/specialists.yaml#L65) 🥷 | Skill Quality Auditor | Automates skill frontmatter compliance using the Ralph loop. Enforces triggers, anti-triggers, and token budgets. |
+| [**Waza**](../../src/registry/presets/specialists.yaml#L72) ⚔️ | Skill Evaluation Runner | Go CLI for skill benchmarking — repeatable eval scenarios, invocation accuracy, task completion scoring. |
+| [**Blitz**](../../src/registry/presets/specialists.yaml#L79) 💥 | Mass Ops / Multi-Repo Campaigns | Executes at scale — audits, issues, PRs, fixes across many repos. **Always audits first, plans, reviews, and waits for approval.** Pairs with Recon for targets and Chuck for fallout. |
+| [**Recon**](../../src/registry/presets/specialists.yaml#L86) 🔭 | Deep Researcher / Opportunity Hunter | Turns over every rock. Maintains RESEARCH.md. Identifies targets for Blitz campaigns. Never stops digging. |
+| [**Ledger**](../../src/registry/presets/specialists.yaml#L93) 📖 | Historian / Build Journalist | Journals how specialist decisions compound. The story of how the work fit together. |
 
 ## Routing
 
@@ -101,3 +101,7 @@ Specialists come pre-configured with MCP tool references:
 - Need speed over depth? → [Dash](dash.md)
 - Need balanced coverage? → [Neighbors](neighbors.md)
 - Want to learn as you build? → [Sages](sages.md)
+
+## Source Definition
+
+Full preset YAML: [`src/registry/presets/specialists.yaml`](../../src/registry/presets/specialists.yaml)
