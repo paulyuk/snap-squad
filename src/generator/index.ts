@@ -190,11 +190,12 @@ ${rows}
 
 ## Routing Principles
 
-1. **Eager by default** — spawn agents who could usefully start work.
-2. **Scribe always runs** after substantial work, in background. Never blocks.
-3. **Quick facts → coordinator answers directly.** Don't spawn for trivial questions.
-4. **Two agents could handle it** → pick the one whose domain is the primary concern.
-5. **Anticipate downstream.** Feature being built? Spawn tester simultaneously.
+1. **Eager by default** — dispatch agents who could usefully start work in parallel.
+2. **"Spawn" means dispatch a sub-agent.** Use the \`task\` tool with \`mode: "background"\` to launch squad members as parallel sub-agents. Include the agent's charter from \`.squad/agents/<name>/charter.md\` in the dispatch prompt.
+3. **Scribe always runs** after substantial work, dispatched in background. Never blocks.
+4. **Quick facts → lead agent answers directly.** Don't dispatch for trivial questions.
+5. **Two agents could handle it** → pick the one whose domain is the primary concern.
+6. **Anticipate downstream.** Feature being built? Dispatch tester simultaneously as a background sub-agent.
 
 ## Automatic Secondary Routing
 
@@ -746,7 +747,23 @@ These are not suggestions. They are standing orders for every session:
 - **Behavior changed → check docs.** If user-visible behavior shifted, docs must reflect it.
 - **Decision made → log it.** Any trade-off or design choice goes in \`.squad/decisions.md\`.
 - **Milestone reached → journal it.** Update \`JOURNAL.md\` with what happened and why.
-- **Another role needed → activate it.** Don't wait to be asked. If docs need updating, be DevRel. If tests are missing, be Tester.
+- **Another role needed → dispatch it.** Don't wait to be asked. If docs need updating, dispatch DevRel. If tests are missing, dispatch Tester.
+
+## Squad Dispatch
+
+When routing.md says "spawn" or "dispatch" an agent, use the \`task\` tool to launch a real sub-agent:
+
+1. **Read the charter first.** Load \`.squad/agents/<name>/charter.md\` for the agent's identity, expertise, and duties.
+2. **Dispatch as background.** Use \`task\` with \`mode: "background"\` and \`agent_type: "general-purpose"\` so squad members work in parallel.
+3. **Include full context.** Sub-agents are stateless. Give each one: the charter content, the specific task, relevant file paths, and any decisions from \`.squad/decisions.md\` that affect the work.
+4. **Lead agent coordinates.** You manage the overall task. Sub-agents execute within their domain. Review their output when they complete.
+5. **Parallel by default.** When multiple agents should work (e.g., Coder + Tester), dispatch them simultaneously — don't serialize.
+
+### When NOT to Dispatch
+
+- **Trivial questions** — answer directly, no sub-agent needed.
+- **Single-domain quick fixes** — just adopt the role with a \`[AgentName]\` tag.
+- **Sub-agent already running** — don't double-dispatch the same role.
 
 ## Before You Say "Done"
 
@@ -757,6 +774,9 @@ Do not end the session without verifying:
 - [ ] Docs updated if user-visible behavior changed
 - [ ] Tests considered if code changed
 - [ ] Open risks or follow-ups explicitly stated
+
+Before finishing, ask: **"Which squad roles should have touched this work but haven't?"**
+Resolve those gaps or explicitly report them before ending the session.
 ${defaultPlus}
 ## Quick Reference
 
@@ -798,6 +818,7 @@ Immediately after reading this file, before responding to the user:
 3. **Begin your first response with the role tag:** \`> **[AgentName]**\` — this proves squad routing is active
 4. Check whether \`JOURNAL.md\` has recent entries — if stale, plan to update it
 5. Identify downstream needs: will this work require tests? docs? evals? decisions? Include them in your plan.
+6. **Dispatch, don't role-play.** Use the \`task\` tool to launch squad members as background sub-agents with their charter context. See AGENTS.md "Squad Dispatch" section.
 
 ## Non-Optional Operating Behaviors
 
@@ -807,7 +828,7 @@ These apply in **every session**, whether or not the user asks:
 - **Behavior changed → docs updated.** If what the user sees changed, docs must change too.
 - **Trade-off made → decision logged.** Record it in \`.squad/decisions.md\` with context and reasoning.
 - **Milestone reached → journal updated.** \`JOURNAL.md\` captures the story, not just the code.
-- **Another role's domain touched → activate that role.** Don't wait to be asked.
+- **Another role's domain touched → dispatch that role as a sub-agent.** Don't role-switch — use the \`task\` tool.
 
 ## Session Completion Gate
 
@@ -849,6 +870,7 @@ function generateCopilotInstructions(arch: Preset): string {
 - Identify which squad member is best suited for the current task
 - **Start every substantive response with a role tag:** \`> **[AgentName]**\` (see AGENTS.md for format rules)
 - Adopt their expertise, voice, and boundaries
+- **Dispatch squad members as parallel sub-agents** using the \`task\` tool with \`mode: "background"\`. Include charter context from \`.squad/agents/<name>/charter.md\`. See AGENTS.md "Squad Dispatch" section.
 - Log significant decisions to \`.squad/decisions.md\` after completing work
 
 ## Proactive Quality Triggers
@@ -862,7 +884,7 @@ These fire automatically — they are not optional:
 | Prompt or agent behavior changed | Review eval baselines |
 | Important trade-off made | Log decision to \`.squad/decisions.md\` |
 | Meaningful milestone reached | Update \`JOURNAL.md\` with what happened and why |
-| Another role's expertise needed | Activate that role — don't wait to be asked |
+| Another role's expertise needed | Dispatch that role as a background sub-agent via \`task\` tool |
 
 ## Before You Respond With "Done"
 
