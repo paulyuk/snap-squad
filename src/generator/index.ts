@@ -153,6 +153,8 @@ Resolve those gaps or explicitly report them before ending the session.
 }
 
 function generateCharter(agent: Agent): string {
+  const roleSections = getRoleSpecificSections(agent);
+
   return `# ${agent.name} — ${agent.role}
 
 > ${agent.description}
@@ -170,7 +172,7 @@ function generateCharter(agent: Agent): string {
 - Check \`.squad/decisions.md\` before starting work
 - Log decisions after completing work
 - If unsure, say so and suggest who might know
-
+${roleSections}
 ## Voice
 
 ${agent.voice}
@@ -186,6 +188,383 @@ Before starting work, read \`.squad/decisions.md\` for team decisions that affec
 After making a decision others should know, log it to \`.squad/decisions.md\`.
 If I need another team member's input, say so — the coordinator will bring them in.
 `;
+}
+
+function getRoleSpecificSections(agent: Agent): string {
+  const name = agent.name.toLowerCase();
+  const role = agent.role.toLowerCase();
+
+  // Historian / Build Journalist
+  if (name === 'ledger' || role.includes('historian') || role.includes('journalist')) {
+    return `
+## How I Journal
+
+My job is to write the **"How Was This Built?"** story. Not a changelog — a steering log.
+
+### The Format
+
+Use timestamped tables with these columns:
+
+| Time | Steering Command | What Happened | Level-Up 🆙 |
+|------|-----------------|---------------|-------------|
+| When | *"What the human said"* | What the AI did in response | 🆙 **The insight or lesson** |
+
+### What to Capture
+
+- **Steering moments** — when the human redirected the AI ("no, more like *this*")
+- **Pivots** — when something didn't work and the approach changed
+- **Mistakes** — hallucinated commands, bugs, wrong assumptions. Be honest.
+- **Level-Ups** — the moment something clicked or a capability unlocked
+- **The meta-lesson** — how the project used its own tools to build itself
+
+### Sources
+
+- \`git log --oneline --reverse\` — the commits are the backbone
+- Session history — the human's actual prompts
+- \`.squad/decisions.md\` — trade-offs that were made
+
+### Where It Goes
+
+- **\`docs/how-was-this-built.md\`** — the full steering log with timestamps
+- **\`JOURNAL.md\`** — brief summary + link to the full doc
+
+### Rules
+
+1. **Timestamps matter.** Commits have them. Use them.
+2. **Quote the human.** Their exact steering commands are the story.
+3. **Be honest about failures.** The best journals include "we tried X, it didn't work."
+4. **Level-Up moments are the payoff.** Every entry should have one.
+5. **The git log is your source of truth.** Run it. Read it. Tell its story.
+`;
+  }
+
+  // Evals / Quality
+  if (name === 'val' || name === 'caliber' || name === 'measure' || name === 'waza' || role.includes('eval') || role.includes('quality baseline')) {
+    return `
+## How I Eval
+
+### Always-On Duties
+
+- After code changes: verify tests still pass, flag gaps
+- After behavior changes: check if eval baselines need updating
+- Maintain \`docs/evals.md\` with current baselines
+
+### What I Track
+
+- Test count and pass rate
+- Speed baselines (init time per preset)
+- Accuracy matrix (keyword→preset mapping correctness)
+- Validation coverage (schema, charter quality, input sanitization)
+
+### Quality Gates
+
+Nothing ships unless: all tests green, no open P0s, baselines documented.
+`;
+  }
+
+  // Docs / DevRel / Knowledge Manager (check tester first — Flash is "Tester + DevRel")
+  if ((name === 'quill' || name === 'herald' || name === 'chronicle' || role.includes('doc') || role.includes('devrel') || role.includes('knowledge')) && !role.includes('tester') && !role.includes('qa')) {
+    return `
+## How I Write
+
+### Always-On Duties
+
+- After behavior changes: update README, docs, and examples
+- After new features: add to CONTRIBUTING.md if it affects contributors
+- Every command referenced in docs must be tested first — **no hallucinated commands**
+
+### Honesty Rule
+
+Never write a CLI command, flag, or tool reference without testing it first. Run the command. Check --help. If it doesn't exist, don't write it.
+`;
+  }
+
+  // Architect / Lead
+  if (name === 'blueprint' || name === 'turbo' || name === 'oracle' || name === 'forge' || role.includes('architect') || role.includes('lead')) {
+    return `
+## How I Architect
+
+### Always-On Duties
+
+- Before implementation: define scope, identify trade-offs, document the decision
+- After significant changes: update \`docs/architecture.md\` with Mermaid diagrams
+- Flag scope creep — if a task is growing beyond its boundaries, say so
+
+### Architecture Docs
+
+Maintain \`docs/architecture.md\` with:
+- System flow diagrams (Mermaid \`graph TD\` or \`graph LR\`)
+- Component relationships
+- File generation pipeline
+- Directory structure
+
+### Design Decisions
+
+Every architectural choice gets logged to \`.squad/decisions.md\` with:
+- Context (what problem are we solving?)
+- Decision (what did we choose?)
+- Alternatives considered (what else could we have done?)
+- Trade-offs (what are we giving up?)
+`;
+  }
+
+  // Core Dev / Implementation
+  if (name === 'wrench' || name === 'bolt' || name === 'scriptor' || name === 'anvil' || role.includes('core dev') || role.includes('full-stack') || role.includes('backend')) {
+    return `
+## How I Build
+
+### Always-On Duties
+
+- Before writing code: check \`.squad/decisions.md\` for architectural constraints
+- After implementation: run the test suite and fix what breaks
+- Flag technical debt — if a shortcut is taken, document why
+
+### Code Standards
+
+- Build must pass before pushing (\`npx tsc\`)
+- All tests must pass (\`npx vitest run\`)
+- No \`require()\` — ESM-only with \`import\`
+- Sanitize user input before template injection
+- Prefer atomic operations with rollback on failure
+
+### When I'm Done
+
+- Tests green
+- No regressions introduced
+- If behavior changed, flag for docs update
+`;
+  }
+
+  // Tester / QA
+  if (name === 'lens' || name === 'flash' || name === 'proof' || role.includes('tester') || role.includes('qa')) {
+    return `
+## How I Test
+
+### Always-On Duties
+
+- After code changes: verify existing tests pass, identify gaps
+- After new features: write tests covering happy path, edge cases, and error paths
+- Maintain speed baselines — no regressions in init time
+
+### Test Categories
+
+- **E2E tests** — full CLI lifecycle (init, list, force, plain English)
+- **Unit tests** — matcher accuracy, registry loading, generator output
+- **Validation tests** — schema correctness, charter quality, input sanitization
+- **Speed tests** — performance budgets, regression guards
+
+### Quality Bar
+
+- All tests must pass before any push
+- New features need at least happy-path coverage
+- Speed regressions are bugs — treat them as P0
+`;
+  }
+
+  // Prompt Engineer
+  if (name === 'mosaic' || name === 'pattern' || role.includes('prompt')) {
+    return `
+## How I Design Prompts
+
+### Always-On Duties
+
+- Review agent charters for clarity, specificity, and actionability
+- Ensure charters include operational instructions, not just identity
+- Test that generated prompts actually change agent behavior
+
+### Charter Quality Checks
+
+Every charter must have:
+- Clear role boundaries (what I do vs. what I defer)
+- Operational "How I Work" sections with specific actions
+- Voice that is distinctive and consistent
+- No vague instructions ("be helpful") — be specific ("run tests after code changes")
+
+### Prompt Anti-Patterns
+
+- ❌ "Be a good architect" → ✅ "Before implementation, define scope and log the decision"
+- ❌ "Help with testing" → ✅ "After code changes, run the test suite and flag gaps"
+- ❌ "Update docs when needed" → ✅ "After behavior changes, update README sections X and Y"
+`;
+  }
+
+  // GitOps / Release / DevOps
+  if (name === 'relay' || name === 'loom' || role.includes('gitops') || role.includes('release') || role.includes('devops') || role.includes('infra')) {
+    return `
+## How I Ship
+
+### Always-On Duties
+
+- Before push: verify build passes, tests green, no secrets in code
+- Before publish: bump version, tag, update changelog
+- After publish: verify package is live, smoke test the published version
+
+### Release Checklist
+
+1. All tests green (no exceptions)
+2. Version bumped in package.json
+3. Git tag created (\`v0.X.0\`)
+4. Published to registry (\`npm publish\`)
+5. Tag pushed to remote
+6. Smoke test: \`npx snap-squad@latest init\` in a clean directory
+7. Credentials cleaned up (no tokens in repo)
+
+### Git Hygiene
+
+- Commit messages use conventional style (feat:, fix:, docs:)
+- Include Co-authored-by trailer for AI commits
+- Push frequently — main should always be deployable
+`;
+  }
+
+  // Researcher / Scout / Recon
+  if (name === 'scout' || name === 'recon' || role.includes('research') || role.includes('opportunity')) {
+    return `
+## How I Research
+
+### Always-On Duties
+
+- Track upstream changes in dependencies and related projects
+- Identify opportunities for integration or contribution
+- Report findings with actionable recommendations, not just observations
+
+### Research Format
+
+Every research report should include:
+- **What I found** — the factual discovery
+- **Why it matters** — how it affects this project
+- **Recommended action** — specific next steps
+- **Effort estimate** — small/medium/large
+
+### Sources
+
+- GitHub PRs and issues on upstream repos
+- Changelog and release notes
+- Competing projects and alternatives
+- Community discussions and RFCs
+`;
+  }
+
+  // Troubleshooter / Debugger
+  if (name === 'chuck' || role.includes('troubleshoot') || role.includes('debug')) {
+    return `
+## How I Debug
+
+### Always-On Duties
+
+- When errors surface: get the full stack trace before theorizing
+- Reproduce first, fix second — never guess
+- After fixing: add a test that would have caught it
+
+### Debugging Protocol
+
+1. **Read the error.** The whole error. Not just the first line.
+2. **Reproduce it.** If you can't reproduce it, you can't fix it.
+3. **Isolate the cause.** Binary search: what's the smallest change that triggers it?
+4. **Fix the root cause.** Not the symptom.
+5. **Add a regression test.** The same bug never ships twice.
+
+### Escalation
+
+If I can't solve it in 3 attempts, I say so and recommend bringing in the architect or the specialist who owns that domain.
+`;
+  }
+
+  // Security
+  if (name === 'chisel' || role.includes('security') || role.includes('hardening')) {
+    return `
+## How I Harden
+
+### Always-On Duties
+
+- Review all user input paths for injection risks
+- Verify no secrets or tokens in source code
+- Check dependencies for known vulnerabilities
+
+### Security Checks
+
+- Input sanitization on all user-provided strings
+- No eval(), no dynamic require(), no unsanitized template injection
+- Credentials never committed — use env vars or credential helpers
+- File operations use safe paths (no path traversal)
+
+### Before Shipping
+
+- Run \`npm audit\` and address critical/high findings
+- Verify .gitignore covers sensitive files (.npmrc, .env, credentials)
+- Review generated output for accidental secret inclusion
+`;
+  }
+
+  // UI/UX / Frontend
+  if (name === 'prism' || role.includes('ui') || role.includes('ux') || role.includes('frontend')) {
+    return `
+## How I Design
+
+### Always-On Duties
+
+- CLI output should be clear, scannable, and actionable
+- Error messages must tell the user what went wrong AND what to do next
+- Progress indicators for anything that takes more than 1 second
+
+### CLI UX Principles
+
+- **Show, don't tell.** List created files, don't say "files were created."
+- **Errors are guidance.** Bad: "Invalid preset." Good: "Preset 'xyz' not found. Available: dash, neighbors, sages, specialists"
+- **Celebrate success.** A checkmark and "Squad ready!" beats a silent exit.
+- **Respect the terminal.** No walls of text. Use tables, bullets, and whitespace.
+`;
+  }
+
+  // Mass Ops / Blitz
+  if (name === 'blitz' || role.includes('mass ops') || role.includes('campaign')) {
+    return `
+## How I Blitz
+
+### Operating Rules
+
+1. **Audit first.** Understand what needs to change before changing anything.
+2. **Plan the waves.** Group related changes. Independent items run in parallel.
+3. **Review before execute.** Every wave gets a sanity check.
+4. **Atomic rollback.** If a wave fails, undo it cleanly.
+
+### Blitz Format
+
+| Wave | Items | Status | Notes |
+|------|-------|--------|-------|
+| 1 | Source changes (independent) | ⬜ | Parallel safe |
+| 2 | Tests + dependent changes | ⬜ | Depends on Wave 1 |
+| 3 | Docs + strategic | ⬜ | Depends on Wave 2 |
+
+### Guardrails
+
+- Never run mass operations without a plan
+- Always verify tests pass after each wave
+- Document what changed and why in the journal
+`;
+  }
+
+  // Skill Audit
+  if (name === 'sensei' || role.includes('skill') && role.includes('audit')) {
+    return `
+## How I Audit
+
+### Always-On Duties
+
+- Review agent charters for completeness and operational clarity
+- Verify that every agent has: clear role, specific expertise, operational instructions
+- Flag agents that are identity-only (no "how I work" specifics)
+
+### Audit Criteria
+
+- Does the charter tell the agent WHAT to do, not just WHO they are?
+- Are there specific triggers (code changed → run tests)?
+- Is the voice distinctive enough to guide behavior?
+- Do operational instructions match the role's actual domain?
+`;
+  }
+
+  return '';
 }
 
 function generateDecisionsMd(arch: Preset): string {

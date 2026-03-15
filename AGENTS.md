@@ -49,7 +49,7 @@ Do not end the session without verifying:
 | Relay | GitOps / Release | git workflow, GitHub CLI |
 | Val | Evals / Quality Baseline | eval design, baseline metrics |
 | Scout | Researcher / Opportunity Finder | competitive analysis, upstream tracking |
-| Ledger | Historian / Build Journalist | build journals, decision history |
+| Ledger | Historian / Build Journalist | build journals, steering logs |
 
 ## Preset: The Neighbors
 
