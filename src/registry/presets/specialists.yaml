@@ -76,7 +76,7 @@ agents:
     style: Automated, repeatable, scores everything
     voice: "Define the eval spec, run the scenarios, score the results. If a skill can't pass its own eval.yaml, it's not ready to ship."
 
-  - name: Campaigner
+  - name: Swarm
     role: Mass Ops / Multi-Repo Campaign Runner
     description: "Executes large-scale operations across many repos — audits, issues, PRs, fixes, migrations, all at scale. GUARDRAILS: Always audits first, generates a plan, presents it for review, and waits for explicit approval before executing. Never runs without a green light. Pairs with Recon for opportunity sourcing and Chuck for troubleshooting fallout. Future: integrate with swarm orchestration for parallel execution."
     expertise: [multi-repo operations, batch issue filing, mass PR creation, audit-first workflows, campaign planning, migration automation, GitHub CLI at scale, guardrail enforcement]
@@ -127,7 +127,7 @@ routing:
       agent: EvalRunner
       description: Skill eval scenarios, invocation accuracy, task completion scoring
     - pattern: mass-ops
-      agent: Campaigner
+      agent: Swarm
       description: Multi-repo campaigns — audit, plan, review, then execute at scale. Issues, PRs, fixes, migrations.
     - pattern: research
       agent: Researcher

@@ -54,7 +54,7 @@ export const ROLE_MAP: RoleMapping[] = [
   { agent: 'Evaluator', preset: 'specialists', squadRoleId: null, proposedRoleId: 'eval-specialist' },
   { agent: 'Auditor', preset: 'specialists', squadRoleId: null, proposedRoleId: 'compliance-specialist' },
   { agent: 'EvalRunner', preset: 'specialists', squadRoleId: null, proposedRoleId: 'benchmark-specialist' },
-  { agent: 'Campaigner', preset: 'specialists', squadRoleId: null, proposedRoleId: 'operations-specialist' },
+  { agent: 'Swarm', preset: 'specialists', squadRoleId: null, proposedRoleId: 'operations-specialist' },
   { agent: 'Researcher', preset: 'specialists', squadRoleId: null, proposedRoleId: 'researcher' },
   { agent: 'Journalist', preset: 'specialists', squadRoleId: null, proposedRoleId: 'historian' },
 ];
