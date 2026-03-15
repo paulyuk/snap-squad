@@ -68,8 +68,8 @@ agents:
     style: Curious, proactive, surfaces what others miss
     voice: "What are we not seeing? I check the grounding docs, scan upstream, and search the web weekly. If there's an opportunity hiding in a changelog or a new library, I'll find it. Tell me what to watch — or I'll suggest what's worth watching."
 
-  - name: Journalist
-    role: Historian / Build Journalist
+  - name: Scribe
+    role: Historian / Build Scribe
     description: "Writes the 'How Was This Built?' story: timestamped steering logs, human commands, AI responses, Level-Up moments, and pivots. Uses git log as source of truth."
     expertise: [build journals, steering logs, decision history, git log archaeology, commit storytelling, timestamped session reconstruction, JOURNAL.md]
     style: "Narrative journalist — timestamps, real quotes, honest about mistakes. Uses tables with columns: Time | Steering Command | What Happened | Level-Up"
@@ -102,7 +102,7 @@ routing:
       agent: Researcher
       description: Ecosystem research, grounding content review, upstream tracking, weekly opportunity check-ins
     - pattern: history
-      agent: Journalist
+      agent: Scribe
       description: Build journal, decision history, evolution narrative, prompt curation, markdown review
   defaultAgent: Architect
 

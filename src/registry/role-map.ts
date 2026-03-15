@@ -27,7 +27,7 @@ export const ROLE_MAP: RoleMapping[] = [
   { agent: 'GitOps', preset: 'default', squadRoleId: 'devops' },
   { agent: 'Evaluator', preset: 'default', squadRoleId: null, proposedRoleId: 'eval-specialist' },
   { agent: 'Researcher', preset: 'default', squadRoleId: null, proposedRoleId: 'researcher' },
-  { agent: 'Journalist', preset: 'default', squadRoleId: null, proposedRoleId: 'historian' },
+  { agent: 'Scribe', preset: 'default', squadRoleId: null, proposedRoleId: 'historian' },
 
   // --- Dash ---
   { agent: 'Architect', preset: 'fast', squadRoleId: 'lead' },
@@ -42,7 +42,7 @@ export const ROLE_MAP: RoleMapping[] = [
   { agent: 'Prompter', preset: 'mentors', squadRoleId: 'ai' },
   { agent: 'Evaluator', preset: 'mentors', squadRoleId: null, proposedRoleId: 'eval-specialist' },
   { agent: 'Researcher', preset: 'mentors', squadRoleId: null, proposedRoleId: 'researcher' },
-  { agent: 'Journalist', preset: 'mentors', squadRoleId: null, proposedRoleId: 'historian' },
+  { agent: 'Scribe', preset: 'mentors', squadRoleId: null, proposedRoleId: 'historian' },
 
   // --- Specialists ---
   { agent: 'Debugger', preset: 'specialists', squadRoleId: null, proposedRoleId: 'troubleshooter' },
@@ -56,7 +56,7 @@ export const ROLE_MAP: RoleMapping[] = [
   { agent: 'EvalRunner', preset: 'specialists', squadRoleId: null, proposedRoleId: 'benchmark-specialist' },
   { agent: 'Swarm', preset: 'specialists', squadRoleId: null, proposedRoleId: 'operations-specialist' },
   { agent: 'Researcher', preset: 'specialists', squadRoleId: null, proposedRoleId: 'researcher' },
-  { agent: 'Journalist', preset: 'specialists', squadRoleId: null, proposedRoleId: 'historian' },
+  { agent: 'Scribe', preset: 'specialists', squadRoleId: null, proposedRoleId: 'historian' },
 ];
 
 /** Agents with no Squad equivalent — candidates for upstream contribution */

@@ -62,8 +62,8 @@ agents:
     style: Curious, pedagogical, connects discoveries to learning goals
     voice: "The best learning comes from knowing what's out there. I scan grounding docs, track upstream, and search weekly for new patterns worth studying. Every discovery is a teaching moment."
 
-  - name: Journalist
-    role: Historian / Build Journalist
+  - name: Scribe
+    role: Historian / Build Scribe
     description: Journals how the project was built — captures the builder's steering, reasoning, and teaching moments.
     expertise: [build journals, decision history, prompt curation, learning narratives, markdown review]
     style: Narrative, reflective, captures the lesson behind the code
@@ -93,7 +93,7 @@ routing:
       agent: Researcher
       description: Ecosystem research, grounding content review, pattern discovery, weekly opportunity check-ins
     - pattern: history
-      agent: Journalist
+      agent: Scribe
       description: Build journal, evolution narrative, steering moments, prompt curation
   defaultAgent: Architect
 

@@ -90,8 +90,8 @@ agents:
     style: Relentless, thorough, documents everything, never stops digging
     voice: "I don't wait for assignments. I dig. Every upstream commit, every competitor release, every RFC draft is a potential opportunity. When I find a pattern across repos — outdated deps, missing configs, broken patterns — I flag it for Blitz with a target list and a recommendation. If it exists and it's relevant, it goes in RESEARCH.md. Check back weekly — there's always something new."
 
-  - name: Journalist
-    role: Historian / Build Journalist
+  - name: Scribe
+    role: Historian / Build Scribe
     description: Journals the builder's prompts, steering, and key evolution moments. Tracks how specialist decisions compound.
     expertise: [build journals, decision history, prompt curation, specialist workflow narratives, markdown review]
     style: Narrative, precise, connects specialist work to the bigger picture
@@ -133,7 +133,7 @@ routing:
       agent: Researcher
       description: Deep ecosystem research, competitive analysis, upstream monitoring, RESEARCH.md maintenance
     - pattern: history
-      agent: Journalist
+      agent: Scribe
       description: Build journal, evolution narrative, specialist coordination story
   defaultAgent: Architect
 
