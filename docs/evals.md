@@ -62,11 +62,46 @@ The accuracy suite contains **28 direct prompt→preset mapping checks** and **8
 | Charter/output quality | 4 | Required charter sections, agent presence in `team.md`, routing rule rendering in `routing.md`, and `JOURNAL.md` generation. |
 | Input sanitization | 3 | Escapes markdown/link-like content in owner and project names, and safely defaults empty owner to `unknown`. |
 
+## Dispatch Enforcement (automated)
+
+Added by D-007. `test/hook-chain-dispatch.test.ts` validates that generated hook-chain files contain the specific enforcement language that makes squad dispatch work at runtime — not just section headings.
+
+| Area | Tests | What is asserted |
+|---|---:|---|
+| Dispatch enforcement | 4 (×4 presets) | `task` tool reference, `mode: "background"`, charter context path, and dispatch language in AGENTS.md, CLAUDE.md, and copilot-instructions.md |
+| Secondary routing triggers | 4 (×4 presets) | Automatic Secondary Routing table maps implementation→testing, behavior→docs, prompts→evals, decisions→logging, milestones→journal |
+| Completion gate specifics | 4 (×4 presets) | Gate references decisions.md, JOURNAL.md, docs, tests, and "Which squad roles should have touched this work" |
+| Role-tag formatting | 4 (×4 presets) | `**[` pattern in all 3 hook files, prohibits "Acting as all agents", requires "One lead role per response" |
+| Routing completeness | 4 (×4 presets) | Each preset's own defined routes are present, plus "Scribe always runs" |
+
+## Live Squad Eval (manual)
+
+Automated tests verify the generated text says the right things. This manual eval verifies the AI actually **follows** those instructions at runtime. Run this after any change to hook-chain templates.
+
+### Prompt
+
+Open a new Copilot CLI session in a snap-squad repo (after `npx snap-squad init`) and paste:
+
+> Add a --verbose flag to snap-squad init that logs each file as it's written. Update tests and docs to match.
+
+### Scorecard
+
+| # | Check | What to look for | Pass? |
+|---|---|---|---|
+| 1 | Role routing | First response starts with `> **[Coder]**` | |
+| 2 | Tester dispatched | Tester launched via `task` tool — visible in `/tasks` | |
+| 3 | DevRel dispatched | DevRel launched via `task` tool — visible in `/tasks` | |
+| 4 | No role-switching | Neither Tester nor DevRel was faked with inline `[Tester]`/`[DevRel]` tags instead of real dispatch | |
+| 5 | Completion gate | Final response references decisions.md, tests, docs before declaring done | |
+| 6 | Routing check | "Which squad roles should have touched this work" is considered before finishing | |
+
+**Interpretation:** 6/6 = hook chain working. 4-5/6 = minor drift. ≤3/6 = dispatch enforcement needs tightening.
+
 ## Quality Gates
 
 | Gate | Requirement |
 |---|---|
-| Functional baseline | All tests green. Current snapshot: **87/87 passing**. |
+| Functional baseline | All tests green. Current snapshot: **173/173 passing**. |
 | Routing quality | Matcher, accuracy, generator, registry, validation, and E2E suites must remain green. |
 | Performance | All speed tests must stay within budget, and no preset init may exceed the 2× hard ceiling. |
 | Release blockers | No open P0 issues before shipping. |
@@ -76,9 +111,9 @@ The accuracy suite contains **28 direct prompt→preset mapping checks** and **8
 | Field | Value |
 |---|---|
 | Date | 2026-03-15 |
-| Version | 0.5.0 |
-| Total tests | 87 |
-| Pass rate | 100% (87/87) |
-| Test files | 7 |
-| Full-suite runtime | 2.04 s |
+| Version | 0.9.1 |
+| Total tests | 173 |
+| Pass rate | 100% (173/173) |
+| Test files | 9 |
+| Full-suite runtime | 1.52 s |
 | Vitest command | `npx vitest run 2>&1` |
