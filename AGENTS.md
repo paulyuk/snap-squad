@@ -44,14 +44,11 @@ When the builder says **"neighbors+"** they mean all presets at the neighbors le
 
 ## Reviewing Discussions & Source Docs
 
-When asked to review a discussion or a source doc (e.g. `https://github.com/org/repo/blob/main/weeks/2026-03-13/final-draft-qa-reviewed.md`):
+When asked to review a file or discussion, the full workflow is implicit: read it, create a branch, make edits, open a PR. The user should only need to say:
 
-1. Read the file
-2. Create a branch
-3. Make your suggested edits
-4. Open a PR
+> Review `https://github.com/org/repo/blob/main/path/to/file.md`
 
-One prompt, no manual steps. If the user gives a discussion URL, find the source markdown it was generated from (check for a `<!-- source: URL -->` comment or a visible footer) and PR against that.
+If given a discussion URL instead of a file URL, find the source markdown (check for `<!-- source: URL -->` or a visible footer) and review that.
 
 ## Backend Development
 
