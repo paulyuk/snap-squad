@@ -1,79 +1,68 @@
 # JOURNAL.md — Build Story
 
-> How this project was built, the steering moments that shaped it, and why things are the way they are.
-> Maintained by **Ledger** (Historian / Build Journalist). Update after milestones.
+> The steering moments that shaped snap-squad, told in the order they happened.
+> For the full timestamped log with every commit, see [`docs/how-was-this-built.md`](docs/how-was-this-built.md).
 
 ---
 
-## 2026-03-15 — Project Bootstrapped
+## Arc 1 — Genesis (Mar 14 morning)
 
-**Squad:** The Neighbors · **Vibe:** friendly · **Theme:** Community Builders
+A Gemini prompt wrote `SPEC.md`. Copilot CLI turned it into a working TypeScript CLI with 4 presets, a YAML registry, and a generator. The product was born recursive: AI defined the tool that helps AI teams work.
 
-### The Team
-
-Blueprint, Wrench, Lens, Quill, Mosaic, Relay, Val, Scout, Ledger
-
-### What Happened
-
-Project initialized with the **The Neighbors** squad preset via `npx snap-squad init`. The full `.squad/` directory, hook chain (AGENTS.md, CLAUDE.md, copilot-instructions.md), and this journal were generated automatically.
-
-### Steering Moment
-
-The builder chose **neighbors** — default generalist squad — reliable, well-rounded, good for any project. This shapes everything that follows: who reviews code, how decisions get made, what gets tested first.
-
-### What's Next
-
-- [ ] First real feature or task
-- [ ] Builder configures project context in `.squad/team.md`
-- [ ] First decision logged to `.squad/decisions.md`
+**Key moves:** Plain-English init (`702e57d`), E2E tests from day one (`12bfe26`), honest quickstart fix (`b4315dd`).
 
 ---
 
-## How to Use This Journal
+## Arc 2 — Ship & Correct (Mar 14 midday)
 
-> *Ledger's guide for the builder and future contributors.*
+Published v0.1.0. Immediately discovered hallucinated commands in docs (`ghcs`, `squad up`). Fixed them and turned the embarrassment into a permanent rule: *never write a CLI command without testing it first*.
 
-This isn't a changelog. It's the **story of how the project was built** — the decisions, the pivots, the moments where the builder steered the squad in a new direction.
-
-### What to capture
-
-| Entry Type | When | Example |
-|-----------|------|---------|
-| **Steering Moment** | Builder redirects the squad | "Switched from REST to GraphQL after seeing the query complexity" |
-| **Key Decision** | Trade-off was made | "Chose SQLite over Postgres — this is a CLI tool, not a service" |
-| **Evolution** | Architecture shifted | "Split monolith into 3 modules after hitting circular deps" |
-| **Milestone** | Something shipped | "v0.1.0 published to npm — first public release" |
-| **Lesson Learned** | Something surprised you | "Vitest runs 10x faster than Jest for this project — switching permanently" |
-
-### Template for new entries
-
-```markdown
-## YYYY-MM-DD — Title
-
-### What Happened
-
-(What was built, changed, or decided)
-
-### Why
-
-(The reasoning — what alternatives existed, what trade-offs were made)
-
-### Steering Moment
-
-(How the builder directed the work — what prompt, feedback, or redirection shaped the outcome)
-
-### Impact
-
-(What this changes going forward)
-```
-
-### Rules
-
-1. **Write for future-you.** Six months from now, this journal explains *why* the code looks the way it does.
-2. **Capture the steering, not the typing.** The git log shows what changed. The journal shows *why it changed*.
-3. **Be honest about pivots.** The best journals include "we tried X, it didn't work, here's why we switched to Y."
-4. **Update after milestones, not after every commit.** Quality over quantity.
+**Pivot:** Hook chain IS the squad — no runtime activation step needed (`5040692`). This was the biggest architectural insight. v0.2.0 shipped.
 
 ---
 
-*The code shows what was built. The journal shows why.*
+## Arc 3 — Roster Expansion (Mar 14 afternoon)
+
+The squad grew. Val (evals), Scout (research), Chuck (debugging), Ledger (historian) each arrived because a real job needed an owner. "Artisans" became "Specialists" because fancy words don't help. "Gauge" became "Val" because warmth matters.
+
+**Key moves:** Speed evals added (`ca3468d`), preset detail docs (`e6bb8a9`), agent spotlights (`8041d55`).
+
+---
+
+## Arc 4 — The Blitz (Mar 14 late afternoon)
+
+18 proposals reviewed and implemented in one coordinated wave. Tests jumped from 35 to 84. Word-boundary matching fixed. Atomic generation with rollback, input sanitization, explain mode, dry-run all landed together. v0.4.0 shipped.
+
+---
+
+## Arc 5 — Squad Awakening (Mar 14 evening → Mar 15)
+
+The builder looked at the repo and said: *"I do not feel like the squad has kicked in."*
+
+That was the turning point. The squad had identity but no operational instructions. Decisions were empty. Journal was generic. No diagrams, no evals baseline, no contributor guide.
+
+**What happened:**
+- Filled every gap: real decisions (13 entries), architecture diagrams, eval baselines, CONTRIBUTING.md
+- Rewrote all 4 hook chain templates from passive (assertiveness 2-3/5) to operational (4-5/5)
+- Added "You ARE the squad. Act accordingly." to AGENTS.md
+- v0.5.0 shipped: proactive squad activation from second one
+
+---
+
+## Arc 6 — Agent Skill-Ups (Mar 15)
+
+Every agent across all 4 presets got operational "How I [verb]" sections in their charters. 32 agents, 14 role types, each with specific duties, quality gates, and output expectations. Ledger learned the steering log format. Flash's role matching was fixed. `docs/how-was-this-built.md` written as the full build story.
+
+---
+
+## What We Learned
+
+1. **Having a roster ≠ having a team.** Agents need operational instructions, not just identity.
+2. **Honesty beats hype.** Every time docs drifted from reality, fixing them made the product better.
+3. **Dogfooding is brutal and valuable.** The biggest improvements came from using snap-squad on itself.
+4. **Hook chain is the runtime.** Generated files aren't config — they're the actual system.
+5. **Name an owner.** Roles turn wishes into work.
+
+---
+
+*The code shows what was built. This journal shows why. The [full steering log](docs/how-was-this-built.md) shows how.*
