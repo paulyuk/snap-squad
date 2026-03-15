@@ -82,18 +82,20 @@ Automated tests verify the generated text says the right things. This manual eva
 
 Open a new Copilot CLI session in a snap-squad repo (after `npx snap-squad init`) and paste:
 
-> Add a --verbose flag to snap-squad init that logs each file as it's written. Update tests and docs to match.
+> Review the matcher accuracy test suite and tell me if there are any keyword→preset mappings that could produce false positives. Don't change anything — just analyze and report.
+
+This prompt is **repeatable** — it exercises squad routing and dispatch without modifying the codebase. Run it as many times as needed.
 
 ### Scorecard
 
 | # | Check | What to look for | Pass? |
 |---|---|---|---|
-| 1 | Role routing | First response starts with `> **[Coder]**` | |
-| 2 | Tester dispatched | Tester launched via `task` tool — visible in `/tasks` | |
-| 3 | DevRel dispatched | DevRel launched via `task` tool — visible in `/tasks` | |
-| 4 | No role-switching | Neither Tester nor DevRel was faked with inline `[Tester]`/`[DevRel]` tags instead of real dispatch | |
-| 5 | Completion gate | Final response references decisions.md, tests, docs before declaring done | |
-| 6 | Routing check | "Which squad roles should have touched this work" is considered before finishing | |
+| 1 | Role routing | First response starts with `> **[Tester]**` or `> **[Evaluator]**` | |
+| 2 | Secondary dispatch | Evaluator or Tester dispatched via `task` tool — visible in `/tasks` | |
+| 3 | No role-switching | Secondary agent was a real background sub-agent, not an inline `[AgentName]` tag | |
+| 4 | Squad files read | Session start reads routing.md and decisions.md before answering | |
+| 5 | Completion gate | Final response considers whether other roles should have been involved | |
+| 6 | No unnecessary changes | Repo is untouched — analysis only, as requested | |
 
 **Interpretation:** 6/6 = hook chain working. 4-5/6 = minor drift. ≤3/6 = dispatch enforcement needs tightening.
 
