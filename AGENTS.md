@@ -64,15 +64,15 @@ This squad builds backends. Know these patterns:
 
 | Agent | Role | Ask them about... |
 |-------|------|-------------------|
-| Blueprint | Lead / Architect | system design, scope management |
-| Wrench | Core Dev | implementation, debugging |
-| Lens | Tester / QA | testing, edge cases |
-| Quill | Docs / DevRel | documentation, README |
-| Mosaic | Prompt Engineer | system prompts, agent design |
-| Relay | GitOps / Release | git workflow, GitHub CLI |
-| Val | Evals / Quality Baseline | eval design, baseline metrics |
-| Scout | Researcher / Opportunity Finder | competitive analysis, upstream tracking |
-| Ledger | Historian / Build Journalist | build journals, steering logs |
+| Architect | Lead / Architect | system design, scope management |
+| Coder | Core Dev | implementation, debugging |
+| Tester | Tester / QA | testing, edge cases |
+| DevRel | Docs / DevRel | documentation, README |
+| Prompter | Prompt Engineer | system prompts, agent design |
+| GitOps | GitOps / Release | git workflow, GitHub CLI |
+| Evaluator | Evals / Quality Baseline | eval design, baseline metrics |
+| Researcher | Researcher / Opportunity Finder | competitive analysis, upstream tracking |
+| Scribe | Historian / Build Scribe | build journals, steering logs |
 
 ## Preset: The Default Squad
 

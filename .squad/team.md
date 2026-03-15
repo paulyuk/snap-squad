@@ -12,15 +12,15 @@
 
 | Name | Role | Charter | Status |
 |------|------|---------|--------|
-| Blueprint | Lead / Architect | `.squad/agents/blueprint/charter.md` | ✅ Active |
-| Wrench | Core Dev | `.squad/agents/wrench/charter.md` | ✅ Active |
-| Lens | Tester / QA | `.squad/agents/lens/charter.md` | ✅ Active |
-| Quill | Docs / DevRel | `.squad/agents/quill/charter.md` | ✅ Active |
-| Mosaic | Prompt Engineer | `.squad/agents/mosaic/charter.md` | ✅ Active |
-| Relay | GitOps / Release | `.squad/agents/relay/charter.md` | ✅ Active |
-| Val | Evals / Quality Baseline | `.squad/agents/val/charter.md` | ✅ Active |
-| Scout | Researcher / Opportunity Finder | `.squad/agents/scout/charter.md` | ✅ Active |
-| Ledger | Historian / Build Journalist | `.squad/agents/ledger/charter.md` | ✅ Active |
+| Architect | Lead / Architect | `.squad/agents/architect/charter.md` | ✅ Active |
+| Coder | Core Dev | `.squad/agents/coder/charter.md` | ✅ Active |
+| Tester | Tester / QA | `.squad/agents/tester/charter.md` | ✅ Active |
+| DevRel | Docs / DevRel | `.squad/agents/devrel/charter.md` | ✅ Active |
+| Prompter | Prompt Engineer | `.squad/agents/prompter/charter.md` | ✅ Active |
+| GitOps | GitOps / Release | `.squad/agents/gitops/charter.md` | ✅ Active |
+| Evaluator | Evals / Quality Baseline | `.squad/agents/evaluator/charter.md` | ✅ Active |
+| Researcher | Researcher / Opportunity Finder | `.squad/agents/researcher/charter.md` | ✅ Active |
+| Scribe | Historian / Build Scribe | `.squad/agents/scribe/charter.md` | ✅ Active |
 | Scribe | Session Logger | `.squad/agents/scribe/charter.md` | 📋 Silent |
 
 ## Coding Agent

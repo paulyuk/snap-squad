@@ -4,15 +4,15 @@
 
 | Work Type | Agent | Examples |
 |-----------|-------|---------|
-| architecture | Blueprint | System design, scope, trade-offs, code review |
-| implementation | Wrench | Feature code, CLI, runtime, file operations |
-| testing | Lens | Tests, quality gates, edge cases, CI/CD |
-| documentation | Quill | README, docs, messaging, onboarding, examples |
-| prompts | Mosaic | Agent charters, system prompts, manifest design |
-| git | Relay | Git workflow, pushes, PRs, releases, GitHub auth, CI/CD |
-| evals | Val | Eval design, baselines, agent-as-judge, quality scoring |
-| research | Scout | Ecosystem research, grounding content review, upstream tracking, weekly opportunity check-ins |
-| history | Ledger | Build journal, decision history, evolution narrative, prompt curation, markdown review |
+| architecture | Architect | System design, scope, trade-offs, code review |
+| implementation | Coder | Feature code, CLI, runtime, file operations |
+| testing | Tester | Tests, quality gates, edge cases, CI/CD |
+| documentation | DevRel | README, docs, messaging, onboarding, examples |
+| prompts | Prompter | Agent charters, system prompts, manifest design |
+| git | GitOps | Git workflow, pushes, PRs, releases, GitHub auth, CI/CD |
+| evals | Evaluator | Eval design, baselines, agent-as-judge, quality scoring |
+| research | Researcher | Ecosystem research, grounding content review, upstream tracking, weekly opportunity check-ins |
+| history | Scribe | Build journal, decision history, evolution narrative, prompt curation, markdown review |
 
 ## Routing Principles
 
