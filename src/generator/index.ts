@@ -132,6 +132,23 @@ ${rows}
 3. **Quick facts → coordinator answers directly.** Don't spawn for trivial questions.
 4. **Two agents could handle it** → pick the one whose domain is the primary concern.
 5. **Anticipate downstream.** Feature being built? Spawn tester simultaneously.
+
+## Automatic Secondary Routing
+
+These triggers fire every session, regardless of user request:
+
+| When this happens... | Also activate... |
+|---------------------|-----------------|
+| Implementation work | Testing review (Lens/equivalent) |
+| User-visible behavior changes | Documentation update (Quill/equivalent) |
+| Prompt or agent changes | Eval baseline check (Val/equivalent) |
+| Significant trade-off or decision | Decision logging (any agent) |
+| Meaningful milestone reached | Journal update (Ledger/equivalent) |
+
+## Completion Routing Check
+
+Before finishing, ask: **"Which squad roles should have touched this work but haven't?"**
+Resolve those gaps or explicitly report them before ending the session.
 `;
 }
 
@@ -214,18 +231,41 @@ function generateAgentsMd(arch: Preset, projectName?: string): string {
   return `# AGENTS.md — ${name} Operating Instructions
 
 > This file is read by AI agents working in this repository.
+> **You are not just aware of the squad. You ARE the squad. Act accordingly.**
 
 ## You Are Part of a Squad
 
 This repository uses [Squad](https://github.com/bradygaster/squad).
-Before doing any work, read and follow the squad configuration:
+
+## Session Start — Do This First
+
+Before responding to the user, complete this checklist:
 
 1. **Read \`.squad/team.md\`** — Know the team and project context
 2. **Read \`.squad/routing.md\`** — Route work to the right agent
-3. **Read agent charters in \`.squad/agents/*/charter.md\`** — Understand expertise and boundaries
-4. **Check \`.squad/decisions.md\`** — Review existing decisions
-5. **Check \`.squad/mcp-config.md\`** — Know available tools
-6. **Update \`JOURNAL.md\`** after milestones — capture steering moments and key decisions
+3. **Read \`.squad/decisions.md\`** — Respect existing decisions
+4. **Identify your role** — Which squad member leads this task? Adopt their expertise, voice, and boundaries.
+5. **Anticipate downstream** — Will this work need tests? Docs? Evals? Journal entry? Plan for those NOW, not as cleanup.
+
+## Always-On Duties
+
+These are not suggestions. They are standing orders for every session:
+
+- **Code changed → check tests.** If implementation changed, testing must be considered.
+- **Behavior changed → check docs.** If user-visible behavior shifted, docs must reflect it.
+- **Decision made → log it.** Any trade-off or design choice goes in \`.squad/decisions.md\`.
+- **Milestone reached → journal it.** Update \`JOURNAL.md\` with what happened and why.
+- **Another role needed → activate it.** Don't wait to be asked. If docs need updating, be Quill. If tests are missing, be Lens.
+
+## Before You Say "Done"
+
+Do not end the session without verifying:
+
+- [ ] \`.squad/decisions.md\` updated if any decisions were made
+- [ ] \`JOURNAL.md\` updated if a milestone was reached
+- [ ] Docs updated if user-visible behavior changed
+- [ ] Tests considered if code changed
+- [ ] Open risks or follow-ups explicitly stated
 
 ## Quick Reference
 
@@ -258,18 +298,41 @@ You are working in a repository using the **${arch.displayName}** squad preset.
 - **Squad:** ${arch.displayName} (${arch.vibe})
 - **Theme:** ${arch.theme}
 
-## Squad Operating Rules
+## Session Start Protocol
 
-Before starting work:
-1. Read \`.squad/team.md\` — know the team
-2. Read \`.squad/routing.md\` — route work correctly
-3. Check \`.squad/decisions.md\` — respect existing decisions
-4. Identify which agent you're acting as for this task
+Immediately after reading this file, before responding to the user:
 
-After completing work:
-1. Log decisions to \`.squad/decisions.md\`
-2. Update \`JOURNAL.md\` with what happened and why
-3. Update relevant docs if behavior changed
+1. Read \`.squad/team.md\`, \`.squad/routing.md\`, and \`.squad/decisions.md\`
+2. Determine which squad member should lead this task
+3. Check whether \`JOURNAL.md\` has recent entries — if stale, plan to update it
+4. Identify downstream needs: will this work require tests? docs? evals? decisions? Include them in your plan.
+
+## Non-Optional Operating Behaviors
+
+These apply in **every session**, whether or not the user asks:
+
+- **Code changed → tests reviewed.** Don't skip testing because it wasn't mentioned.
+- **Behavior changed → docs updated.** If what the user sees changed, docs must change too.
+- **Trade-off made → decision logged.** Record it in \`.squad/decisions.md\` with context and reasoning.
+- **Milestone reached → journal updated.** \`JOURNAL.md\` captures the story, not just the code.
+- **Another role's domain touched → activate that role.** Don't wait to be asked.
+
+## Session Completion Gate
+
+Before ending the session, verify:
+
+1. \`.squad/decisions.md\` — Updated if any decisions were made
+2. \`JOURNAL.md\` — Updated if a milestone was reached
+3. Relevant docs — Updated if user-visible behavior changed
+4. Open risks or follow-ups — Explicitly called out, not silently dropped
+
+## First Session After Init
+
+If this is the first working session after squad initialization:
+
+1. Update project context above (Owner, Stack, Description)
+2. Record the first real decision in \`.squad/decisions.md\`
+3. Start the build story in \`JOURNAL.md\` — capture what's being built and why
 `;
 }
 
@@ -294,6 +357,23 @@ function generateCopilotInstructions(arch: Preset): string {
 - Identify which squad member is best suited for the current task
 - Adopt their expertise, voice, and boundaries
 - Log significant decisions to \`.squad/decisions.md\` after completing work
+
+## Proactive Quality Triggers
+
+These fire automatically — they are not optional:
+
+| Trigger | Action |
+|---------|--------|
+| Code changed | Review tests — are they still correct and sufficient? |
+| User-visible behavior changed | Update docs and README if affected |
+| Prompt or agent behavior changed | Review eval baselines |
+| Important trade-off made | Log decision to \`.squad/decisions.md\` |
+| Meaningful milestone reached | Update \`JOURNAL.md\` with what happened and why |
+| Another role's expertise needed | Activate that role — don't wait to be asked |
+
+## Before You Respond With "Done"
+
+Verify that all triggered duties above were handled or explicitly called out as deferred. Do not silently skip them.
 
 ## Managing This Squad
 

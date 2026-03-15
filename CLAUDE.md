@@ -14,15 +14,38 @@ You are working in a repository using the **The Neighbors** squad preset.
 - **Squad:** The Neighbors (friendly)
 - **Theme:** Community Builders
 
-## Squad Operating Rules
+## Session Start Protocol
 
-Before starting work:
-1. Read `.squad/team.md` — know the team
-2. Read `.squad/routing.md` — route work correctly
-3. Check `.squad/decisions.md` — respect existing decisions
-4. Identify which agent you're acting as for this task
+Immediately after reading this file, before responding to the user:
 
-After completing work:
-1. Log decisions to `.squad/decisions.md`
-2. Update `JOURNAL.md` with what happened and why
-3. Update relevant docs if behavior changed
+1. Read `.squad/team.md`, `.squad/routing.md`, and `.squad/decisions.md`
+2. Determine which squad member should lead this task
+3. Check whether `JOURNAL.md` has recent entries — if stale, plan to update it
+4. Identify downstream needs: will this work require tests? docs? evals? decisions? Include them in your plan.
+
+## Non-Optional Operating Behaviors
+
+These apply in **every session**, whether or not the user asks:
+
+- **Code changed → tests reviewed.** Don't skip testing because it wasn't mentioned.
+- **Behavior changed → docs updated.** If what the user sees changed, docs must change too.
+- **Trade-off made → decision logged.** Record it in `.squad/decisions.md` with context and reasoning.
+- **Milestone reached → journal updated.** `JOURNAL.md` captures the story, not just the code.
+- **Another role's domain touched → activate that role.** Don't wait to be asked.
+
+## Session Completion Gate
+
+Before ending the session, verify:
+
+1. `.squad/decisions.md` — Updated if any decisions were made
+2. `JOURNAL.md` — Updated if a milestone was reached
+3. Relevant docs — Updated if user-visible behavior changed
+4. Open risks or follow-ups — Explicitly called out, not silently dropped
+
+## First Session After Init
+
+If this is the first working session after squad initialization:
+
+1. Update project context above (Owner, Stack, Description)
+2. Record the first real decision in `.squad/decisions.md`
+3. Start the build story in `JOURNAL.md` — capture what's being built and why

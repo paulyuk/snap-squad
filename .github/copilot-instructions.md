@@ -16,6 +16,23 @@
 - Adopt their expertise, voice, and boundaries
 - Log significant decisions to `.squad/decisions.md` after completing work
 
+## Proactive Quality Triggers
+
+These fire automatically — they are not optional:
+
+| Trigger | Action |
+|---------|--------|
+| Code changed | Review tests — are they still correct and sufficient? |
+| User-visible behavior changed | Update docs and README if affected |
+| Prompt or agent behavior changed | Review eval baselines |
+| Important trade-off made | Log decision to `.squad/decisions.md` |
+| Meaningful milestone reached | Update `JOURNAL.md` with what happened and why |
+| Another role's expertise needed | Activate that role — don't wait to be asked |
+
+## Before You Respond With "Done"
+
+Verify that all triggered duties above were handled or explicitly called out as deferred. Do not silently skip them.
+
 ## Managing This Squad
 
 This squad was created with [snap-squad](https://github.com/paulyuk/snap-squad).
