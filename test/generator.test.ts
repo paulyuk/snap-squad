@@ -62,7 +62,7 @@ describe('Generator', () => {
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');
     expect(teamMd).toContain('alice');
     expect(teamMd).toContain('The Default Squad');
-    expect(teamMd).toContain('Blueprint');
+    expect(teamMd).toContain('Architect');
   });
 
   it('hook chain files reference .squad/', () => {
@@ -100,7 +100,7 @@ describe('Generator', () => {
     });
 
     expect(result.skipped).toEqual(['.squad/decisions.md', 'JOURNAL.md']);
-    expect(readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8')).toContain('Turbo');
+    expect(readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8')).toContain('Architect');
     expect(readFileSync(decisionsPath, 'utf-8')).toContain('Do not erase this.');
     expect(readFileSync(journalPath, 'utf-8')).toContain('Do not erase this either.');
   });
