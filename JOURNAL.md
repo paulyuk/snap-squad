@@ -1,59 +1,76 @@
 # JOURNAL.md — Build Story
 
-> The steering moments that shaped snap-squad, told in the order they happened.
-> For the full timestamped log with every commit, see [`docs/how-was-this-built.md`](docs/how-was-this-built.md).
+> **Meta-lesson:** snap-squad is its own best example. It teaches builders to steer a squad with plain language, fast feedback, honest docs, and explicit roles — and that is exactly how this repository was built.
 
 ---
 
-## Arc 1 — Genesis (Mar 14 morning)
+snap-squad did not emerge from a slow, linear plan. It came together in a tightly steered burst: a prompt sparked a spec, a spec became a CLI, the docs got ahead of reality, the team corrected course, the roster expanded, and then the product had to confront a deeper truth — having a squad on paper is not the same thing as having a squad that actually acts.
 
-A Gemini prompt wrote `SPEC.md`. Copilot CLI turned it into a working TypeScript CLI with 4 presets, a YAML registry, and a generator. The product was born recursive: AI defined the tool that helps AI teams work.
+## The Spark
 
-**Key moves:** Plain-English init (`702e57d`), E2E tests from day one (`12bfe26`), honest quickstart fix (`b4315dd`).
+The first artifact was not code. It was a **Gemini prompt**.
 
----
+That prompt produced `SPEC.md`: a crisp description of pre-baked squad presets for different kinds of builders. Then Copilot CLI took that spec and implemented the working product: a TypeScript CLI, YAML preset definitions, a generator, and the hook chain that teaches every assistant who the squad is.
 
-## Arc 2 — Ship & Correct (Mar 14 midday)
+The real origin story is delightfully recursive: **snap-squad was built the way snap-squad asks teams to build.**
 
-Published v0.1.0. Immediately discovered hallucinated commands in docs (`ghcs`, `squad up`). Fixed them and turned the embarrassment into a permanent rule: *never write a CLI command without testing it first*.
+## The Complete Steering Log
 
-**Pivot:** Hook chain IS the squad — no runtime activation step needed (`5040692`). This was the biggest architectural insight. v0.2.0 shipped.
+### Session 1 — Genesis & First Ship (Mar 14, 9:55 AM – 12:52 PM PT)
 
----
+| Time | Steering Command | What Happened | Level-Up |
+|---|---|---|---|
+| 9:55 AM · `164ab20` | "Initial snap-squad POC" | A Gemini prompt wrote `SPEC.md`, and Copilot CLI turned that spec into the first working POC: TypeScript CLI, YAML presets, generator, and hook chain. Four presets landed in the opening move: Neighbors, Dash, Sages, and Artisans. | 🌱 **Project born from a Gemini prompt.** |
+| 10:11 AM · `9b441d8` | "dont use the word archetype... nor persona, ever" | The language got reset from clever to clear. "Archetypes" became "presets," "persona" disappeared. | 🚫 **No fancy words.** Naming is product design, not decoration. |
+| 10:14 AM · `702e57d` | "Add plain English init" | The CLI stopped requiring users to know preset names up front. A natural-language matcher picks the right preset. | 🗣️ **Plain English beats memorization.** |
+| 10:15 AM · `12bfe26` | "Add E2E test suite" | 12-test end-to-end suite covering the full CLI lifecycle. | ✅ **Testing from day one.** |
+| 10:38 AM · `b4315dd` | "Fix bootstrap flow: honest quickstart" | Docs were implying a smoother experience than reality. Fixed. | 🪞 **Honesty beats hype.** |
+| 10:48 AM · `732393b` | "Hire Ledger" | The historian role made "capture the build story" an explicit responsibility. | 📝 **If it matters, name an owner.** |
+| 12:25 PM · `ada4b44` | "Publish to npm" | `snap-squad@0.1.0` went live. | 🚀 **Ship early enough to learn in public.** |
+| 12:31 PM · `5040692` | "no squad up, hook chain IS the squad" | The biggest pivot. No runtime activation step needed. If the hook chain files exist, the squad exists. v0.2.0. | 🏛️ **Hook chain IS the squad.** |
+| 12:34 PM · `5b1a581` | "Fix hallucinated ghcs command" | An invented command shipped in docs. Cleanup started immediately. | 😳 **Hallucinated commands shipped.** |
+| 12:36 PM · `978340f` | "Bake honesty rule into charters" | Every charter gained a rule: never write CLI commands without testing them first. | 🛡️ **Turn mistakes into guardrails.** |
 
-## Arc 3 — Roster Expansion (Mar 14 afternoon)
+### Session 2 — Roster Expansion & Features (Mar 14, 1:54 PM – 4:46 PM PT)
 
-The squad grew. Val (evals), Scout (research), Chuck (debugging), Ledger (historian) each arrived because a real job needed an owner. "Artisans" became "Specialists" because fancy words don't help. "Gauge" became "Val" because warmth matters.
+| Time | Steering Command | What Happened | Level-Up |
+|---|---|---|---|
+| 1:54 PM · `f94eac0` | "add Evals role, rename artisans to specialists" | Artisans became Specialists. Evals role added. Sensei and Waza expanded the preset. | 🧱 **The roster kept evolving.** |
+| 4:08 PM · `0ca39a3` | "rename Gauge to Val" | "Gauge" felt cold. "Val" felt warmer, more human. | ❤️ **Warmth matters.** |
+| 4:15 PM · `ca3468d` | "add Scout/Recon researchers + speed evals" | Researcher roles added. Speed became measurable. | 🧪 **Speed became a spec.** |
+| 4:17 PM · `1b0adac` | "add Chuck — the toughest debugger" | Chuck arrived with full Chuck Norris energy. Debugging got its own hero. | 🥋 **Chuck arrives.** |
+| 4:46 PM · `39f9757` | "blitz all of them" | 18 proposals in one wave. Tests: 35 → 84. Word-boundary bugs fixed. Atomic generation, rollback, sanitization, explain mode, dry-run. | ⚡ **The Blitz.** |
+| 4:47 PM · `cc982b7` | "publish" | v0.4.0 shipped right after the Blitz. | 📦 **After the blitz, ship.** |
 
-**Key moves:** Speed evals added (`ca3468d`), preset detail docs (`e6bb8a9`), agent spotlights (`8041d55`).
+### Session 3 — Squad Awakening (Mar 14, 5:27 PM – Mar 15)
 
----
+| Time | Steering Command | What Happened | Level-Up |
+|---|---|---|---|
+| 5:27 PM · `50b5d4f` | "build journal doesn't say anything" | Generated journal was generic. Template rewritten to teach journaling. | ✍️ **A journal should teach, not just exist.** |
+| 5:40 PM · — | "I do not feel like the squad has kicked in" | The deeper problem: squad existed as files and identities, but not as an operational system. Hook chain told agents who they were, but not what to do. | 👁️ **The squad is passive.** |
+| 5:50 PM · `5916954` | "blitz all 3 tracks" | Gaps filled (decisions, diagrams, evals, CONTRIBUTING.md). Hook chain rewritten from informative to operational. Assertiveness: 2/5 → 5/5. "You ARE the squad." | 🔥 **You ARE the squad.** |
+| 5:54 PM · `4cc1174` | "publish" | v0.5.0: proactive squad activation from second one. | ✅ **Promise fulfilled.** |
+| Mar 15 · `423a0fd` | "ensure all agent skills get updated" | 32 agents across 4 presets got operational "How I [verb]" sections. 14 role types with duties and quality gates. | 🎓 **Skill up every agent.** |
+| Mar 15 | "did we break the npm again?" | `--force` had been nuking JOURNAL.md and decisions.md. Chuck debugged it. Files split into structural (safe to overwrite) vs content (protected). `--reset-all` added for true clean slate. Tests: 84 → 87. | 🛡️ **Protect user content from regeneration.** |
 
-## Arc 4 — The Blitz (Mar 14 late afternoon)
+## How We Used What We Teach
 
-18 proposals reviewed and implemented in one coordinated wave. Tests jumped from 35 to 84. Word-boundary matching fixed. Atomic generation with rollback, input sanitization, explain mode, dry-run all landed together. v0.4.0 shipped.
+| snap-squad principle | How snap-squad used it on itself | Evidence |
+|---|---|---|
+| Plain-English steering | Short, natural commands instead of specs. | "build journal doesn't say anything," "blitz all 3 tracks" |
+| Presets over jargon | Aggressively removed insider language. | `9b441d8`, `f94eac0`, `0ca39a3` |
+| Honest documentation | Hallucinated commands fixed fast, lesson encoded into system. | `5b1a581`, `978340f`, `f9adb20` |
+| Hook-chain activation | Generated files are the runtime. Upgraded from descriptive to operational. | `5040692`, `5916954` |
+| Test the real path | E2E early, speed tests, Blitz pushed 35 → 84 → 87 tests. | `12bfe26`, `ca3468d`, `39f9757` |
+| Dogfood the promise | Biggest improvement came from using snap-squad on itself. | `693615e`, `5916954` |
 
----
+## The Commit Log Is the Curriculum
 
-## Arc 5 — Squad Awakening (Mar 14 evening → Mar 15)
+```text
+git log --oneline --reverse
+```
 
-The builder looked at the repo and said: *"I do not feel like the squad has kicked in."*
-
-That was the turning point. The squad had identity but no operational instructions. Decisions were empty. Journal was generic. No diagrams, no evals baseline, no contributor guide.
-
-**What happened:**
-- Filled every gap: real decisions (13 entries), architecture diagrams, eval baselines, CONTRIBUTING.md
-- Rewrote all 4 hook chain templates from passive (assertiveness 2-3/5) to operational (4-5/5)
-- Added "You ARE the squad. Act accordingly." to AGENTS.md
-- v0.5.0 shipped: proactive squad activation from second one
-
----
-
-## Arc 6 — Agent Skill-Ups (Mar 15)
-
-Every agent across all 4 presets got operational "How I [verb]" sections in their charters. 32 agents, 14 role types, each with specific duties, quality gates, and output expectations. Ledger learned the steering log format. Flash's role matching was fixed. `docs/how-was-this-built.md` written as the full build story.
-
----
+The raw log shows the quiet truths too. Not every important move was a big feature. Some were renames. Some were doc corrections. Some were cleanup commits that made the system more believable. That is the real shape of AI-steered building: ideas, implementation, embarrassment, guardrails, polish, then a better idea.
 
 ## What We Learned
 
@@ -62,7 +79,8 @@ Every agent across all 4 presets got operational "How I [verb]" sections in thei
 3. **Dogfooding is brutal and valuable.** The biggest improvements came from using snap-squad on itself.
 4. **Hook chain is the runtime.** Generated files aren't config — they're the actual system.
 5. **Name an owner.** Roles turn wishes into work.
+6. **Protect user content.** Structural files and content files need different regeneration rules.
 
 ---
 
-*The code shows what was built. This journal shows why. The [full steering log](docs/how-was-this-built.md) shows how.*
+*The code shows what was built. This journal shows why.*

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { execSync } from 'node:child_process';
-import { mkdtempSync, rmSync, existsSync, readFileSync, readdirSync } from 'node:fs';
+import { mkdtempSync, rmSync, existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -131,13 +131,37 @@ describe('E2E: snap-squad CLI', () => {
     }
   });
 
-  it('--force overwrites existing .squad/', () => {
+  it('--force overwrites structural files but preserves content files', () => {
     run(`init --type neighbors --dir "${tempDir}"`);
+    writeFileSync(join(tempDir, '.squad', 'decisions.md'), '# custom decisions\n\nkeep me\n');
+    writeFileSync(join(tempDir, 'JOURNAL.md'), '# custom journal\n\nkeep me too\n');
+
     const output = run(`init --type dash --dir "${tempDir}" --force`);
     expect(output).toContain('Dash Squad');
+    expect(output).toContain('⚠ Skipping .squad/decisions.md (contains user content)');
+    expect(output).toContain('⚠ Skipping JOURNAL.md (contains user content)');
 
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');
     expect(teamMd).toContain('Turbo');
+    expect(readFileSync(join(tempDir, '.squad', 'decisions.md'), 'utf-8')).toContain('keep me');
+    expect(readFileSync(join(tempDir, 'JOURNAL.md'), 'utf-8')).toContain('keep me too');
+  });
+
+  it('--reset-all overwrites content files too', () => {
+    run(`init --type neighbors --dir "${tempDir}"`);
+    writeFileSync(join(tempDir, '.squad', 'decisions.md'), '# custom decisions\n\nwipe me\n');
+    writeFileSync(join(tempDir, 'JOURNAL.md'), '# custom journal\n\nwipe me too\n');
+
+    const output = run(`init --type dash --dir "${tempDir}" --reset-all`);
+    expect(output).toContain('Dash Squad');
+    expect(output).not.toContain('Skipping JOURNAL.md');
+
+    const decisionsMd = readFileSync(join(tempDir, '.squad', 'decisions.md'), 'utf-8');
+    const journalMd = readFileSync(join(tempDir, 'JOURNAL.md'), 'utf-8');
+    expect(decisionsMd).toContain('"dash" preset');
+    expect(decisionsMd).not.toContain('wipe me');
+    expect(journalMd).toContain('Dash Squad');
+    expect(journalMd).not.toContain('wipe me too');
   });
 
   it('invalid preset name shows error', () => {

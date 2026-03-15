@@ -4,15 +4,25 @@ Thanks for helping improve Snap Squad. This project is small on purpose: a TypeS
 
 ## Quick Start for Contributors
 
+1. **Fork** the repo on GitHub (click the Fork button)
+2. **Clone your fork** and create a branch:
+
 ```bash
-git clone https://github.com/paulyuk/snap-squad.git
+git clone https://github.com/<your-username>/snap-squad.git
 cd snap-squad
+git checkout -b my-feature
 npm install
 npx tsc
 npx vitest run
 ```
 
-The full test suite should finish green with **84/84** passing on the current main branch.
+3. Make your changes, then **push to your fork** and open a PR against `main`:
+
+```bash
+git push origin my-feature
+```
+
+> **Why fork+branch?** It keeps `main` clean, lets CI run on your changes before merge, and is standard open-source workflow. Never push directly to `main`.
 
 ## Project Structure
 

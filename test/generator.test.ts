@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdtempSync, rmSync, existsSync, readFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { loadPreset } from '../src/registry/loader.js';
@@ -18,27 +18,29 @@ describe('Generator', () => {
 
   it('generates all expected files for neighbors preset', () => {
     const preset = loadPreset('neighbors');
-    const created = generateSquad({
+    const result = generateSquad({
       targetDir: tempDir,
       preset,
       projectName: 'test-project',
       owner: 'testuser',
     });
 
+    expect(result.skipped).toEqual([]);
+
     // Core .squad/ files
-    expect(created).toContain('.squad/team.md');
-    expect(created).toContain('.squad/routing.md');
-    expect(created).toContain('.squad/decisions.md');
-    expect(created).toContain('.squad/mcp-config.md');
+    expect(result.written).toContain('.squad/team.md');
+    expect(result.written).toContain('.squad/routing.md');
+    expect(result.written).toContain('.squad/decisions.md');
+    expect(result.written).toContain('.squad/mcp-config.md');
 
     // Hook chain
-    expect(created).toContain('AGENTS.md');
-    expect(created).toContain('CLAUDE.md');
-    expect(created).toContain('.github/copilot-instructions.md');
+    expect(result.written).toContain('AGENTS.md');
+    expect(result.written).toContain('CLAUDE.md');
+    expect(result.written).toContain('.github/copilot-instructions.md');
 
     // Agent charters
     for (const agent of preset.agents) {
-      expect(created).toContain(`.squad/agents/${agent.name.toLowerCase()}/charter.md`);
+      expect(result.written).toContain(`.squad/agents/${agent.name.toLowerCase()}/charter.md`);
     }
 
     // Verify files exist on disk
@@ -81,6 +83,47 @@ describe('Generator', () => {
     );
     expect(copilotMd).toContain('AGENTS.md');
     expect(copilotMd).toContain('.squad/team.md');
+  });
+
+  it('preserves content files during structural overwrite mode', () => {
+    generateSquad({ targetDir: tempDir, preset: loadPreset('neighbors') });
+
+    const decisionsPath = join(tempDir, '.squad', 'decisions.md');
+    const journalPath = join(tempDir, 'JOURNAL.md');
+    writeFileSync(decisionsPath, '# custom decisions\n\nDo not erase this.\n');
+    writeFileSync(journalPath, '# custom journal\n\nDo not erase this either.\n');
+
+    const result = generateSquad({
+      targetDir: tempDir,
+      preset: loadPreset('dash'),
+      overwriteMode: 'structural',
+    });
+
+    expect(result.skipped).toEqual(['.squad/decisions.md', 'JOURNAL.md']);
+    expect(readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8')).toContain('Turbo');
+    expect(readFileSync(decisionsPath, 'utf-8')).toContain('Do not erase this.');
+    expect(readFileSync(journalPath, 'utf-8')).toContain('Do not erase this either.');
+  });
+
+  it('reset-all overwrite mode replaces content files too', () => {
+    generateSquad({ targetDir: tempDir, preset: loadPreset('neighbors') });
+
+    const decisionsPath = join(tempDir, '.squad', 'decisions.md');
+    const journalPath = join(tempDir, 'JOURNAL.md');
+    writeFileSync(decisionsPath, '# custom decisions\n\nReset me.\n');
+    writeFileSync(journalPath, '# custom journal\n\nReset me too.\n');
+
+    const result = generateSquad({
+      targetDir: tempDir,
+      preset: loadPreset('dash'),
+      overwriteMode: 'all',
+    });
+
+    expect(result.skipped).toEqual([]);
+    expect(readFileSync(decisionsPath, 'utf-8')).toContain('"dash" preset');
+    expect(readFileSync(decisionsPath, 'utf-8')).not.toContain('Reset me.');
+    expect(readFileSync(journalPath, 'utf-8')).toContain('Dash Squad');
+    expect(readFileSync(journalPath, 'utf-8')).not.toContain('Reset me too.');
   });
 
   it('generates skill references for specialists', () => {

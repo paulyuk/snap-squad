@@ -1,13 +1,29 @@
-import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import type { Preset, Agent } from '../registry/loader.js';
 import { listPresets } from '../registry/loader.js';
+
+type FileKind = 'structural' | 'content';
+type OverwriteMode = 'all' | 'structural';
+
+interface GeneratedFile {
+  path: string;
+  content: string;
+  label: string;
+  kind: FileKind;
+}
 
 export interface GenerateOptions {
   targetDir: string;
   preset: Preset;
   projectName?: string;
   owner?: string;
+  overwriteMode?: OverwriteMode;
+}
+
+export interface GenerateResult {
+  written: string[];
+  skipped: string[];
 }
 
 // Sanitize user input for markdown templates
@@ -15,60 +31,103 @@ function sanitize(input: string): string {
   return input.replace(/[[\](){}|`*_~<>#]/g, '\\$&');
 }
 
-export function generateSquad(options: GenerateOptions): string[] {
-  const { targetDir, preset, projectName, owner } = options;
+export function generateSquad(options: GenerateOptions): GenerateResult {
+  const { targetDir, preset, projectName, owner, overwriteMode = 'all' } = options;
   const safeName = projectName ? sanitize(projectName) : undefined;
   const safeOwner = owner ? sanitize(owner) : undefined;
   const squadDir = join(targetDir, '.squad');
   const githubDir = join(targetDir, '.github');
 
   // Phase 1: Generate all content in memory (no I/O)
-  const files: { path: string; content: string; label: string }[] = [];
+  const files: GeneratedFile[] = [];
 
-  files.push({ path: join(squadDir, 'team.md'), content: generateTeamMd(preset, safeName, safeOwner), label: '.squad/team.md' });
-  files.push({ path: join(squadDir, 'routing.md'), content: generateRoutingMd(preset), label: '.squad/routing.md' });
+  files.push({ path: join(squadDir, 'team.md'), content: generateTeamMd(preset, safeName, safeOwner), label: '.squad/team.md', kind: 'structural' });
+  files.push({ path: join(squadDir, 'routing.md'), content: generateRoutingMd(preset), label: '.squad/routing.md', kind: 'structural' });
 
   for (const agent of preset.agents) {
     files.push({
       path: join(squadDir, 'agents', agent.name.toLowerCase(), 'charter.md'),
       content: generateCharter(agent),
       label: `.squad/agents/${agent.name.toLowerCase()}/charter.md`,
+      kind: 'structural',
     });
   }
 
-  files.push({ path: join(squadDir, 'decisions.md'), content: generateDecisionsMd(preset), label: '.squad/decisions.md' });
-  files.push({ path: join(squadDir, 'mcp-config.md'), content: generateMcpConfigMd(preset), label: '.squad/mcp-config.md' });
-  files.push({ path: join(targetDir, 'AGENTS.md'), content: generateAgentsMd(preset, safeName), label: 'AGENTS.md' });
-  files.push({ path: join(targetDir, 'CLAUDE.md'), content: generateClaudeMd(preset, safeName, safeOwner), label: 'CLAUDE.md' });
-  files.push({ path: join(githubDir, 'copilot-instructions.md'), content: generateCopilotInstructions(preset), label: '.github/copilot-instructions.md' });
-  files.push({ path: join(targetDir, 'JOURNAL.md'), content: generateJournalMd(preset, safeName), label: 'JOURNAL.md' });
+  files.push({ path: join(squadDir, 'decisions.md'), content: generateDecisionsMd(preset), label: '.squad/decisions.md', kind: 'content' });
+  files.push({ path: join(squadDir, 'mcp-config.md'), content: generateMcpConfigMd(preset), label: '.squad/mcp-config.md', kind: 'structural' });
+  files.push({ path: join(targetDir, 'AGENTS.md'), content: generateAgentsMd(preset, safeName), label: 'AGENTS.md', kind: 'structural' });
+  files.push({ path: join(targetDir, 'CLAUDE.md'), content: generateClaudeMd(preset, safeName, safeOwner), label: 'CLAUDE.md', kind: 'structural' });
+  files.push({ path: join(githubDir, 'copilot-instructions.md'), content: generateCopilotInstructions(preset), label: '.github/copilot-instructions.md', kind: 'structural' });
+  files.push({ path: join(targetDir, 'JOURNAL.md'), content: generateJournalMd(preset, safeName), label: 'JOURNAL.md', kind: 'content' });
+
+  const skipped = new Set(
+    files
+      .filter(({ kind, path }) => overwriteMode === 'structural' && kind === 'content' && existsSync(path))
+      .map(({ label }) => label)
+  );
+  const filesToWrite = files.filter(({ label }) => !skipped.has(label));
 
   // Phase 2: Create directories
-  const dirs = new Set(files.map(f => dirname(f.path)));
-  for (const dir of dirs) {
-    try {
-      mkdirSync(dir, { recursive: true });
-    } catch (err) {
-      const message = err instanceof Error ? err.message : String(err);
-      throw new Error(`Failed to create directory "${dir}": ${message}`);
-    }
-  }
-
-  // Phase 3: Write all files (with error context)
-  const written: string[] = [];
+  const createdDirs: string[] = [];
+  const dirs = [...new Set(filesToWrite.map((file) => dirname(file.path)))];
+  let currentDir = '';
   try {
-    for (const { path, content, label } of files) {
-      writeFileSync(path, content);
-      written.push(label);
+    for (const dir of dirs) {
+      currentDir = dir;
+      if (existsSync(dir)) {
+        continue;
+      }
+
+      mkdirSync(dir, { recursive: true });
+      createdDirs.push(dir);
     }
   } catch (err) {
-    // Rollback: remove .squad/ if we created it
-    try { rmSync(squadDir, { recursive: true, force: true }); } catch {}
+    for (const createdDir of [...createdDirs].reverse()) {
+      try {
+        rmSync(createdDir, { recursive: true, force: true });
+      } catch {}
+    }
     const message = err instanceof Error ? err.message : String(err);
-    throw new Error(`Squad generation failed after writing ${written.length}/${files.length} files: ${message}`);
+    throw new Error(`Failed to create directory "${currentDir}": ${message}`);
   }
 
-  return written;
+  // Phase 3: Write all files (with rollback for overwritten content)
+  const written: string[] = [];
+  const writtenFiles: GeneratedFile[] = [];
+  const previousContents = new Map<string, string>();
+  try {
+    for (const file of filesToWrite) {
+      if (existsSync(file.path)) {
+        previousContents.set(file.path, readFileSync(file.path, 'utf-8'));
+      }
+
+      writeFileSync(file.path, file.content);
+      written.push(file.label);
+      writtenFiles.push(file);
+    }
+  } catch (err) {
+    for (const file of [...writtenFiles].reverse()) {
+      try {
+        const previous = previousContents.get(file.path);
+        if (previous !== undefined) {
+          writeFileSync(file.path, previous);
+        } else {
+          rmSync(file.path, { force: true });
+        }
+      } catch {}
+    }
+
+    for (const createdDir of [...createdDirs].reverse()) {
+      try {
+        rmSync(createdDir, { recursive: true, force: true });
+      } catch {}
+    }
+
+    const message = err instanceof Error ? err.message : String(err);
+    throw new Error(`Squad generation failed after writing ${written.length}/${filesToWrite.length} files: ${message}`);
+  }
+
+  return { written, skipped: [...skipped] };
 }
 
 function generateTeamMd(arch: Preset, projectName?: string, owner?: string): string {
@@ -225,8 +284,7 @@ Use timestamped tables with these columns:
 
 ### Where It Goes
 
-- **\`docs/how-was-this-built.md\`** — the full steering log with timestamps
-- **\`JOURNAL.md\`** — brief summary + link to the full doc
+- **\`JOURNAL.md\`** — the full steering log with timestamps, Level-Up moments, and lessons learned
 
 ### Rules
 
@@ -603,9 +661,28 @@ ${skillSection}
 
 function generateAgentsMd(arch: Preset, projectName?: string): string {
   const name = projectName || arch.team.name;
+  const presetKey = arch.name?.toLowerCase() || '';
+  const isNeighborsPlus = presetKey !== 'dash';
   const agentTable = arch.agents
     .map((a) => `| ${a.name} | ${a.role} | ${a.expertise.slice(0, 2).join(', ')} |`)
     .join('\n');
+
+  const neighborsPlus = isNeighborsPlus ? `
+
+## Shorthand
+
+When the builder says **"neighbors+"** they mean all presets at the neighbors level and above (currently: neighbors, sages, specialists — everything except dash). Apply the instruction to all matching presets.
+
+## Backend Development
+
+This squad builds backends. Know these patterns:
+
+- **Azure Functions** — the default compute for API and event-driven backends. Use the Functions programming model v4 for TypeScript/JavaScript, or the isolated worker model for .NET.
+- **Event-driven patterns** — triggers (HTTP, Timer, Queue, Blob, Event Grid, Service Bus, Cosmos DB change feed) are first-class. Pick the right trigger for the workload.
+- **API patterns** — HTTP triggers for REST APIs, Durable Functions for orchestration, SignalR bindings for real-time.
+- **Azure skills bootstrap** — when the project needs Azure services (databases, storage, messaging, AI), use [aka.ms/azure-skills](https://aka.ms/azure-skills) to activate the relevant Copilot skills. Don't guess at Azure config — let the skills handle provisioning and deployment.
+- **Infrastructure** — prefer \`azd\` (Azure Developer CLI) with Bicep for infrastructure-as-code. Use \`azd init\`, \`azd up\`, \`azd deploy\`.
+` : '';
 
   return `# AGENTS.md — ${name} Operating Instructions
 
@@ -645,7 +722,7 @@ Do not end the session without verifying:
 - [ ] Docs updated if user-visible behavior changed
 - [ ] Tests considered if code changed
 - [ ] Open risks or follow-ups explicitly stated
-
+${neighborsPlus}
 ## Quick Reference
 
 | Agent | Role | Ask them about... |

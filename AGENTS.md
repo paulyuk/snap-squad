@@ -37,6 +37,21 @@ Do not end the session without verifying:
 - [ ] Tests considered if code changed
 - [ ] Open risks or follow-ups explicitly stated
 
+
+## Shorthand
+
+When the builder says **"neighbors+"** they mean all presets at the neighbors level and above (currently: neighbors, sages, specialists — everything except dash). Apply the instruction to all matching presets.
+
+## Backend Development
+
+This squad builds backends. Know these patterns:
+
+- **Azure Functions** — the default compute for API and event-driven backends. Use the Functions programming model v4 for TypeScript/JavaScript, or the isolated worker model for .NET.
+- **Event-driven patterns** — triggers (HTTP, Timer, Queue, Blob, Event Grid, Service Bus, Cosmos DB change feed) are first-class. Pick the right trigger for the workload.
+- **API patterns** — HTTP triggers for REST APIs, Durable Functions for orchestration, SignalR bindings for real-time.
+- **Azure skills bootstrap** — when the project needs Azure services (databases, storage, messaging, AI), use [aka.ms/azure-skills](https://aka.ms/azure-skills) to activate the relevant Copilot skills. Don't guess at Azure config — let the skills handle provisioning and deployment.
+- **Infrastructure** — prefer `azd` (Azure Developer CLI) with Bicep for infrastructure-as-code. Use `azd init`, `azd up`, `azd deploy`.
+
 ## Quick Reference
 
 | Agent | Role | Ask them about... |

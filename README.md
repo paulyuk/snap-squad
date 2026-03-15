@@ -36,6 +36,15 @@ npx snap-squad init                                  # → Neighbors (default)
 npx snap-squad init --type dash                      # → pick directly
 ```
 
+### Regenerate safely
+
+```bash
+npx snap-squad init --force      # refresh structural templates, keep JOURNAL.md + .squad/decisions.md
+npx snap-squad init --reset-all  # overwrite every generated file for a true clean slate
+```
+
+When `--force` preserves a content file, Snap Squad prints a warning so you know it left your journal or decisions log alone.
+
 ---
 
 ## What Is Squad?

@@ -8,15 +8,15 @@ snap-squad measures the things that decide whether a generated squad is trustwor
 
 | Test file | Tests | What it covers |
 |---|---:|---|
-| `test/e2e.test.ts` | 12 | End-to-end CLI behavior: `list`, `init`, preset selection, plain-English routing, overwrite/error handling, and generated squad/session-awareness artifacts. |
+| `test/e2e.test.ts` | 13 | End-to-end CLI behavior: `list`, `init`, preset selection, plain-English routing, overwrite/error handling, safe `--force` regeneration, and generated squad/session-awareness artifacts. |
 | `test/matcher.test.ts` | 5 | Representative preset matching, default fallback behavior, and presence of a non-empty match explanation/score. |
 | `test/matcher-accuracy.test.ts` | 36 | Curated accuracy matrix for prompt→preset resolution plus explainability, word-boundary safety, and robustness checks. |
 | `test/registry.test.ts` | 6 | Registry discovery/loading for all four presets plus unknown preset failure behavior. |
-| `test/generator.test.ts` | 4 | File generation coverage for preset output, hook-chain wiring, project context injection, and specialist skill references. |
+| `test/generator.test.ts` | 6 | File generation coverage for preset output, hook-chain wiring, project context injection, structural/content overwrite rules, and specialist skill references. |
 | `test/validation.test.ts` | 13 | Preset schema invariants, charter/output quality, routing integrity, `JOURNAL.md` generation, and input sanitization. |
 | `test/speed.test.ts` | 8 | Performance budgets for cold init, forced re-init, `list`, plain-English resolution + init, and regression guard ceilings. |
 
-**Suite total:** 84 tests across 7 files.
+**Suite total:** 87 tests across 7 files.
 
 ## Speed Baselines
 
@@ -66,7 +66,7 @@ The accuracy suite contains **28 direct prompt→preset mapping checks** and **8
 
 | Gate | Requirement |
 |---|---|
-| Functional baseline | All tests green. Current snapshot: **84/84 passing**. |
+| Functional baseline | All tests green. Current snapshot: **87/87 passing**. |
 | Routing quality | Matcher, accuracy, generator, registry, validation, and E2E suites must remain green. |
 | Performance | All speed tests must stay within budget, and no preset init may exceed the 2× hard ceiling. |
 | Release blockers | No open P0 issues before shipping. |
@@ -75,10 +75,10 @@ The accuracy suite contains **28 direct prompt→preset mapping checks** and **8
 
 | Field | Value |
 |---|---|
-| Date | 2026-03-14 |
-| Version | 0.4.0 |
-| Total tests | 84 |
-| Pass rate | 100% (84/84) |
+| Date | 2026-03-15 |
+| Version | 0.5.0 |
+| Total tests | 87 |
+| Pass rate | 100% (87/87) |
 | Test files | 7 |
-| Full-suite runtime | 1.64 s |
+| Full-suite runtime | 2.04 s |
 | Vitest command | `npx vitest run 2>&1` |

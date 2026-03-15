@@ -30,15 +30,17 @@ program
   .option('-d, --dir <directory>', 'target directory', '.')
   .option('-n, --name <name>', 'project name')
   .option('-o, --owner <owner>', 'project owner')
-  .option('-f, --force', 'overwrite existing .squad/ directory', false)
+  .option('-f, --force', 'overwrite structural files but preserve JOURNAL.md and .squad/decisions.md', false)
+  .option('--reset-all', 'overwrite every generated file, including JOURNAL.md and .squad/decisions.md', false)
   .option('--explain', 'show why a preset was chosen')
   .option('--dry-run', 'show what would be created without writing files')
   .action((descriptionWords: string[], opts) => {
     const targetDir = resolve(opts.dir);
     const squadDir = resolve(targetDir, '.squad');
+    const canRegenerate = opts.force || opts.resetAll;
 
-    if (existsSync(squadDir) && !opts.force) {
-      console.error(chalk.red('✗ .squad/ already exists. Use --force to overwrite.'));
+    if (existsSync(squadDir) && !canRegenerate) {
+      console.error(chalk.red('✗ .squad/ already exists. Use --force to refresh templates or --reset-all for a clean slate.'));
       process.exit(1);
     }
 
@@ -81,16 +83,24 @@ program
 
     console.log(chalk.blue(`⚡ Snapping in ${chalk.bold(preset.displayName)}...`));
 
-    const created = generateSquad({
+    const { written, skipped } = generateSquad({
       targetDir,
       preset,
       projectName: opts.name,
       owner: opts.owner,
+      overwriteMode: opts.resetAll ? 'all' : opts.force ? 'structural' : 'all',
     });
 
+    if (skipped.length > 0) {
+      console.log();
+      for (const file of skipped) {
+        console.log(chalk.yellow(`⚠ Skipping ${file} (contains user content)`));
+      }
+    }
+
     console.log(chalk.green(`\n✓ Squad ready! (${preset.displayName})\n`));
-    console.log(chalk.dim('Created:'));
-    for (const file of created) {
+    console.log(chalk.dim('Written:'));
+    for (const file of written) {
       console.log(chalk.dim(`  ${file}`));
     }
     console.log(
