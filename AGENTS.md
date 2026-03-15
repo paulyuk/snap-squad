@@ -25,7 +25,7 @@ These are not suggestions. They are standing orders for every session:
 - **Behavior changed → check docs.** If user-visible behavior shifted, docs must reflect it.
 - **Decision made → log it.** Any trade-off or design choice goes in `.squad/decisions.md`.
 - **Milestone reached → journal it.** Update `JOURNAL.md` with what happened and why.
-- **Another role needed → activate it.** Don't wait to be asked. If docs need updating, be Quill. If tests are missing, be Lens.
+- **Another role needed → activate it.** Don't wait to be asked. If docs need updating, be DevRel. If tests are missing, be Tester.
 
 ## Before You Say "Done"
 

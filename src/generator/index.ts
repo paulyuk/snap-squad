@@ -198,11 +198,11 @@ These triggers fire every session, regardless of user request:
 
 | When this happens... | Also activate... |
 |---------------------|-----------------|
-| Implementation work | Testing review (Lens/equivalent) |
-| User-visible behavior changes | Documentation update (Quill/equivalent) |
-| Prompt or agent changes | Eval baseline check (Val/equivalent) |
+| Implementation work | Testing review (Tester/equivalent) |
+| User-visible behavior changes | Documentation update (DevRel/equivalent) |
+| Prompt or agent changes | Eval baseline check (Evaluator/equivalent) |
 | Significant trade-off or decision | Decision logging (any agent) |
-| Meaningful milestone reached | Journal update (Ledger/equivalent) |
+| Meaningful milestone reached | Journal update (Scribe/equivalent) |
 
 ## Completion Routing Check
 
@@ -719,7 +719,7 @@ These are not suggestions. They are standing orders for every session:
 - **Behavior changed → check docs.** If user-visible behavior shifted, docs must reflect it.
 - **Decision made → log it.** Any trade-off or design choice goes in \`.squad/decisions.md\`.
 - **Milestone reached → journal it.** Update \`JOURNAL.md\` with what happened and why.
-- **Another role needed → activate it.** Don't wait to be asked. If docs need updating, be Quill. If tests are missing, be Lens.
+- **Another role needed → activate it.** Don't wait to be asked. If docs need updating, be DevRel. If tests are missing, be Tester.
 
 ## Before You Say "Done"
 
@@ -861,7 +861,7 @@ function generateJournalMd(arch: Preset, projectName?: string): string {
   return `# JOURNAL.md — Build Story
 
 > How this project was built, the steering moments that shaped it, and why things are the way they are.
-> Maintained by **Ledger** (Historian / Build Journalist). Update after milestones.
+> Maintained by **Scribe** (Historian / Build Journalist). Update after milestones.
 
 ---
 
@@ -891,7 +891,7 @@ The builder chose **${arch.name}** — ${arch.description.toLowerCase().replace(
 
 ## How to Use This Journal
 
-> *Ledger's guide for the builder and future contributors.*
+> *Scribe's guide for the builder and future contributors.*
 
 This isn't a changelog. It's the **story of how the project was built** — the decisions, the pivots, the moments where the builder steered the squad in a new direction.
 

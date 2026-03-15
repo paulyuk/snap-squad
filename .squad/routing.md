@@ -28,11 +28,11 @@ These triggers fire every session, regardless of user request:
 
 | When this happens... | Also activate... |
 |---------------------|-----------------|
-| Implementation work | Testing review (Lens/equivalent) |
-| User-visible behavior changes | Documentation update (Quill/equivalent) |
-| Prompt or agent changes | Eval baseline check (Val/equivalent) |
+| Implementation work | Testing review (Tester/equivalent) |
+| User-visible behavior changes | Documentation update (DevRel/equivalent) |
+| Prompt or agent changes | Eval baseline check (Evaluator/equivalent) |
 | Significant trade-off or decision | Decision logging (any agent) |
-| Meaningful milestone reached | Journal update (Ledger/equivalent) |
+| Meaningful milestone reached | Journal update (Scribe/equivalent) |
 
 ## Completion Routing Check
 
