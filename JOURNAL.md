@@ -59,6 +59,12 @@ The real origin story is delightfully recursive: **snap-squad was built the way 
 |---|---|---|---|
 | 6:27 PM · — | "Update all 4 preset detail docs ... to deep link agent names to their YAML definitions" | Quill traced every `- name:` entry in the four preset YAML files, converted each team-table agent name into a GitHub line anchor, and added a Source Definition section to every preset detail doc. No build or test run — the user explicitly asked to skip them for this docs-only pass. | 🔗 **Docs now point at source, not just describe it.** |
 
+### Session 5 — Functional Naming Alignment (Mar 15)
+
+| Time | Steering Command | What Happened | Level-Up |
+|---|---|---|---|
+| Mar 15 · — | "Update docs to new functional agent names" | Preset docs, the plain-language explainer, and evaluator guidance were updated from retired creative names to the current functional roster. YAML deep-link targets and external tool URLs stayed intact, and the targeted files were verified with grep for missed names. | 🧭 **Docs now match the shipped roster.** |
+
 ## How We Used What We Teach
 
 | snap-squad principle | How snap-squad used it on itself | Evidence |

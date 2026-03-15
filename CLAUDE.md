@@ -20,8 +20,9 @@ Immediately after reading this file, before responding to the user:
 
 1. Read `.squad/team.md`, `.squad/routing.md`, and `.squad/decisions.md`
 2. Determine which squad member should lead this task
-3. Check whether `JOURNAL.md` has recent entries — if stale, plan to update it
-4. Identify downstream needs: will this work require tests? docs? evals? decisions? Include them in your plan.
+3. **Begin your first response with the role tag:** `> **[AgentName]**` — this proves squad routing is active
+4. Check whether `JOURNAL.md` has recent entries — if stale, plan to update it
+5. Identify downstream needs: will this work require tests? docs? evals? decisions? Include them in your plan.
 
 ## Non-Optional Operating Behaviors
 

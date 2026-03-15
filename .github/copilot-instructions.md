@@ -13,6 +13,7 @@
 ## Squad-Aware Behavior
 
 - Identify which squad member is best suited for the current task
+- **Start every substantive response with a role tag:** `> **[AgentName]**` (see AGENTS.md for format rules)
 - Adopt their expertise, voice, and boundaries
 - Log significant decisions to `.squad/decisions.md` after completing work
 

@@ -27,3 +27,9 @@
 - **Date:** 2026-03-15
 - **Context:** The preset detail docs describe each squad roster, but contributors had no direct path from an agent listed in `docs/presets/*.md` to the canonical YAML definition in `src/registry/presets/*.yaml`.
 - **Decision:** Link each team-table agent name directly to its `- name:` line in the matching preset YAML and add a Source Definition section at the bottom of every preset detail doc so docs stay traceable to the registry source of truth.
+
+### D-005: Preset docs should use functional roster names
+- **By:** DevRel
+- **Date:** 2026-03-15
+- **Context:** The preset docs and explainer still mixed retired creative agent names into tables, spotlight sections, routing examples, and evaluator guidance after the roster moved to functional names.
+- **Decision:** Keep preset docs, the how-it-works explainer, and evaluator guidance aligned to the functional roster names while preserving canonical YAML deep-link paths and external tool URLs.

@@ -14,55 +14,55 @@ npx snap-squad init
 
 | Agent | Role | What They Do |
 |-------|------|-------------|
-| [**Blueprint**](../../src/registry/presets/default.yaml#L15) 🏗️ | Lead / Architect | Sees the whole picture. Keeps the project on track. Prefers simple solutions — will ask "do we actually need this?" before building. |
-| [**Wrench**](../../src/registry/presets/default.yaml#L22) 🔧 | Core Dev | Makes it work. Practical, fast, reliable. Thinks the best abstraction is a good function name. |
-| [**Lens**](../../src/registry/presets/default.yaml#L29) 🔍 | Tester / QA | Finds what's broken before users do. Thorough, skeptical. Will block a PR for missing tests. |
-| [**Quill**](../../src/registry/presets/default.yaml#L36) ✍️ | Docs / DevRel | Makes the project approachable. Believes the README is the front door. |
-| [**Mosaic**](../../src/registry/presets/default.yaml#L43) 🧩 | Prompt Engineer | Crafts the prompts and agent voices. Every token earns its place. |
-| [**Relay**](../../src/registry/presets/default.yaml#L50) 🔗 | GitOps / Release | Manages git workflow, CI/CD, releases. Automation-first. |
-| [**Val**](../../src/registry/presets/default.yaml#L57) 📊 | Evals / Quality Baseline | Runs **light evals** — establishes baselines, spot-checks quality, and coaches toward better eval practices. Not a full eval pipeline; just enough to keep you honest. |
-| [**Scout**](../../src/registry/presets/default.yaml#L64) 🔭 | Researcher / Opportunity Finder | Scans grounding content, upstream repos, and the ecosystem. Checks in weekly with web-based research. |
-| [**Ledger**](../../src/registry/presets/default.yaml#L71) 📖 | Historian / Build Journalist | Journals the builder's prompts, steering, and key evolution moments. |
+| [**Architect**](../../src/registry/presets/default.yaml#L15) 🏗️ | Lead / Architect | Sees the whole picture. Keeps the project on track. Prefers simple solutions — will ask "do we actually need this?" before building. |
+| [**Coder**](../../src/registry/presets/default.yaml#L22) 🔧 | Core Dev | Makes it work. Practical, fast, reliable. Thinks the best abstraction is a good function name. |
+| [**Tester**](../../src/registry/presets/default.yaml#L29) 🔍 | Tester / QA | Finds what's broken before users do. Thorough, skeptical. Will block a PR for missing tests. |
+| [**DevRel**](../../src/registry/presets/default.yaml#L36) ✍️ | Docs / DevRel | Makes the project approachable. Believes the README is the front door. |
+| [**Prompter**](../../src/registry/presets/default.yaml#L43) 🧩 | Prompt Engineer | Crafts the prompts and agent voices. Every token earns its place. |
+| [**GitOps**](../../src/registry/presets/default.yaml#L50) 🔗 | GitOps / Release | Manages git workflow, CI/CD, releases. Automation-first. |
+| [**Evaluator**](../../src/registry/presets/default.yaml#L57) 📊 | Evals / Quality Baseline | Runs **light evals** — establishes baselines, spot-checks quality, and coaches toward better eval practices. Not a full eval pipeline; just enough to keep you honest. |
+| [**Researcher**](../../src/registry/presets/default.yaml#L64) 🔭 | Researcher / Opportunity Finder | Scans grounding content, upstream repos, and the ecosystem. Checks in weekly with web-based research. |
+| [**Scribe**](../../src/registry/presets/default.yaml#L71) 📖 | Historian / Build Journalist | Journals the builder's prompts, steering, and key evolution moments. |
 
 ## Routing
 
 | Work Type | Agent | Examples |
 |-----------|-------|---------|
-| `architecture` | Blueprint | System design, scope, trade-offs, code review |
-| `implementation` | Wrench | Feature code, CLI, runtime, file operations |
-| `testing` | Lens | Tests, quality gates, edge cases, CI/CD |
-| `documentation` | Quill | README, docs, messaging, onboarding |
-| `prompts` | Mosaic | Agent charters, system prompts, manifest design |
-| `git` | Relay | Git workflow, pushes, PRs, releases |
-| `evals` | Val | Eval design, baselines, agent-as-judge |
-| `research` | Scout | Ecosystem research, grounding content, upstream tracking |
-| `history` | Ledger | Build journal, decision history |
+| `architecture` | Architect | System design, scope, trade-offs, code review |
+| `implementation` | Coder | Feature code, CLI, runtime, file operations |
+| `testing` | Tester | Tests, quality gates, edge cases, CI/CD |
+| `documentation` | DevRel | README, docs, messaging, onboarding |
+| `prompts` | Prompter | Agent charters, system prompts, manifest design |
+| `git` | GitOps | Git workflow, pushes, PRs, releases |
+| `evals` | Evaluator | Eval design, baselines, agent-as-judge |
+| `research` | Researcher | Ecosystem research, grounding content, upstream tracking |
+| `history` | Scribe | Build journal, decision history |
 
-**Default agent:** Blueprint — when in doubt, the architect decides.
+**Default agent:** Architect — when in doubt, the architect decides.
 
-## Spotlight: Blueprint 🏗️
+## Spotlight: Architect 🏗️
 
 > *"Do we actually need this?"*
 
-Blueprint is the voice of simplicity. Before any feature gets built, Blueprint asks the question nobody wants to hear — and saves the team weeks of wasted work. Sees the whole board, not just the next move. If you're arguing about architecture, Blueprint already drew the diagram on the whiteboard while you were talking.
+Architect is the voice of simplicity. Before any feature gets built, Architect asks the question nobody wants to hear — and saves the team weeks of wasted work. Sees the whole board, not just the next move. If you're arguing about architecture, Architect already drew the diagram on the whiteboard while you were talking.
 
-## Spotlight: Val 📊
+## Spotlight: Evaluator 📊
 
 > *"You don't need a 200-test eval suite. You need three good baselines and the discipline to check them."*
 
-Val keeps the squad honest without slowing it down. Light evals — baselines, spot-checks, a gentle nudge toward "did you actually measure that?" Val won't build you a full eval pipeline (that's Caliber's job in [Specialists](specialists.md)), but Val will make sure you're not shipping vibes instead of metrics.
+Evaluator keeps the squad honest without slowing it down. Light evals — baselines, spot-checks, a gentle nudge toward "did you actually measure that?" Evaluator won't build you a full eval pipeline (that's Evaluator's job in [Specialists](specialists.md)), but Evaluator will make sure you're not shipping vibes instead of metrics.
 
-## Spotlight: Scout 🔭
+## Spotlight: Researcher 🔭
 
 > *"Found something upstream you should see."*
 
-Scout doesn't wait for assignments. Scans grounding content, watches upstream repos, checks in weekly with ecosystem research. The agent who says "hey, did you know there's a new API for that?" before you spend a week building it yourself.
+Researcher doesn't wait for assignments. Scans grounding content, watches upstream repos, checks in weekly with ecosystem research. The agent who says "hey, did you know there's a new API for that?" before you spend a week building it yourself.
 
 ## A Note on Evals
 
-Neighbors includes **light evals** via Val — enough to establish baselines and catch regressions, but not a full eval pipeline. If you need comprehensive eval suites, agent-as-judge patterns, or regression benchmarking, level up to [Specialists](specialists.md) where **Caliber** owns deep eval architecture.
+Default includes **light evals** via Evaluator — enough to establish baselines and catch regressions, but not a full eval pipeline. If you need comprehensive eval suites, agent-as-judge patterns, or regression benchmarking, level up to [Specialists](specialists.md) where **Evaluator** owns deep eval architecture.
 
-## When to Use Neighbors
+## When to Use Default
 
 - You're starting a new project and want a solid all-around team
 - You need balanced coverage across architecture, code, tests, and docs

@@ -20,7 +20,7 @@ snap-squad measures the things that decide whether a generated squad is trustwor
 
 ## Speed Baselines
 
-Measured from a local `npx vitest run test/speed.test.ts --reporter=verbose` run after the full `npx vitest run` baseline.
+Captured from a local `npx vitest run test/speed.test.ts --reporter=verbose` run after the full `npx vitest run` baseline.
 
 | Speed test | Budget | Actual | Result |
 |---|---:|---:|---|

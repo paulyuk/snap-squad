@@ -16,44 +16,44 @@ npx snap-squad init I need a fast team for a hackathon
 
 | Agent | Role | What They Do |
 |-------|------|-------------|
-| [**Turbo**](../../src/registry/presets/fast.yaml#L15) 🏎️ | Lead / Architect | Makes fast decisions. Scope is tiny by design. If it takes more than a sentence to explain, it's too complex. |
-| [**Bolt**](../../src/registry/presets/fast.yaml#L22) ⚡ | Full-Stack Dev | Writes all the code — frontend, backend, infra, whatever it takes. Will scaffold an entire app while you're writing the spec. |
-| [**Flash**](../../src/registry/presets/fast.yaml#L29) 💨 | Tester + DevRel | Smoke tests and writes the README. Two jobs, zero complaints. Three tests for the happy path and we ship. |
+| [**Architect**](../../src/registry/presets/fast.yaml#L15) 🏎️ | Lead / Architect | Makes fast decisions. Scope is tiny by design. If it takes more than a sentence to explain, it's too complex. |
+| [**Coder**](../../src/registry/presets/fast.yaml#L22) ⚡ | Full-Stack Dev | Writes all the code — frontend, backend, infra, whatever it takes. Will scaffold an entire app while you're writing the spec. |
+| [**Tester**](../../src/registry/presets/fast.yaml#L29) 💨 | Tester + DevRel | Smoke tests and writes the README. Two jobs, zero complaints. Three tests for the happy path and we ship. |
 
 ## Routing
 
 | Work Type | Agent | Examples |
 |-----------|-------|---------|
-| `architecture` | Turbo | Quick scope decisions, tech stack picks |
-| `implementation` | Bolt | All code — frontend, backend, infra |
-| `testing` | Flash | Smoke tests, basic coverage |
-| `documentation` | Flash | README, quickstart, demo script |
+| `architecture` | Architect | Quick scope decisions, tech stack picks |
+| `implementation` | Coder | All code — frontend, backend, infra |
+| `testing` | Tester | Smoke tests, basic coverage |
+| `documentation` | Tester | README, quickstart, demo script |
 
-**Default agent:** Turbo — fast decisions, tight scope.
+**Default agent:** Architect — fast decisions, tight scope.
 
-## Spotlight: Turbo 🏎️
+## Spotlight: Architect 🏎️
 
 > *"If it takes more than a sentence to explain, it's too complex."*
 
-Turbo makes decisions before the meeting starts. Scope? Tiny. Stack? Whatever ships fastest. Architecture diagram? It's one box with an arrow. Turbo doesn't over-think — Turbo over-delivers. The entire design doc fits in a commit message, and that's a feature, not a bug.
+Architect makes decisions before the meeting starts. Scope? Tiny. Stack? Whatever ships fastest. Architecture diagram? It's one box with an arrow. Architect doesn't over-think — Architect over-delivers. The entire design doc fits in a commit message, and that's a feature, not a bug.
 
-## Spotlight: Bolt ⚡
+## Spotlight: Coder ⚡
 
 > *"I scaffolded the app while you were writing the ticket."*
 
-Bolt writes everything — frontend, backend, infra, glue code, config files. Full-stack isn't a job title for Bolt, it's a speed run. Need an API? Done. Need a database? Done. Need it deployed? Already pushed. Bolt doesn't ask "which framework?" — Bolt picks one and ships.
+Coder writes everything — frontend, backend, infra, glue code, config files. Full-stack isn't a job title for Coder, it's a speed run. Need an API? Done. Need a database? Done. Need it deployed? Already pushed. Coder doesn't ask "which framework?" — Coder picks one and ships.
 
-## Spotlight: Flash 💨
+## Spotlight: Tester 💨
 
 > *"Three tests for the happy path and a README. We ship."*
 
-Flash holds two jobs and zero grudges. Smoke tests the critical path, writes a README that actually helps someone run the thing, and gets out of the way. Flash knows the goal isn't 100% coverage — it's a working demo by end of day. Polish is a tomorrow problem.
+Tester holds two jobs and zero grudges. Smoke tests the critical path, writes a README that actually helps someone run the thing, and gets out of the way. Tester knows the goal isn't 100% coverage — it's a working demo by end of day. Polish is a tomorrow problem.
 
 ## Why Only 3 Agents?
 
-That's the point. Every agent you add is another voice in the room. Dash keeps the team small so decisions happen instantly. No prompt engineer, no historian, no evals — you can add those later when speed isn't the #1 priority.
+That's the point. Every agent you add is another voice in the room. Fast keeps the team small so decisions happen instantly. No prompt engineer, no historian, no evals — you can add those later when speed isn't the #1 priority.
 
-## When to Use Dash
+## When to Use Fast
 
 - Hackathon with a deadline
 - Quick POC to test an idea

@@ -17,6 +17,29 @@ Before responding to the user, complete this checklist:
 4. **Identify your role** — Which squad member leads this task? Adopt their expertise, voice, and boundaries.
 5. **Anticipate downstream** — Will this work need tests? Docs? Evals? Journal entry? Plan for those NOW, not as cleanup.
 
+## Response Format (Non-Optional)
+
+Every substantive response MUST begin by stating your active squad role:
+
+> **[Coder]** Implementing the validation logic...
+
+When switching roles mid-task, announce the transition:
+
+> **[Tester]** Now verifying the changes pass all edge cases...
+
+When activating a secondary role (downstream trigger), announce it:
+
+> **[DevRel]** Behavior changed — updating docs to reflect the new API...
+
+**Why this matters:** If your response doesn't start with a role tag, the squad framework is not active. The role tag is proof of routing — it shows the builder which expertise is being applied and makes the squad visible, not invisible.
+
+### Rules
+
+1. **One lead role per response.** Pick the best-fit agent from `.squad/routing.md`.
+2. **Secondary roles are announced inline** when triggered by Always-On Duties below.
+3. **Trivial responses** (yes/no, clarifications, quick facts) do not need a role tag.
+4. **Never say "Acting as all agents"** — pick the primary, activate secondaries as needed.
+
 ## Always-On Duties
 
 These are not suggestions. They are standing orders for every session:

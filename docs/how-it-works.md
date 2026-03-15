@@ -38,23 +38,23 @@ project-root/
 │   └── copilot-instructions.md
 ├── .squad/
 │   ├── agents/
-│   │   ├── blueprint/
+│   │   ├── architect/
 │   │   │   └── charter.md
-│   │   ├── ledger/
+│   │   ├── scribe/
 │   │   │   └── charter.md
-│   │   ├── lens/
+│   │   ├── tester/
 │   │   │   └── charter.md
-│   │   ├── mosaic/
+│   │   ├── prompter/
 │   │   │   └── charter.md
-│   │   ├── quill/
+│   │   ├── devrel/
 │   │   │   └── charter.md
-│   │   ├── relay/
+│   │   ├── gitops/
 │   │   │   └── charter.md
-│   │   ├── scout/
+│   │   ├── researcher/
 │   │   │   └── charter.md
-│   │   ├── val/
+│   │   ├── evaluator/
 │   │   │   └── charter.md
-│   │   └── wrench/
+│   │   └── coder/
 │   │       └── charter.md
 │   ├── decisions.md
 │   ├── mcp-config.md
@@ -96,9 +96,9 @@ A preset is a YAML file in `src/registry/presets/`. It defines the team name, to
 
 Today snap-squad ships four presets:
 
-- **Neighbors** — the general-purpose default
-- **Dash** — fast, low-ceremony, demo-first
-- **Sages** — mentor-style, explains the why
+- **Default** — the general-purpose default
+- **Fast** — fast, low-ceremony, demo-first
+- **Mentors** — mentor-style, explains the why
 - **Specialists** — deeper domain experts for precision work
 
 That matters because presets are not hard-coded as giant `if` statements. The CLI resolves a preset name, loads the YAML, validates it, and generates the same file structure every time. That makes the product easy to inspect and easy to extend.
@@ -117,7 +117,7 @@ A good charter is more than a personality blurb. In snap-squad, the charter give
 - voice and tone
 - collaboration rules
 
-For example, Quill's charter is not just "the docs writer." It also says to update docs after behavior changes and to avoid writing untested commands. Lens is not just "QA"; the charter tells Lens what kinds of tests matter and what quality bar to hold.
+For example, DevRel's charter is not just "the docs writer." It also says to update docs after behavior changes and to avoid writing untested commands. Tester is not just "QA"; the charter tells Tester what kinds of tests matter and what quality bar to hold.
 
 This matters because AI assistants respond better to concrete operating instructions than to vague role labels. "You are an architect" is weak. "Before implementation, define scope and log the decision" is much stronger.
 
@@ -127,10 +127,10 @@ Routing lives in `.squad/routing.md`.
 
 That file maps a work type to the agent who should lead it. For example:
 
-- architecture → Blueprint or the preset's equivalent
-- implementation → Wrench or equivalent
-- documentation → Quill or equivalent
-- testing → Lens or equivalent
+- architecture → Architect or the preset's equivalent
+- implementation → Coder or equivalent
+- documentation → DevRel or equivalent
+- testing → Tester or equivalent
 
 The file also includes routing principles and automatic follow-ons. If implementation work happens, testing should also get involved. If user-visible behavior changes, docs should also get involved. If a meaningful milestone is reached, the journal should get updated.
 

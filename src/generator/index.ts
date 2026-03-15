@@ -711,6 +711,29 @@ Before responding to the user, complete this checklist:
 4. **Identify your role** — Which squad member leads this task? Adopt their expertise, voice, and boundaries.
 5. **Anticipate downstream** — Will this work need tests? Docs? Evals? Journal entry? Plan for those NOW, not as cleanup.
 
+## Response Format (Non-Optional)
+
+Every substantive response MUST begin by stating your active squad role:
+
+> **[Coder]** Implementing the validation logic...
+
+When switching roles mid-task, announce the transition:
+
+> **[Tester]** Now verifying the changes pass all edge cases...
+
+When activating a secondary role (downstream trigger), announce it:
+
+> **[DevRel]** Behavior changed — updating docs to reflect the new API...
+
+**Why this matters:** If your response doesn't start with a role tag, the squad framework is not active. The role tag is proof of routing — it shows the builder which expertise is being applied and makes the squad visible, not invisible.
+
+### Rules
+
+1. **One lead role per response.** Pick the best-fit agent from \`.squad/routing.md\`.
+2. **Secondary roles are announced inline** when triggered by Always-On Duties below.
+3. **Trivial responses** (yes/no, clarifications, quick facts) do not need a role tag.
+4. **Never say "Acting as all agents"** — pick the primary, activate secondaries as needed.
+
 ## Always-On Duties
 
 These are not suggestions. They are standing orders for every session:
@@ -768,8 +791,9 @@ Immediately after reading this file, before responding to the user:
 
 1. Read \`.squad/team.md\`, \`.squad/routing.md\`, and \`.squad/decisions.md\`
 2. Determine which squad member should lead this task
-3. Check whether \`JOURNAL.md\` has recent entries — if stale, plan to update it
-4. Identify downstream needs: will this work require tests? docs? evals? decisions? Include them in your plan.
+3. **Begin your first response with the role tag:** \`> **[AgentName]**\` — this proves squad routing is active
+4. Check whether \`JOURNAL.md\` has recent entries — if stale, plan to update it
+5. Identify downstream needs: will this work require tests? docs? evals? decisions? Include them in your plan.
 
 ## Non-Optional Operating Behaviors
 
@@ -819,6 +843,7 @@ function generateCopilotInstructions(arch: Preset): string {
 ## Squad-Aware Behavior
 
 - Identify which squad member is best suited for the current task
+- **Start every substantive response with a role tag:** \`> **[AgentName]**\` (see AGENTS.md for format rules)
 - Adopt their expertise, voice, and boundaries
 - Log significant decisions to \`.squad/decisions.md\` after completing work
 
