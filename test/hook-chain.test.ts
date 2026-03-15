@@ -37,6 +37,7 @@ describe('Hook Chain: squad enforcement is present in generated files', () => {
       claude: readFileSync(join(tempDir, 'CLAUDE.md'), 'utf-8'),
       copilot: readFileSync(join(tempDir, '.github', 'copilot-instructions.md'), 'utf-8'),
       routing: readFileSync(join(tempDir, '.squad', 'routing.md'), 'utf-8'),
+      team: readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8'),
     };
   }
 
@@ -173,5 +174,34 @@ describe('Hook Chain: squad enforcement is present in generated files', () => {
       expect(claude).toContain('role tag');
       expect(copilot).toContain('role tag');
     });
+  });
+
+  describe('team.md — no duplicates or title bugs', () => {
+    for (const preset of PRESETS) {
+      it(`${preset}: title is not duplicated when no projectName`, () => {
+        const p = loadPreset(preset);
+        // Regenerate without projectName to test default title
+        rmSync(tempDir, { recursive: true, force: true });
+        const { mkdtempSync: mktemp } = require('node:fs');
+        const newDir = mktemp(require('node:path').join(require('node:os').tmpdir(), 'snap-squad-team-'));
+        generateSquad({ targetDir: newDir, preset: p, owner: 'test' });
+        const team = readFileSync(require('node:path').join(newDir, '.squad', 'team.md'), 'utf-8');
+        const title = team.split('\n')[0];
+        // Title should NOT have "X — X" pattern (duplicated name)
+        const parts = title.replace('# ', '').split(' — ');
+        if (parts.length > 1) {
+          expect(parts[0]).not.toEqual(parts[1]);
+        }
+        rmSync(newDir, { recursive: true, force: true });
+      });
+
+      it(`${preset}: no agent appears twice in members table`, () => {
+        const { team } = generateAndRead(preset);
+        const memberLines = team.split('\n').filter((l: string) => l.startsWith('| ') && l.includes('charter.md'));
+        const names = memberLines.map((l: string) => l.split('|')[1].trim());
+        const unique = new Set(names);
+        expect(names.length).toBe(unique.size);
+      });
+    }
   });
 });

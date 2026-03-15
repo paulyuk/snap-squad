@@ -1,4 +1,4 @@
-# The Default Squad — The Default Squad
+# The Default Squad
 
 > A friendly, well-rounded squad for general-purpose projects.
 
@@ -21,7 +21,6 @@
 | Evaluator | Evals / Quality Baseline | `.squad/agents/evaluator/charter.md` | ✅ Active |
 | Researcher | Researcher / Opportunity Finder | `.squad/agents/researcher/charter.md` | ✅ Active |
 | Scribe | Historian / Build Scribe | `.squad/agents/scribe/charter.md` | ✅ Active |
-| Scribe | Session Logger | `.squad/agents/scribe/charter.md` | 📋 Silent |
 
 ## Coding Agent
 

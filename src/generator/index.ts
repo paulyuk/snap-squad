@@ -136,7 +136,12 @@ function generateTeamMd(arch: Preset, projectName?: string, owner?: string): str
     .map((a) => `| ${a.name} | ${a.role} | \`.squad/agents/${a.name.toLowerCase()}/charter.md\` | ✅ Active |`)
     .join('\n');
 
-  return `# ${arch.team.name} — ${name}
+  const title = projectName ? `${arch.team.name} — ${projectName}` : arch.team.name;
+
+  const hasScribe = arch.agents.some((a) => a.name.toLowerCase() === 'scribe');
+  const scribeRow = hasScribe ? '' : '\n| Scribe | Session Logger | `.squad/agents/scribe/charter.md` | 📋 Silent |';
+
+  return `# ${title}
 
 > ${arch.team.description}
 
@@ -150,8 +155,7 @@ function generateTeamMd(arch: Preset, projectName?: string, owner?: string): str
 
 | Name | Role | Charter | Status |
 |------|------|---------|--------|
-${agentRows}
-| Scribe | Session Logger | \`.squad/agents/scribe/charter.md\` | 📋 Silent |
+${agentRows}${scribeRow}
 
 ## Coding Agent
 
