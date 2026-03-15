@@ -19,6 +19,7 @@
 | Mosaic | Prompt Engineer | `.squad/agents/mosaic/charter.md` | ✅ Active |
 | Relay | GitOps / Release | `.squad/agents/relay/charter.md` | ✅ Active |
 | Val | Evals / Quality Baseline | `.squad/agents/val/charter.md` | ✅ Active |
+| Scout | Researcher / Opportunity Finder | `.squad/agents/scout/charter.md` | ✅ Active |
 | Ledger | Historian / Build Journalist | `.squad/agents/ledger/charter.md` | ✅ Active |
 | Scribe | Session Logger | `.squad/agents/scribe/charter.md` | 📋 Silent |
 
@@ -36,4 +37,4 @@
 - **Stack:** (configure after init)
 - **Description:** Default generalist squad — reliable, well-rounded, good for any project.
 - **Universe:** Community Builders
-- **Created:** 2026-03-14
+- **Created:** 2026-03-15

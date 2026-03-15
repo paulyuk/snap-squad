@@ -11,6 +11,7 @@
 | prompts | Mosaic | Agent charters, system prompts, manifest design |
 | git | Relay | Git workflow, pushes, PRs, releases, GitHub auth, CI/CD |
 | evals | Val | Eval design, baselines, agent-as-judge, quality scoring |
+| research | Scout | Ecosystem research, grounding content review, upstream tracking, weekly opportunity check-ins |
 | history | Ledger | Build journal, decision history, evolution narrative, prompt curation, markdown review |
 
 ## Routing Principles

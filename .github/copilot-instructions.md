@@ -26,4 +26,4 @@ npx snap-squad init --type <preset> --force    # switch to a different preset
 npx snap-squad list                            # see available presets
 ```
 
-Available presets: neighbors (general), dash (speed), sages (mentor), specialists (deep expertise)
+Available presets: dash, neighbors, sages, specialists

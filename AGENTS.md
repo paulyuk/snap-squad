@@ -25,6 +25,7 @@ Before doing any work, read and follow the squad configuration:
 | Mosaic | Prompt Engineer | system prompts, agent design |
 | Relay | GitOps / Release | git workflow, GitHub CLI |
 | Val | Evals / Quality Baseline | eval design, baseline metrics |
+| Scout | Researcher / Opportunity Finder | competitive analysis, upstream tracking |
 | Ledger | Historian / Build Journalist | build journals, decision history |
 
 ## Preset: The Neighbors
