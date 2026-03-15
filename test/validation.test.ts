@@ -21,7 +21,7 @@ describe('Preset Schema Validation', () => {
     }
   });
 
-  it('all presets have at least 3 agents (except dash)', () => {
+  it('all presets have at least 3 agents (except fast)', () => {
     for (const name of listPresets()) {
       const preset = loadPreset(name);
       if (name === 'fast') {

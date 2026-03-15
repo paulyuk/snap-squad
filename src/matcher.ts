@@ -12,7 +12,7 @@ export interface PresetMatch {
 }
 
 const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
-  // --- Dash: speed, POCs, hackathons ---
+  // --- fast: speed, POCs, hackathons ---
   fast: [{ preset: 'fast', weight: 3 }],
   quick: [{ preset: 'fast', weight: 3 }],
   speed: [{ preset: 'fast', weight: 3 }],
@@ -25,7 +25,7 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   'ship fast': [{ preset: 'fast', weight: 5 }],
   'no fluff': [{ preset: 'fast', weight: 4 }],
 
-  // --- Sages: learning, mentoring, best practices ---
+  // --- mentors: learning, mentoring, best practices ---
   learn: [{ preset: 'mentors', weight: 4 }],
   teach: [{ preset: 'mentors', weight: 4 }],
   mentor: [{ preset: 'mentors', weight: 5 }],
@@ -81,7 +81,7 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   blitz: [{ preset: 'specialists', weight: 5 }],
   'file issues': [{ preset: 'specialists', weight: 3 }],
 
-  // --- Neighbors: general / default ---
+  // --- default: general / all-purpose ---
   general: [{ preset: 'default', weight: 3 }],
   'all purpose': [{ preset: 'default', weight: 3 }],
   balanced: [{ preset: 'default', weight: 3 }],

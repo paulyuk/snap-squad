@@ -8,7 +8,7 @@ import { matchPreset } from '../src/matcher.js';
 describe('Matcher Accuracy Matrix', () => {
   // Curated test cases: [description, expected preset]
   const cases: [string, string][] = [
-    // --- Dash (speed) ---
+    // --- fast (speed) ---
     ['I need a fast team for a hackathon', 'fast'],
     ['rapid prototyping for a demo', 'fast'],
     ['quick POC, ship it fast', 'fast'],
@@ -17,7 +17,7 @@ describe('Matcher Accuracy Matrix', () => {
     ['speed is all that matters', 'fast'],
     ['quick prototype for investor demo', 'fast'],
 
-    // --- Sages (learning/mentoring) ---
+    // --- mentors (learning/mentoring) ---
     ['help me learn best practices', 'mentors'],
     ['I want a mentor who explains the why', 'mentors'],
     ['training project for new developers', 'mentors'],
@@ -37,7 +37,7 @@ describe('Matcher Accuracy Matrix', () => {
     ['debug this firefight', 'specialists'],
     ['skill quality audit with benchmarks', 'specialists'],
 
-    // --- Neighbors (general/default) ---
+    // --- default (general/all-purpose) ---
     ['build a web app', 'default'],
     ['general purpose project', 'default'],
     ['', 'default'],

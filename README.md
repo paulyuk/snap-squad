@@ -11,7 +11,7 @@ mkdir my-project && cd my-project
 npx snap-squad init
 ```
 
-That's it. You now have the **Neighbors** squad — a reliable generalist team with routing rules, agent charters, and decision logging. Open Copilot and start building:
+That's it. You now have the **default** squad — a reliable generalist team with routing rules, agent charters, and decision logging. Open Copilot and start building:
 
 ```bash
 copilot
@@ -24,15 +24,15 @@ copilot
 npx snap-squad init I need a fast team for a hackathon
 ```
 
-Snap Squad reads your description and picks **Dash** — a speed-focused squad built for rapid POCs. No fluff, no ceremony, just velocity.
+Snap Squad reads your description and picks **fast** — a speed-focused squad built for rapid POCs. No fluff, no ceremony, just velocity.
 
 ### Describe what you need. Get the right team.
 
 ```bash
-npx snap-squad init help me learn best practices    # → Sages (mentor)
-npx snap-squad init database security hardening      # → Specialists (precision)
-npx snap-squad init something is on fire debug help  # → Specialists (Chuck is already on his way)
-npx snap-squad init                                  # → Neighbors (default)
+npx snap-squad init help me learn best practices    # → mentors
+npx snap-squad init database security hardening      # → specialists
+npx snap-squad init something is on fire debug help  # → specialists (Chuck is already on his way)
+npx snap-squad init                                  # → default
 npx snap-squad init --type fast                      # → pick directly
 ```
 
@@ -64,7 +64,7 @@ The catch? Setting up a new squad takes time. Interviews, charters, routing conf
 | [**mentors**](docs/presets/mentors.md) | Mentor | Polaris *(architect)*, Scriptor *(mentor dev)*, Proof *(test mentor)*, Chronicle *(docs)*, Pattern *(prompts)*, Measure *(evals)*, Scout *(researcher)*, Ledger *(historian)* | Learning, best practices, architecture review |
 | [**specialists**](docs/presets/specialists.md) | Precision | Chuck 🥋 *(debugger)*, Forge *(architect)*, Anvil *(data)*, Chisel *(security)*, Prism *(UI/UX)*, Loom *(infra)*, Caliber *(deep evals)*, Sensei *(skill audit)*, Waza *(skill bench)*, Blitz *(mass ops)*, Recon *(deep research)*, Ledger *(historian)* | DB tuning, security hardening, mass ops, troubleshooting |
 
-> **Neighbors** does light evals (Val spots-checks baselines). Need a full eval pipeline? **Specialists** brings Caliber for deep eval architecture plus Sensei and Waza for skill benchmarking.
+> **default** does light evals (Val spot-checks baselines). Need a full eval pipeline? **specialists** brings Caliber for deep eval architecture plus Sensei and Waza for skill benchmarking.
 
 Click any preset name above to see the full roster — every agent's role, personality, routing rules, and when to use them.
 

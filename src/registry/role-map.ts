@@ -18,7 +18,7 @@ export interface RoleMapping {
 }
 
 export const ROLE_MAP: RoleMapping[] = [
-  // --- Neighbors ---
+  // --- default ---
   { agent: 'Architect', preset: 'default', squadRoleId: 'lead' },
   { agent: 'Coder', preset: 'default', squadRoleId: 'fullstack' },
   { agent: 'Tester', preset: 'default', squadRoleId: 'tester' },
@@ -29,12 +29,12 @@ export const ROLE_MAP: RoleMapping[] = [
   { agent: 'Researcher', preset: 'default', squadRoleId: null, proposedRoleId: 'researcher' },
   { agent: 'Scribe', preset: 'default', squadRoleId: null, proposedRoleId: 'historian' },
 
-  // --- Dash ---
+  // --- fast ---
   { agent: 'Architect', preset: 'fast', squadRoleId: 'lead' },
   { agent: 'Coder', preset: 'fast', squadRoleId: 'fullstack' },
   { agent: 'Tester', preset: 'fast', squadRoleId: 'tester' },  // also does docs
 
-  // --- Sages ---
+  // --- mentors ---
   { agent: 'Architect', preset: 'mentors', squadRoleId: 'lead' },
   { agent: 'Coder', preset: 'mentors', squadRoleId: 'fullstack' },
   { agent: 'Tester', preset: 'mentors', squadRoleId: 'tester' },
