@@ -42,25 +42,16 @@ Do not end the session without verifying:
 
 When the builder says **"neighbors+"** they mean all presets at the neighbors level and above (currently: neighbors, sages, specialists — everything except dash). Apply the instruction to all matching presets.
 
-## Reviewing Discussions
+## Reviewing Discussions & Source Docs
 
-GitHub Discussions are often generated from a source markdown file in a repo. When asked to review a discussion:
+When asked to review a discussion or a source doc (e.g. `https://github.com/org/repo/blob/main/weeks/2026-03-13/final-draft-qa-reviewed.md`):
 
-1. **Find the source doc.** Look for an HTML comment (`<!-- source: URL -->`) or a visible footer linking to the source file.
-2. **Review the source, not the discussion.** The discussion is a published copy. The source markdown is the reviewable artifact.
-3. **PR against the source.** Create a branch, edit the source markdown, and open a PR. Never edit the discussion directly.
+1. Read the file
+2. Create a branch
+3. Make your suggested edits
+4. Open a PR
 
-When publishing a discussion from a source doc, always include both:
-
-```markdown
-<!-- source: https://github.com/org/repo/blob/main/path/to/source.md -->
-```
-
-And a visible footer:
-
-```markdown
-> 📄 Source: [source.md](URL) · To suggest changes, open a PR against this file.
-```
+One prompt, no manual steps. If the user gives a discussion URL, find the source markdown it was generated from (check for a `<!-- source: URL -->` comment or a visible footer) and PR against that.
 
 ## Backend Development
 
