@@ -19,44 +19,44 @@ export interface RoleMapping {
 
 export const ROLE_MAP: RoleMapping[] = [
   // --- Neighbors ---
-  { agent: 'Blueprint', preset: 'default', squadRoleId: 'lead' },
-  { agent: 'Wrench', preset: 'default', squadRoleId: 'fullstack' },
-  { agent: 'Lens', preset: 'default', squadRoleId: 'tester' },
-  { agent: 'Quill', preset: 'default', squadRoleId: 'docs' },
-  { agent: 'Mosaic', preset: 'default', squadRoleId: 'ai' },
-  { agent: 'Relay', preset: 'default', squadRoleId: 'devops' },
-  { agent: 'Val', preset: 'default', squadRoleId: null, proposedRoleId: 'eval-specialist' },
-  { agent: 'Scout', preset: 'default', squadRoleId: null, proposedRoleId: 'researcher' },
-  { agent: 'Ledger', preset: 'default', squadRoleId: null, proposedRoleId: 'historian' },
+  { agent: 'Architect', preset: 'default', squadRoleId: 'lead' },
+  { agent: 'Coder', preset: 'default', squadRoleId: 'fullstack' },
+  { agent: 'Tester', preset: 'default', squadRoleId: 'tester' },
+  { agent: 'DevRel', preset: 'default', squadRoleId: 'docs' },
+  { agent: 'Prompter', preset: 'default', squadRoleId: 'ai' },
+  { agent: 'GitOps', preset: 'default', squadRoleId: 'devops' },
+  { agent: 'Evaluator', preset: 'default', squadRoleId: null, proposedRoleId: 'eval-specialist' },
+  { agent: 'Researcher', preset: 'default', squadRoleId: null, proposedRoleId: 'researcher' },
+  { agent: 'Scribe', preset: 'default', squadRoleId: null, proposedRoleId: 'historian' },
 
   // --- Dash ---
-  { agent: 'Turbo', preset: 'fast', squadRoleId: 'lead' },
-  { agent: 'Bolt', preset: 'fast', squadRoleId: 'fullstack' },
-  { agent: 'Flash', preset: 'fast', squadRoleId: 'tester' },  // also does docs
+  { agent: 'Architect', preset: 'fast', squadRoleId: 'lead' },
+  { agent: 'Coder', preset: 'fast', squadRoleId: 'fullstack' },
+  { agent: 'Tester', preset: 'fast', squadRoleId: 'tester' },  // also does docs
 
   // --- Sages ---
-  { agent: 'Polaris', preset: 'mentors', squadRoleId: 'lead' },
-  { agent: 'Scriptor', preset: 'mentors', squadRoleId: 'fullstack' },
-  { agent: 'Proof', preset: 'mentors', squadRoleId: 'tester' },
-  { agent: 'Chronicle', preset: 'mentors', squadRoleId: 'docs' },
-  { agent: 'Pattern', preset: 'mentors', squadRoleId: 'ai' },
-  { agent: 'Measure', preset: 'mentors', squadRoleId: null, proposedRoleId: 'eval-specialist' },
-  { agent: 'Scout', preset: 'mentors', squadRoleId: null, proposedRoleId: 'researcher' },
-  { agent: 'Ledger', preset: 'mentors', squadRoleId: null, proposedRoleId: 'historian' },
+  { agent: 'Architect', preset: 'mentors', squadRoleId: 'lead' },
+  { agent: 'Coder', preset: 'mentors', squadRoleId: 'fullstack' },
+  { agent: 'Tester', preset: 'mentors', squadRoleId: 'tester' },
+  { agent: 'DocWriter', preset: 'mentors', squadRoleId: 'docs' },
+  { agent: 'Prompter', preset: 'mentors', squadRoleId: 'ai' },
+  { agent: 'Evaluator', preset: 'mentors', squadRoleId: null, proposedRoleId: 'eval-specialist' },
+  { agent: 'Researcher', preset: 'mentors', squadRoleId: null, proposedRoleId: 'researcher' },
+  { agent: 'Scribe', preset: 'mentors', squadRoleId: null, proposedRoleId: 'historian' },
 
   // --- Specialists ---
-  { agent: 'Chuck', preset: 'specialists', squadRoleId: null, proposedRoleId: 'troubleshooter' },
-  { agent: 'Forge', preset: 'specialists', squadRoleId: 'lead' },
-  { agent: 'Anvil', preset: 'specialists', squadRoleId: 'data' },
-  { agent: 'Chisel', preset: 'specialists', squadRoleId: 'security' },
-  { agent: 'Prism', preset: 'specialists', squadRoleId: 'designer' },
-  { agent: 'Loom', preset: 'specialists', squadRoleId: 'devops' },
-  { agent: 'Caliber', preset: 'specialists', squadRoleId: null, proposedRoleId: 'eval-specialist' },
-  { agent: 'Sensei', preset: 'specialists', squadRoleId: null, proposedRoleId: 'compliance-specialist' },
-  { agent: 'Waza', preset: 'specialists', squadRoleId: null, proposedRoleId: 'benchmark-specialist' },
-  { agent: 'Blitz', preset: 'specialists', squadRoleId: null, proposedRoleId: 'operations-specialist' },
-  { agent: 'Recon', preset: 'specialists', squadRoleId: null, proposedRoleId: 'researcher' },
-  { agent: 'Ledger', preset: 'specialists', squadRoleId: null, proposedRoleId: 'historian' },
+  { agent: 'Debugger', preset: 'specialists', squadRoleId: null, proposedRoleId: 'troubleshooter' },
+  { agent: 'Architect', preset: 'specialists', squadRoleId: 'lead' },
+  { agent: 'Backend', preset: 'specialists', squadRoleId: 'data' },
+  { agent: 'Security', preset: 'specialists', squadRoleId: 'security' },
+  { agent: 'Frontend', preset: 'specialists', squadRoleId: 'designer' },
+  { agent: 'DevOps', preset: 'specialists', squadRoleId: 'devops' },
+  { agent: 'Evaluator', preset: 'specialists', squadRoleId: null, proposedRoleId: 'eval-specialist' },
+  { agent: 'Auditor', preset: 'specialists', squadRoleId: null, proposedRoleId: 'compliance-specialist' },
+  { agent: 'EvalRunner', preset: 'specialists', squadRoleId: null, proposedRoleId: 'benchmark-specialist' },
+  { agent: 'Swarm', preset: 'specialists', squadRoleId: null, proposedRoleId: 'operations-specialist' },
+  { agent: 'Researcher', preset: 'specialists', squadRoleId: null, proposedRoleId: 'researcher' },
+  { agent: 'Scribe', preset: 'specialists', squadRoleId: null, proposedRoleId: 'historian' },
 ];
 
 /** Agents with no Squad equivalent — candidates for upstream contribution */

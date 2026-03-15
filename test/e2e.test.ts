@@ -61,8 +61,8 @@ describe('E2E: snap-squad CLI', () => {
     // Content is correct
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');
     expect(teamMd).toContain('alice');
-    expect(teamMd).toContain('Blueprint');
-    expect(teamMd).toContain('Relay'); // GitOps agent
+    expect(teamMd).toContain('Architect');
+    expect(teamMd).toContain('GitOps'); // GitOps agent
 
     // Hook chain points to .squad/
     const agentsMd = readFileSync(join(tempDir, 'AGENTS.md'), 'utf-8');
@@ -75,8 +75,8 @@ describe('E2E: snap-squad CLI', () => {
     expect(output).toContain('Fast Squad');
 
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');
-    expect(teamMd).toContain('Turbo');
-    expect(teamMd).toContain('Bolt');
+    expect(teamMd).toContain('Architect');
+    expect(teamMd).toContain('Coder');
   });
 
   it('init --type specialists includes skill references', () => {
@@ -142,7 +142,7 @@ describe('E2E: snap-squad CLI', () => {
     expect(output).toContain('⚠ Skipping JOURNAL.md (contains user content)');
 
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');
-    expect(teamMd).toContain('Turbo');
+    expect(teamMd).toContain('Architect');
     expect(readFileSync(join(tempDir, '.squad', 'decisions.md'), 'utf-8')).toContain('keep me');
     expect(readFileSync(join(tempDir, 'JOURNAL.md'), 'utf-8')).toContain('keep me too');
   });
