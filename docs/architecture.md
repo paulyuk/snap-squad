@@ -12,7 +12,7 @@ graph TD
   B --> C["Resolve preset name"]
   C --> C1["Use --type when provided"]
   C --> C2["Otherwise matchPreset() scores description keywords"]
-  C --> C3["Fallback to neighbors when no description is given"]
+  C --> C3["Fallback to default when no description is given"]
   C1 --> D["loadPreset() reads the selected YAML preset"]
   C2 --> D
   C3 --> D

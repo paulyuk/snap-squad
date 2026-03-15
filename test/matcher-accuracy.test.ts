@@ -9,22 +9,22 @@ describe('Matcher Accuracy Matrix', () => {
   // Curated test cases: [description, expected preset]
   const cases: [string, string][] = [
     // --- Dash (speed) ---
-    ['I need a fast team for a hackathon', 'dash'],
-    ['rapid prototyping for a demo', 'dash'],
-    ['quick POC, ship it fast', 'dash'],
-    ['build an MVP in 6 hours', 'dash'],
-    ['ship fast no fluff', 'dash'],
-    ['speed is all that matters', 'dash'],
-    ['quick prototype for investor demo', 'dash'],
+    ['I need a fast team for a hackathon', 'fast'],
+    ['rapid prototyping for a demo', 'fast'],
+    ['quick POC, ship it fast', 'fast'],
+    ['build an MVP in 6 hours', 'fast'],
+    ['ship fast no fluff', 'fast'],
+    ['speed is all that matters', 'fast'],
+    ['quick prototype for investor demo', 'fast'],
 
     // --- Sages (learning/mentoring) ---
-    ['help me learn best practices', 'sages'],
-    ['I want a mentor who explains the why', 'sages'],
-    ['training project for new developers', 'sages'],
-    ['teach me how to architect this', 'sages'],
-    ['onboard a junior dev into the codebase', 'sages'],
-    ['I want to understand design patterns', 'sages'],
-    ['explain the trade-offs of each approach', 'sages'],
+    ['help me learn best practices', 'mentors'],
+    ['I want a mentor who explains the why', 'mentors'],
+    ['training project for new developers', 'mentors'],
+    ['teach me how to architect this', 'mentors'],
+    ['onboard a junior dev into the codebase', 'mentors'],
+    ['I want to understand design patterns', 'mentors'],
+    ['explain the trade-offs of each approach', 'mentors'],
 
     // --- Specialists (deep domain) ---
     ['database tuning and security hardening', 'specialists'],
@@ -38,11 +38,11 @@ describe('Matcher Accuracy Matrix', () => {
     ['skill quality audit with benchmarks', 'specialists'],
 
     // --- Neighbors (general/default) ---
-    ['build a web app', 'neighbors'],
-    ['general purpose project', 'neighbors'],
-    ['', 'neighbors'],
-    ['a reliable standard project', 'neighbors'],
-    ['balanced all purpose team', 'neighbors'],
+    ['build a web app', 'default'],
+    ['general purpose project', 'default'],
+    ['', 'default'],
+    ['a reliable standard project', 'default'],
+    ['balanced all purpose team', 'default'],
   ];
 
   // Run all cases

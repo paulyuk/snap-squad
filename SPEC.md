@@ -28,9 +28,9 @@ Snap Squad will ship with four "Warm-Start" presets:
 
 | Squad Name | Role/Vibe | Particular Set of Skills |
 | --- | --- | --- |
-| **The Neighbors** | Default / Generalist | High-level logic, project structure, reliable general-purpose building. |
-| **The Dash Squad** | Rapid POC / Speed | Minimalist prompts, high-velocity code generation, zero conversational "fluff." |
-| **The Sages** | Learning / Mentor | Explains the "why," focuses on best practices, documentation, and architectural critique. |
+| **The Default** | Default / Generalist | High-level logic, project structure, reliable general-purpose building. |
+| **The Fast Squad** | Rapid POC / Speed | Minimalist prompts, high-velocity code generation, zero conversational "fluff." |
+| **The Mentors** | Learning / Mentor | Explains the "why," focuses on best practices, documentation, and architectural critique. |
 | **The Artisans** | Precision Specialists | Niche MCP tool experts (e.g., UI/UX polish, DB tuning, Security hardening). |
 
 ---

@@ -1,4 +1,4 @@
-# MCP Integration — The Neighbors
+# MCP Integration — The Default Squad
 
 MCP (Model Context Protocol) servers extend the squad with external tools.
 

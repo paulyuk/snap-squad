@@ -33,7 +33,7 @@ npx snap-squad init help me learn best practices    # → Sages (mentor)
 npx snap-squad init database security hardening      # → Specialists (precision)
 npx snap-squad init something is on fire debug help  # → Specialists (Chuck is already on his way)
 npx snap-squad init                                  # → Neighbors (default)
-npx snap-squad init --type dash                      # → pick directly
+npx snap-squad init --type fast                      # → pick directly
 ```
 
 ### Regenerate safely
@@ -59,9 +59,9 @@ The catch? Setting up a new squad takes time. Interviews, charters, routing conf
 
 | Preset | Vibe | Agents | Best For |
 |--------|------|--------|----------|
-| [**neighbors**](docs/presets/neighbors.md) | Generalist | Blueprint *(architect)*, Wrench *(dev)*, Lens *(QA)*, Quill *(docs)*, Mosaic *(prompts)*, Relay *(GitOps)*, Val *(light evals)*, Scout *(researcher)*, Ledger *(historian)* | General-purpose projects, reliable building |
-| [**dash**](docs/presets/dash.md) | Speed | Turbo *(architect)*, Bolt *(full-stack)*, Flash *(test + docs)* | Rapid POCs, hackathons, zero fluff |
-| [**sages**](docs/presets/sages.md) | Mentor | Oracle *(architect)*, Scriptor *(mentor dev)*, Proof *(test mentor)*, Chronicle *(docs)*, Pattern *(prompts)*, Measure *(evals)*, Scout *(researcher)*, Ledger *(historian)* | Learning, best practices, architecture review |
+| [**default**](docs/presets/default.md) | Generalist | Blueprint *(architect)*, Wrench *(dev)*, Lens *(QA)*, Quill *(docs)*, Mosaic *(prompts)*, Relay *(GitOps)*, Val *(light evals)*, Scout *(researcher)*, Ledger *(historian)* | General-purpose projects, reliable building |
+| [**fast**](docs/presets/fast.md) | Speed | Turbo *(architect)*, Bolt *(full-stack)*, Flash *(test + docs)* | Rapid POCs, hackathons, zero fluff |
+| [**mentors**](docs/presets/mentors.md) | Mentor | Polaris *(architect)*, Scriptor *(mentor dev)*, Proof *(test mentor)*, Chronicle *(docs)*, Pattern *(prompts)*, Measure *(evals)*, Scout *(researcher)*, Ledger *(historian)* | Learning, best practices, architecture review |
 | [**specialists**](docs/presets/specialists.md) | Precision | Chuck 🥋 *(debugger)*, Forge *(architect)*, Anvil *(data)*, Chisel *(security)*, Prism *(UI/UX)*, Loom *(infra)*, Caliber *(deep evals)*, Sensei *(skill audit)*, Waza *(skill bench)*, Blitz *(mass ops)*, Recon *(deep research)*, Ledger *(historian)* | DB tuning, security hardening, mass ops, troubleshooting |
 
 > **Neighbors** does light evals (Val spots-checks baselines). Need a full eval pipeline? **Specialists** brings Caliber for deep eval architecture plus Sensei and Waza for skill benchmarking.
@@ -96,7 +96,7 @@ The hook chain (`AGENTS.md` + `CLAUDE.md` + `copilot-instructions.md`) makes eve
 Once your squad is initialized, just talk to it:
 
 ```
-> switch my squad to the sages preset
+> switch my squad to the mentors preset
 > add a security specialist to my team
 > show me my squad routing rules
 ```

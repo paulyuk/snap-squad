@@ -28,7 +28,7 @@ git push origin my-feature
 
 - `src/cli.ts` — CLI entry point for `snap-squad init` and `snap-squad list`.
 - `src/generator/` — turns a preset into generated files like `.squad/`, `AGENTS.md`, `CLAUDE.md`, and `JOURNAL.md`.
-- `src/registry/presets/` — preset YAML files (`neighbors.yaml`, `dash.yaml`, etc.).
+- `src/registry/presets/` — preset YAML files (`default.yaml`, `fast.yaml`, etc.).
 - `src/registry/loader.ts` — loads presets, validates them, and auto-discovers `*.yaml` files in the preset directory.
 - `src/registry/role-map.ts` — keyword weighting used when matching plain-English input to a preset.
 - `src/matcher.ts` — picks the best preset from a user description.
@@ -82,7 +82,7 @@ Charters are generated automatically for every agent in the preset. If you need 
    - `agents`
    - `routing`
    - `skills` for generated MCP/skill notes (there is no separate `mcp` block today)
-3. Keep the filename aligned with the preset name, for example `neighbors.yaml` → `neighbors`.
+3. Keep the filename aligned with the preset name, for example `default.yaml` → `default`.
 4. Build and test the project.
 
 ```bash

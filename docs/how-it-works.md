@@ -14,7 +14,7 @@ At a high level, the pipeline is simple:
 4. The generator turns that preset into real files
 5. Those files become the squad
 
-If you run `npx snap-squad init --type neighbors`, the preset step is direct: `neighbors` is the preset name. If you run `npx snap-squad init help me learn best practices`, the CLI scores the words in your description and picks the closest preset.
+If you run `npx snap-squad init --type default`, the preset step is direct: `default` is the preset name. If you run `npx snap-squad init help me learn best practices`, the CLI scores the words in your description and picks the closest preset.
 
 Once the preset name is known, `loadPreset()` reads `src/registry/presets/<name>.yaml`, parses it, and validates the basics: top-level fields, agent names, and routing references. Then `generateSquad()` writes the squad files to disk.
 
@@ -25,9 +25,9 @@ That means the product is mostly a file generator with a preset registry in fron
 A small example:
 
 ```bash
-$ npx snap-squad init --type neighbors
-⚡ Snapping in The Neighbors...
-✓ Squad ready! (The Neighbors)
+$ npx snap-squad init --type default
+⚡ Snapping in The Default...
+✓ Squad ready! (The Default)
 ```
 
 The generated workspace looks like this:

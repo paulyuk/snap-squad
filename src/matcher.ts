@@ -13,30 +13,30 @@ export interface PresetMatch {
 
 const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   // --- Dash: speed, POCs, hackathons ---
-  fast: [{ preset: 'dash', weight: 3 }],
-  quick: [{ preset: 'dash', weight: 3 }],
-  speed: [{ preset: 'dash', weight: 3 }],
-  rapid: [{ preset: 'dash', weight: 3 }],
-  poc: [{ preset: 'dash', weight: 4 }],
-  prototype: [{ preset: 'dash', weight: 4 }],
-  hackathon: [{ preset: 'dash', weight: 5 }],
-  demo: [{ preset: 'dash', weight: 3 }],
-  mvp: [{ preset: 'dash', weight: 4 }],
-  'ship fast': [{ preset: 'dash', weight: 5 }],
-  'no fluff': [{ preset: 'dash', weight: 4 }],
+  fast: [{ preset: 'fast', weight: 3 }],
+  quick: [{ preset: 'fast', weight: 3 }],
+  speed: [{ preset: 'fast', weight: 3 }],
+  rapid: [{ preset: 'fast', weight: 3 }],
+  poc: [{ preset: 'fast', weight: 4 }],
+  prototype: [{ preset: 'fast', weight: 4 }],
+  hackathon: [{ preset: 'fast', weight: 5 }],
+  demo: [{ preset: 'fast', weight: 3 }],
+  mvp: [{ preset: 'fast', weight: 4 }],
+  'ship fast': [{ preset: 'fast', weight: 5 }],
+  'no fluff': [{ preset: 'fast', weight: 4 }],
 
   // --- Sages: learning, mentoring, best practices ---
-  learn: [{ preset: 'sages', weight: 4 }],
-  teach: [{ preset: 'sages', weight: 4 }],
-  mentor: [{ preset: 'sages', weight: 5 }],
-  explain: [{ preset: 'sages', weight: 3 }],
-  'best practice': [{ preset: 'sages', weight: 4 }],
-  'best practices': [{ preset: 'sages', weight: 4 }],
-  onboard: [{ preset: 'sages', weight: 3 }],
-  training: [{ preset: 'sages', weight: 4 }],
-  understand: [{ preset: 'sages', weight: 3 }],
-  why: [{ preset: 'sages', weight: 2 }],
-  review: [{ preset: 'sages', weight: 2 }],
+  learn: [{ preset: 'mentors', weight: 4 }],
+  teach: [{ preset: 'mentors', weight: 4 }],
+  mentor: [{ preset: 'mentors', weight: 5 }],
+  explain: [{ preset: 'mentors', weight: 3 }],
+  'best practice': [{ preset: 'mentors', weight: 4 }],
+  'best practices': [{ preset: 'mentors', weight: 4 }],
+  onboard: [{ preset: 'mentors', weight: 3 }],
+  training: [{ preset: 'mentors', weight: 4 }],
+  understand: [{ preset: 'mentors', weight: 3 }],
+  why: [{ preset: 'mentors', weight: 2 }],
+  review: [{ preset: 'mentors', weight: 2 }],
 
   // --- Specialists: deep domain expertise ---
   database: [{ preset: 'specialists', weight: 4 }],
@@ -82,20 +82,20 @@ const KEYWORDS: Record<string, { preset: string; weight: number }[]> = {
   'file issues': [{ preset: 'specialists', weight: 3 }],
 
   // --- Neighbors: general / default ---
-  general: [{ preset: 'neighbors', weight: 3 }],
-  'all purpose': [{ preset: 'neighbors', weight: 3 }],
-  balanced: [{ preset: 'neighbors', weight: 3 }],
-  reliable: [{ preset: 'neighbors', weight: 3 }],
-  standard: [{ preset: 'neighbors', weight: 2 }],
-  project: [{ preset: 'neighbors', weight: 1 }],
-  app: [{ preset: 'neighbors', weight: 1 }],
-  build: [{ preset: 'neighbors', weight: 1 }],
+  general: [{ preset: 'default', weight: 3 }],
+  'all purpose': [{ preset: 'default', weight: 3 }],
+  balanced: [{ preset: 'default', weight: 3 }],
+  reliable: [{ preset: 'default', weight: 3 }],
+  standard: [{ preset: 'default', weight: 2 }],
+  project: [{ preset: 'default', weight: 1 }],
+  app: [{ preset: 'default', weight: 1 }],
+  build: [{ preset: 'default', weight: 1 }],
 };
 
 const REASONS: Record<string, string> = {
-  neighbors: 'Good all-around team for general projects',
-  dash: 'Speed-focused team for rapid building',
-  sages: 'Mentor team that explains the "why" behind decisions',
+  default: 'Good all-around team for general projects',
+  fast: 'Speed-focused team for rapid building',
+  mentors: 'Mentor team that explains the "why" behind decisions',
   specialists: 'Specialist team for deep, precise work',
 };
 
@@ -119,8 +119,8 @@ export function matchPreset(description: string): PresetMatch {
     }
   }
 
-  // Find winner (default to neighbors)
-  let best = 'neighbors';
+  // Find winner (default to default preset)
+  let best = 'default';
   let bestScore = 0;
   for (const [preset, score] of Object.entries(scores)) {
     if (score > bestScore) {

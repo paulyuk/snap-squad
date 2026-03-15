@@ -1,4 +1,4 @@
-# The Neighbors — The Neighbors
+# The Default Squad — The Default Squad
 
 > A friendly, well-rounded squad for general-purpose projects.
 

@@ -98,9 +98,9 @@ Specialists come pre-configured with MCP tool references:
 
 ## When to Scale Down
 
-- Need speed over depth? → [Dash](dash.md)
-- Need balanced coverage? → [Neighbors](neighbors.md)
-- Want to learn as you build? → [Sages](sages.md)
+- Need speed over depth? → [Fast](fast.md)
+- Need balanced coverage? → [Default](default.md)
+- Want to learn as you build? → [Mentors](mentors.md)
 
 ## Source Definition
 

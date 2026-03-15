@@ -1,6 +1,6 @@
-# The Neighbors — Generalist Squad
+# The Default — Generalist Squad
 
-> *"Good neighbors build great things."*
+> *"Good defaults build great things."*
 
 **Vibe:** Friendly · **Theme:** Community Builders · **Best for:** General-purpose projects, reliable building
 
@@ -14,15 +14,15 @@ npx snap-squad init
 
 | Agent | Role | What They Do |
 |-------|------|-------------|
-| [**Blueprint**](../../src/registry/presets/neighbors.yaml#L15) 🏗️ | Lead / Architect | Sees the whole picture. Keeps the project on track. Prefers simple solutions — will ask "do we actually need this?" before building. |
-| [**Wrench**](../../src/registry/presets/neighbors.yaml#L22) 🔧 | Core Dev | Makes it work. Practical, fast, reliable. Thinks the best abstraction is a good function name. |
-| [**Lens**](../../src/registry/presets/neighbors.yaml#L29) 🔍 | Tester / QA | Finds what's broken before users do. Thorough, skeptical. Will block a PR for missing tests. |
-| [**Quill**](../../src/registry/presets/neighbors.yaml#L36) ✍️ | Docs / DevRel | Makes the project approachable. Believes the README is the front door. |
-| [**Mosaic**](../../src/registry/presets/neighbors.yaml#L43) 🧩 | Prompt Engineer | Crafts the prompts and agent voices. Every token earns its place. |
-| [**Relay**](../../src/registry/presets/neighbors.yaml#L50) 🔗 | GitOps / Release | Manages git workflow, CI/CD, releases. Automation-first. |
-| [**Val**](../../src/registry/presets/neighbors.yaml#L57) 📊 | Evals / Quality Baseline | Runs **light evals** — establishes baselines, spot-checks quality, and coaches toward better eval practices. Not a full eval pipeline; just enough to keep you honest. |
-| [**Scout**](../../src/registry/presets/neighbors.yaml#L64) 🔭 | Researcher / Opportunity Finder | Scans grounding content, upstream repos, and the ecosystem. Checks in weekly with web-based research. |
-| [**Ledger**](../../src/registry/presets/neighbors.yaml#L71) 📖 | Historian / Build Journalist | Journals the builder's prompts, steering, and key evolution moments. |
+| [**Blueprint**](../../src/registry/presets/default.yaml#L15) 🏗️ | Lead / Architect | Sees the whole picture. Keeps the project on track. Prefers simple solutions — will ask "do we actually need this?" before building. |
+| [**Wrench**](../../src/registry/presets/default.yaml#L22) 🔧 | Core Dev | Makes it work. Practical, fast, reliable. Thinks the best abstraction is a good function name. |
+| [**Lens**](../../src/registry/presets/default.yaml#L29) 🔍 | Tester / QA | Finds what's broken before users do. Thorough, skeptical. Will block a PR for missing tests. |
+| [**Quill**](../../src/registry/presets/default.yaml#L36) ✍️ | Docs / DevRel | Makes the project approachable. Believes the README is the front door. |
+| [**Mosaic**](../../src/registry/presets/default.yaml#L43) 🧩 | Prompt Engineer | Crafts the prompts and agent voices. Every token earns its place. |
+| [**Relay**](../../src/registry/presets/default.yaml#L50) 🔗 | GitOps / Release | Manages git workflow, CI/CD, releases. Automation-first. |
+| [**Val**](../../src/registry/presets/default.yaml#L57) 📊 | Evals / Quality Baseline | Runs **light evals** — establishes baselines, spot-checks quality, and coaches toward better eval practices. Not a full eval pipeline; just enough to keep you honest. |
+| [**Scout**](../../src/registry/presets/default.yaml#L64) 🔭 | Researcher / Opportunity Finder | Scans grounding content, upstream repos, and the ecosystem. Checks in weekly with web-based research. |
+| [**Ledger**](../../src/registry/presets/default.yaml#L71) 📖 | Historian / Build Journalist | Journals the builder's prompts, steering, and key evolution moments. |
 
 ## Routing
 
@@ -71,10 +71,10 @@ Neighbors includes **light evals** via Val — enough to establish baselines and
 
 ## When to Level Up
 
-- Need raw speed? → [Dash](dash.md)
-- Want explanations and mentoring? → [Sages](sages.md)
+- Need raw speed? → [Fast](fast.md)
+- Want explanations and mentoring? → [Mentors](mentors.md)
 - Need deep domain expertise? → [Specialists](specialists.md)
 
 ## Source Definition
 
-Full preset YAML: [`src/registry/presets/neighbors.yaml`](../../src/registry/presets/neighbors.yaml)
+Full preset YAML: [`src/registry/presets/default.yaml`](../../src/registry/presets/default.yaml)

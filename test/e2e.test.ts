@@ -29,17 +29,17 @@ describe('E2E: snap-squad CLI', () => {
 
   it('list shows all 4 presets', () => {
     const output = run('list');
-    expect(output).toContain('neighbors');
-    expect(output).toContain('dash');
-    expect(output).toContain('sages');
+    expect(output).toContain('default');
+    expect(output).toContain('fast');
+    expect(output).toContain('mentors');
     expect(output).toContain('specialists');
   });
 
   // --- snap-squad init --type <preset> ---
 
-  it('init --type neighbors creates full .squad/ and hook chain', () => {
-    const output = run(`init --type neighbors --dir "${tempDir}" --name test-proj --owner alice`);
-    expect(output).toContain('The Neighbors');
+  it('init --type default creates full .squad/ and hook chain', () => {
+    const output = run(`init --type default --dir "${tempDir}" --name test-proj --owner alice`);
+    expect(output).toContain('The Default Squad');
     expect(output).toContain('Squad ready');
 
     // .squad/ core files
@@ -70,9 +70,9 @@ describe('E2E: snap-squad CLI', () => {
     expect(agentsMd).toContain('.squad/routing.md');
   });
 
-  it('init --type dash creates speed-focused squad', () => {
-    const output = run(`init --type dash --dir "${tempDir}"`);
-    expect(output).toContain('Dash Squad');
+  it('init --type fast creates speed-focused squad', () => {
+    const output = run(`init --type fast --dir "${tempDir}"`);
+    expect(output).toContain('Fast Squad');
 
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');
     expect(teamMd).toContain('Turbo');
@@ -91,18 +91,18 @@ describe('E2E: snap-squad CLI', () => {
 
   // --- Plain English init ---
 
-  it('plain English: "fast hackathon" resolves to dash', () => {
+  it('plain English: "fast hackathon" resolves to fast', () => {
     const output = run(`init fast hackathon project --dir "${tempDir}"`);
-    expect(output).toContain('dash');
-    expect(output).toContain('Dash Squad');
+    expect(output).toContain('fast');
+    expect(output).toContain('Fast Squad');
 
     expect(existsSync(join(tempDir, '.squad', 'team.md'))).toBe(true);
   });
 
-  it('plain English: "learn best practices" resolves to sages', () => {
+  it('plain English: "learn best practices" resolves to mentors', () => {
     const output = run(`init help me learn best practices --dir "${tempDir}"`);
-    expect(output).toContain('sages');
-    expect(output).toContain('Sages');
+    expect(output).toContain('mentors');
+    expect(output).toContain('Mentors');
   });
 
   it('plain English: "database security" resolves to specialists', () => {
@@ -111,9 +111,9 @@ describe('E2E: snap-squad CLI', () => {
     expect(output).toContain('Specialists');
   });
 
-  it('plain English: no description defaults to neighbors', () => {
+  it('plain English: no description defaults to default', () => {
     const output = run(`init --dir "${tempDir}"`);
-    expect(output).toContain('Neighbors');
+    expect(output).toContain('Default Squad');
   });
 
   // --- Error cases ---
@@ -132,12 +132,12 @@ describe('E2E: snap-squad CLI', () => {
   });
 
   it('--force overwrites structural files but preserves content files', () => {
-    run(`init --type neighbors --dir "${tempDir}"`);
+    run(`init --type default --dir "${tempDir}"`);
     writeFileSync(join(tempDir, '.squad', 'decisions.md'), '# custom decisions\n\nkeep me\n');
     writeFileSync(join(tempDir, 'JOURNAL.md'), '# custom journal\n\nkeep me too\n');
 
-    const output = run(`init --type dash --dir "${tempDir}" --force`);
-    expect(output).toContain('Dash Squad');
+    const output = run(`init --type fast --dir "${tempDir}" --force`);
+    expect(output).toContain('Fast Squad');
     expect(output).toContain('⚠ Skipping .squad/decisions.md (contains user content)');
     expect(output).toContain('⚠ Skipping JOURNAL.md (contains user content)');
 
@@ -148,19 +148,19 @@ describe('E2E: snap-squad CLI', () => {
   });
 
   it('--reset-all overwrites content files too', () => {
-    run(`init --type neighbors --dir "${tempDir}"`);
+    run(`init --type default --dir "${tempDir}"`);
     writeFileSync(join(tempDir, '.squad', 'decisions.md'), '# custom decisions\n\nwipe me\n');
     writeFileSync(join(tempDir, 'JOURNAL.md'), '# custom journal\n\nwipe me too\n');
 
-    const output = run(`init --type dash --dir "${tempDir}" --reset-all`);
-    expect(output).toContain('Dash Squad');
+    const output = run(`init --type fast --dir "${tempDir}" --reset-all`);
+    expect(output).toContain('Fast Squad');
     expect(output).not.toContain('Skipping JOURNAL.md');
 
     const decisionsMd = readFileSync(join(tempDir, '.squad', 'decisions.md'), 'utf-8');
     const journalMd = readFileSync(join(tempDir, 'JOURNAL.md'), 'utf-8');
-    expect(decisionsMd).toContain('"dash" preset');
+    expect(decisionsMd).toContain('"fast" preset');
     expect(decisionsMd).not.toContain('wipe me');
-    expect(journalMd).toContain('Dash Squad');
+    expect(journalMd).toContain('Fast Squad');
     expect(journalMd).not.toContain('wipe me too');
   });
 
@@ -176,7 +176,7 @@ describe('E2E: snap-squad CLI', () => {
   // --- Session awareness verification ---
 
   it('generated files form a complete squad-aware session', () => {
-    run(`init --type neighbors --dir "${tempDir}" --name my-app --owner bob`);
+    run(`init --type default --dir "${tempDir}" --name my-app --owner bob`);
 
     // AGENTS.md instructs reading .squad/
     const agentsMd = readFileSync(join(tempDir, 'AGENTS.md'), 'utf-8');
@@ -204,6 +204,6 @@ describe('E2E: snap-squad CLI', () => {
     // decisions.md has initial decision
     const decisionsMd = readFileSync(join(tempDir, '.squad', 'decisions.md'), 'utf-8');
     expect(decisionsMd).toContain('D-001');
-    expect(decisionsMd).toContain('neighbors');
+    expect(decisionsMd).toContain('default');
   });
 });

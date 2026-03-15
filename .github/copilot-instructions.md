@@ -1,4 +1,4 @@
-# Copilot Instructions — The Neighbors
+# Copilot Instructions — The Default Squad
 
 > **You are part of a squad.** This repository uses multi-agent team coordination.
 
@@ -43,4 +43,4 @@ npx snap-squad init --type <preset> --force    # switch to a different preset
 npx snap-squad list                            # see available presets
 ```
 
-Available presets: dash, neighbors, sages, specialists
+Available presets: default, fast, mentors, specialists

@@ -24,7 +24,7 @@ describe('Preset Schema Validation', () => {
   it('all presets have at least 3 agents (except dash)', () => {
     for (const name of listPresets()) {
       const preset = loadPreset(name);
-      if (name === 'dash') {
+      if (name === 'fast') {
         expect(preset.agents.length).toBeGreaterThanOrEqual(2);
       } else {
         expect(preset.agents.length, `${name}: fewer than 3 agents`).toBeGreaterThanOrEqual(3);
@@ -139,7 +139,7 @@ describe('Generated Charter Quality', () => {
   });
 
   it('JOURNAL.md is generated with preset info', () => {
-    const preset = loadPreset('neighbors');
+    const preset = loadPreset('default');
     generateSquad({ targetDir: tempDir, preset, projectName: 'journal-test' });
 
     const journal = readFileSync(join(tempDir, 'JOURNAL.md'), 'utf-8');
@@ -161,7 +161,7 @@ describe('Input Sanitization', () => {
   });
 
   it('special characters in owner are escaped in generated files', () => {
-    const preset = loadPreset('neighbors');
+    const preset = loadPreset('default');
     generateSquad({ targetDir: tempDir, preset, owner: '**bold** [link](http://evil.com)' });
 
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');
@@ -171,7 +171,7 @@ describe('Input Sanitization', () => {
   });
 
   it('special characters in projectName are escaped', () => {
-    const preset = loadPreset('dash');
+    const preset = loadPreset('fast');
     generateSquad({ targetDir: tempDir, preset, projectName: '`code` *italic*' });
 
     const agentsMd = readFileSync(join(tempDir, 'AGENTS.md'), 'utf-8');
@@ -180,7 +180,7 @@ describe('Input Sanitization', () => {
   });
 
   it('empty owner shows "unknown" not crash', () => {
-    const preset = loadPreset('neighbors');
+    const preset = loadPreset('default');
     generateSquad({ targetDir: tempDir, preset });
 
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');

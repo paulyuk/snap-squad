@@ -61,7 +61,7 @@ program
         console.log();
       }
     } else {
-      presetName = availablePresets.includes('neighbors') ? 'neighbors' : availablePresets[0] ?? 'neighbors';
+      presetName = availablePresets.includes('default') ? 'default' : availablePresets[0] ?? 'default';
     }
 
     let preset;

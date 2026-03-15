@@ -1,11 +1,11 @@
-name: neighbors
-displayName: The Neighbors
+name: default
+displayName: The Default Squad
 description: Default generalist squad — reliable, well-rounded, good for any project.
 vibe: friendly
 theme: Community Builders
 
 team:
-  name: The Neighbors
+  name: The Default Squad
   description: A friendly, well-rounded squad for general-purpose projects.
   projectContext: |
     A reliable generalist team that handles any project type. 

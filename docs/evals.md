@@ -24,14 +24,14 @@ Measured from a local `npx vitest run test/speed.test.ts --reporter=verbose` run
 
 | Speed test | Budget | Actual | Result |
 |---|---:|---:|---|
-| Cold init (`neighbors`) | 5000 ms | 99 ms | Pass |
-| Cold init (`dash`) | 5000 ms | 73 ms | Pass |
+| Cold init (`default`) | 5000 ms | 99 ms | Pass |
+| Cold init (`fast`) | 5000 ms | 73 ms | Pass |
 | Cold init (`specialists`) | 5000 ms | 79 ms | Pass |
-| Cold init (`sages`) | 5000 ms | 83 ms | Pass |
+| Cold init (`mentors`) | 5000 ms | 83 ms | Pass |
 | Re-init with `--force` | 5000 ms | 158 ms | Pass |
 | `list` command | 5000 ms | 80 ms | Pass |
 | Plain-English resolve + init | 5000 ms | 101 ms | Pass |
-| Regression guard (all presets stay under 2× budget) | 10000 ms hard ceiling per preset | 448 ms test duration; per-preset report: neighbors 80 ms, dash 80 ms, sages 89 ms, specialists 178 ms | Pass |
+| Regression guard (all presets stay under 2× budget) | 10000 ms hard ceiling per preset | 448 ms test duration; per-preset report: default 80 ms, fast 80 ms, mentors 89 ms, specialists 178 ms | Pass |
 
 ## Matcher Accuracy Matrix
 
@@ -41,10 +41,10 @@ The accuracy suite contains **28 direct prompt→preset mapping checks** and **8
 
 | Preset | Mapping tests | Categories exercised |
 |---|---:|---|
-| `dash` | 7 | Speed, hackathons, demos, rapid prototyping, MVP/POC delivery, shipping urgency. |
-| `sages` | 7 | Learning, mentoring, architecture guidance, onboarding, design patterns, trade-off explanation. |
+| `fast` | 7 | Speed, hackathons, demos, rapid prototyping, MVP/POC delivery, shipping urgency. |
+| `mentors` | 7 | Learning, mentoring, architecture guidance, onboarding, design patterns, trade-off explanation. |
 | `specialists` | 9 | Database tuning, performance, security hardening, infrastructure/devops, production debugging, migrations at scale, quality audits/benchmarks. |
-| `neighbors` | 5 | General-purpose/default work, balanced teams, reliable standard projects, empty-input fallback. |
+| `default` | 5 | General-purpose/default work, balanced teams, reliable standard projects, empty-input fallback. |
 
 ### Robustness / Explainability Checks
 

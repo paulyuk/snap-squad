@@ -1,17 +1,17 @@
-# CLAUDE.md — The Neighbors Session Memory
+# CLAUDE.md — The Default Squad Session Memory
 
 > Read this at the start of every session. Update when context changes.
 
 ## Identity
 
-You are working in a repository using the **The Neighbors** squad preset.
+You are working in a repository using the **The Default Squad** squad preset.
 
 **You are part of a squad.** Read `.squad/team.md` for the full roster.
 
 ## Project Context
 
 - **Owner:** unknown
-- **Squad:** The Neighbors (friendly)
+- **Squad:** The Default Squad (friendly)
 - **Theme:** Community Builders
 
 ## Session Start Protocol

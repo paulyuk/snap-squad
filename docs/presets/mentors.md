@@ -1,4 +1,4 @@
-# The Sages — Mentor Squad
+# The Mentors — Mentor Squad
 
 > *"Never just says 'do it this way.' Always explains why."*
 
@@ -7,7 +7,7 @@
 A teaching-first squad where every code change comes with an explanation. Architecture decisions include rationale. Great for onboarding, training projects, and establishing patterns you'll reuse for years.
 
 ```bash
-npx snap-squad init --type sages
+npx snap-squad init --type mentors
 # or
 npx snap-squad init help me learn best practices
 ```
@@ -16,20 +16,20 @@ npx snap-squad init help me learn best practices
 
 | Agent | Role | What They Do |
 |-------|------|-------------|
-| [**Oracle**](../../src/registry/presets/sages.yaml#L16) 🔮 | Lead / Architect | Explains architectural decisions with context and trade-offs. Teaches through Socratic questions. |
-| [**Scriptor**](../../src/registry/presets/sages.yaml#L23) 📜 | Core Dev / Mentor | Writes exemplary code with inline explanations. Every function tells a story. |
-| [**Proof**](../../src/registry/presets/sages.yaml#L30) ✅ | Tester / Quality Mentor | Teaches testing as a design tool, not a chore. Tests are specifications written in code. |
-| [**Chronicle**](../../src/registry/presets/sages.yaml#L37) 📚 | Docs / Knowledge Manager | Writes docs that teach, not just describe. Maintains decision records and learning paths. |
-| [**Pattern**](../../src/registry/presets/sages.yaml#L44) 🧵 | Prompt Engineer / Pattern Curator | Designs prompts as reusable patterns with documented rationale. Document it, version it, test it. |
-| [**Measure**](../../src/registry/presets/sages.yaml#L51) 📐 | Evals / Assessment Mentor | Teaches eval-driven development — why baselines matter and how to design evals that reveal real quality. |
-| [**Scout**](../../src/registry/presets/sages.yaml#L58) 🔭 | Researcher / Landscape Analyst | Explores the ecosystem for learning opportunities and new patterns. Every discovery is a teaching moment. |
-| [**Ledger**](../../src/registry/presets/sages.yaml#L65) 📖 | Historian / Build Journalist | Captures the builder's steering, reasoning, and teaching moments. The lesson behind the code. |
+| [**Polaris**](../../src/registry/presets/mentors.yaml#L16) 🔮 | Lead / Architect | Explains architectural decisions with context and trade-offs. Teaches through Socratic questions. |
+| [**Scriptor**](../../src/registry/presets/mentors.yaml#L23) 📜 | Core Dev / Mentor | Writes exemplary code with inline explanations. Every function tells a story. |
+| [**Proof**](../../src/registry/presets/mentors.yaml#L30) ✅ | Tester / Quality Mentor | Teaches testing as a design tool, not a chore. Tests are specifications written in code. |
+| [**Chronicle**](../../src/registry/presets/mentors.yaml#L37) 📚 | Docs / Knowledge Manager | Writes docs that teach, not just describe. Maintains decision records and learning paths. |
+| [**Pattern**](../../src/registry/presets/mentors.yaml#L44) 🧵 | Prompt Engineer / Pattern Curator | Designs prompts as reusable patterns with documented rationale. Document it, version it, test it. |
+| [**Measure**](../../src/registry/presets/mentors.yaml#L51) 📐 | Evals / Assessment Mentor | Teaches eval-driven development — why baselines matter and how to design evals that reveal real quality. |
+| [**Scout**](../../src/registry/presets/mentors.yaml#L58) 🔭 | Researcher / Landscape Analyst | Explores the ecosystem for learning opportunities and new patterns. Every discovery is a teaching moment. |
+| [**Ledger**](../../src/registry/presets/mentors.yaml#L65) 📖 | Historian / Build Journalist | Captures the builder's steering, reasoning, and teaching moments. The lesson behind the code. |
 
 ## Routing
 
 | Work Type | Agent | Examples |
 |-----------|-------|---------|
-| `architecture` | Oracle | Design decisions with full rationale and alternatives |
+| `architecture` | Polaris | Design decisions with full rationale and alternatives |
 | `implementation` | Scriptor | Clean, well-documented code with inline explanations |
 | `testing` | Proof | Test-driven development, coverage strategy |
 | `documentation` | Chronicle | Tutorials, ADRs, learning paths, reference docs |
@@ -38,13 +38,13 @@ npx snap-squad init help me learn best practices
 | `research` | Scout | Ecosystem research, pattern discovery, weekly check-ins |
 | `history` | Ledger | Build journal, steering moments, prompt curation |
 
-**Default agent:** Oracle — the mentor leads.
+**Default agent:** Polaris — the mentor leads.
 
-## Spotlight: Oracle 🔮
+## Spotlight: Polaris 🔮
 
 > *"What are the three alternatives you didn't pick, and why?"*
 
-Oracle teaches through questions. Instead of handing you the answer, Oracle walks you through the decision tree — the trade-offs, the alternatives, the thing that'll bite you in six months if you pick the easy path today. Every architecture decision comes with a rationale you can defend in a design review. Oracle doesn't just build systems; Oracle builds engineers who can build systems.
+Polaris teaches through questions. Instead of handing you the answer, Polaris walks you through the decision tree — the trade-offs, the alternatives, the thing that'll bite you in six months if you pick the easy path today. Every architecture decision comes with a rationale you can defend in a design review. Polaris doesn't just build systems; Polaris builds engineers who can build systems.
 
 ## Spotlight: Scriptor 📜
 
@@ -76,10 +76,10 @@ Every squad *builds*. Sages also *teach*. The difference shows up everywhere:
 
 ## When to Level Up
 
-- Need to ship faster? → [Dash](dash.md)
-- Need balanced coverage? → [Neighbors](neighbors.md)
+- Need to ship faster? → [Fast](fast.md)
+- Need balanced coverage? → [Default](default.md)
 - Need deep domain expertise? → [Specialists](specialists.md)
 
 ## Source Definition
 
-Full preset YAML: [`src/registry/presets/sages.yaml`](../../src/registry/presets/sages.yaml)
+Full preset YAML: [`src/registry/presets/mentors.yaml`](../../src/registry/presets/mentors.yaml)

@@ -568,7 +568,7 @@ If I can't solve it in 3 attempts, I say so and recommend bringing in the archit
 ### CLI UX Principles
 
 - **Show, don't tell.** List created files, don't say "files were created."
-- **Errors are guidance.** Bad: "Invalid preset." Good: "Preset 'xyz' not found. Available: dash, neighbors, sages, specialists"
+- **Errors are guidance.** Bad: "Invalid preset." Good: "Preset 'xyz' not found. Available: default, fast, mentors, specialists"
 - **Celebrate success.** A checkmark and "Squad ready!" beats a silent exit.
 - **Respect the terminal.** No walls of text. Use tables, bullets, and whitespace.
 `;
@@ -662,16 +662,16 @@ ${skillSection}
 function generateAgentsMd(arch: Preset, projectName?: string): string {
   const name = projectName || arch.team.name;
   const presetKey = arch.name?.toLowerCase() || '';
-  const isNeighborsPlus = presetKey !== 'dash';
+  const isDefaultPlus = presetKey !== 'fast';
   const agentTable = arch.agents
     .map((a) => `| ${a.name} | ${a.role} | ${a.expertise.slice(0, 2).join(', ')} |`)
     .join('\n');
 
-  const neighborsPlus = isNeighborsPlus ? `
+  const defaultPlus = isDefaultPlus ? `
 
 ## Shorthand
 
-When the builder says **"neighbors+"** they mean all presets at the neighbors level and above (currently: neighbors, sages, specialists — everything except dash). Apply the instruction to all matching presets.
+When the builder says **"default+"** they mean all presets at the default level and above (currently: default, mentors, specialists — everything except fast). Apply the instruction to all matching presets.
 
 ## Reviewing Discussions & Source Docs
 
@@ -730,7 +730,7 @@ Do not end the session without verifying:
 - [ ] Docs updated if user-visible behavior changed
 - [ ] Tests considered if code changed
 - [ ] Open risks or follow-ups explicitly stated
-${neighborsPlus}
+${defaultPlus}
 ## Quick Reference
 
 | Agent | Role | Ask them about... |
@@ -802,7 +802,7 @@ If this is the first working session after squad initialization:
 
 function generateCopilotInstructions(arch: Preset): string {
   const presetNames = listPresets();
-  const presetList = presetNames.length > 0 ? presetNames.join(', ') : 'neighbors, dash, sages, specialists';
+  const presetList = presetNames.length > 0 ? presetNames.join(', ') : 'default, fast, mentors, specialists';
 
   return `# Copilot Instructions — ${arch.team.name}
 

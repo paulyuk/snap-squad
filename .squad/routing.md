@@ -1,4 +1,4 @@
-# Routing Rules — The Neighbors
+# Routing Rules — The Default Squad
 
 ## Work Type → Agent
 

@@ -16,8 +16,8 @@ describe('Generator', () => {
     rmSync(tempDir, { recursive: true, force: true });
   });
 
-  it('generates all expected files for neighbors preset', () => {
-    const preset = loadPreset('neighbors');
+  it('generates all expected files for default preset', () => {
+    const preset = loadPreset('default');
     const result = generateSquad({
       targetDir: tempDir,
       preset,
@@ -51,7 +51,7 @@ describe('Generator', () => {
   });
 
   it('team.md contains project context', () => {
-    const preset = loadPreset('neighbors');
+    const preset = loadPreset('default');
     generateSquad({
       targetDir: tempDir,
       preset,
@@ -61,12 +61,12 @@ describe('Generator', () => {
 
     const teamMd = readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8');
     expect(teamMd).toContain('alice');
-    expect(teamMd).toContain('The Neighbors');
+    expect(teamMd).toContain('The Default Squad');
     expect(teamMd).toContain('Blueprint');
   });
 
   it('hook chain files reference .squad/', () => {
-    const preset = loadPreset('dash');
+    const preset = loadPreset('fast');
     generateSquad({ targetDir: tempDir, preset });
 
     const agentsMd = readFileSync(join(tempDir, 'AGENTS.md'), 'utf-8');
@@ -86,7 +86,7 @@ describe('Generator', () => {
   });
 
   it('preserves content files during structural overwrite mode', () => {
-    generateSquad({ targetDir: tempDir, preset: loadPreset('neighbors') });
+    generateSquad({ targetDir: tempDir, preset: loadPreset('default') });
 
     const decisionsPath = join(tempDir, '.squad', 'decisions.md');
     const journalPath = join(tempDir, 'JOURNAL.md');
@@ -95,7 +95,7 @@ describe('Generator', () => {
 
     const result = generateSquad({
       targetDir: tempDir,
-      preset: loadPreset('dash'),
+      preset: loadPreset('fast'),
       overwriteMode: 'structural',
     });
 
@@ -106,7 +106,7 @@ describe('Generator', () => {
   });
 
   it('reset-all overwrite mode replaces content files too', () => {
-    generateSquad({ targetDir: tempDir, preset: loadPreset('neighbors') });
+    generateSquad({ targetDir: tempDir, preset: loadPreset('default') });
 
     const decisionsPath = join(tempDir, '.squad', 'decisions.md');
     const journalPath = join(tempDir, 'JOURNAL.md');
@@ -115,14 +115,14 @@ describe('Generator', () => {
 
     const result = generateSquad({
       targetDir: tempDir,
-      preset: loadPreset('dash'),
+      preset: loadPreset('fast'),
       overwriteMode: 'all',
     });
 
     expect(result.skipped).toEqual([]);
-    expect(readFileSync(decisionsPath, 'utf-8')).toContain('"dash" preset');
+    expect(readFileSync(decisionsPath, 'utf-8')).toContain('"fast" preset');
     expect(readFileSync(decisionsPath, 'utf-8')).not.toContain('Reset me.');
-    expect(readFileSync(journalPath, 'utf-8')).toContain('Dash Squad');
+    expect(readFileSync(journalPath, 'utf-8')).toContain('Fast Squad');
     expect(readFileSync(journalPath, 'utf-8')).not.toContain('Reset me too.');
   });
 

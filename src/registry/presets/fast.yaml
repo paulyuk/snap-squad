@@ -1,11 +1,11 @@
-name: dash
-displayName: The Dash Squad
+name: fast
+displayName: The Fast Squad
 description: Rapid POC squad — speed over ceremony, zero fluff, ship fast.
 vibe: speed
 theme: Racing Crew
 
 team:
-  name: The Dash Squad
+  name: The Fast Squad
   description: Built for speed. Minimal ceremony, maximum velocity.
   projectContext: |
     A squad optimized for rapid POCs and hackathons.

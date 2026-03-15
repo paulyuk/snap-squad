@@ -1,11 +1,11 @@
-name: sages
-displayName: The Sages
+name: mentors
+displayName: The Mentors
 description: Mentor squad — explains the "why", focuses on best practices and learning.
 vibe: mentor
 theme: Library Council
 
 team:
-  name: The Sages
+  name: The Mentors
   description: A teaching-first squad that explains decisions, shares patterns, and builds understanding.
   projectContext: |
     A squad for learning and best practices. Every code change comes
@@ -13,7 +13,7 @@ team:
     Great for onboarding, training projects, and establishing patterns.
 
 agents:
-  - name: Oracle
+  - name: Polaris
     role: Lead / Architect
     description: Explains architectural decisions with context and trade-offs.
     expertise: [architecture, design patterns, trade-off analysis]
@@ -72,7 +72,7 @@ agents:
 routing:
   rules:
     - pattern: architecture
-      agent: Oracle
+      agent: Polaris
       description: Design decisions with full rationale and alternatives
     - pattern: implementation
       agent: Scriptor
@@ -95,6 +95,6 @@ routing:
     - pattern: history
       agent: Ledger
       description: Build journal, evolution narrative, steering moments, prompt curation
-  defaultAgent: Oracle
+  defaultAgent: Polaris
 
 skills: []

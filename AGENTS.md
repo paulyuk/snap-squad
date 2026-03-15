@@ -1,4 +1,4 @@
-# AGENTS.md — The Neighbors Operating Instructions
+# AGENTS.md — The Default Squad Operating Instructions
 
 > This file is read by AI agents working in this repository.
 > **You are not just aware of the squad. You ARE the squad. Act accordingly.**
@@ -40,7 +40,7 @@ Do not end the session without verifying:
 
 ## Shorthand
 
-When the builder says **"neighbors+"** they mean all presets at the neighbors level and above (currently: neighbors, sages, specialists — everything except dash). Apply the instruction to all matching presets.
+When the builder says **"default+"** they mean all presets at the default level and above (currently: default, mentors, specialists — everything except fast). Apply the instruction to all matching presets.
 
 ## Reviewing Discussions & Source Docs
 
@@ -74,6 +74,6 @@ This squad builds backends. Know these patterns:
 | Scout | Researcher / Opportunity Finder | competitive analysis, upstream tracking |
 | Ledger | Historian / Build Journalist | build journals, steering logs |
 
-## Preset: The Neighbors
+## Preset: The Default Squad
 
 Default generalist squad — reliable, well-rounded, good for any project.

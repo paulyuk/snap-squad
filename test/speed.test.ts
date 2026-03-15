@@ -43,16 +43,16 @@ describe('Speed: snap-squad must stay fast', () => {
 
   // --- init speed ---
 
-  it(`cold init (neighbors) completes under ${BUDGETS.initCold}ms`, () => {
-    const ms = timeMs(() => run(`init --type neighbors --dir "${tempDir}"`));
+  it(`cold init (default) completes under ${BUDGETS.initCold}ms`, () => {
+    const ms = timeMs(() => run(`init --type default --dir "${tempDir}"`));
     expect(ms).toBeLessThan(BUDGETS.initCold);
     expect(existsSync(join(tempDir, '.squad', 'team.md'))).toBe(true);
   });
 
-  it(`cold init (dash) completes under ${BUDGETS.initCold}ms`, () => {
+  it(`cold init (fast) completes under ${BUDGETS.initCold}ms`, () => {
     const dir2 = mkdtempSync(join(tmpdir(), 'snap-squad-speed-'));
     try {
-      const ms = timeMs(() => run(`init --type dash --dir "${dir2}"`));
+      const ms = timeMs(() => run(`init --type fast --dir "${dir2}"`));
       expect(ms).toBeLessThan(BUDGETS.initCold);
     } finally {
       rmSync(dir2, { recursive: true, force: true });
@@ -69,10 +69,10 @@ describe('Speed: snap-squad must stay fast', () => {
     }
   });
 
-  it(`cold init (sages) completes under ${BUDGETS.initCold}ms`, () => {
+  it(`cold init (mentors) completes under ${BUDGETS.initCold}ms`, () => {
     const dir2 = mkdtempSync(join(tmpdir(), 'snap-squad-speed-'));
     try {
-      const ms = timeMs(() => run(`init --type sages --dir "${dir2}"`));
+      const ms = timeMs(() => run(`init --type mentors --dir "${dir2}"`));
       expect(ms).toBeLessThan(BUDGETS.initCold);
     } finally {
       rmSync(dir2, { recursive: true, force: true });
@@ -82,8 +82,8 @@ describe('Speed: snap-squad must stay fast', () => {
   // --- re-init with --force ---
 
   it(`re-init with --force completes under ${BUDGETS.initForce}ms`, () => {
-    run(`init --type neighbors --dir "${tempDir}"`);
-    const ms = timeMs(() => run(`init --type dash --dir "${tempDir}" --force`));
+    run(`init --type default --dir "${tempDir}"`);
+    const ms = timeMs(() => run(`init --type fast --dir "${tempDir}" --force`));
     expect(ms).toBeLessThan(BUDGETS.initForce);
   });
 
@@ -105,7 +105,7 @@ describe('Speed: snap-squad must stay fast', () => {
   // --- regression: all presets stay under budget ---
 
   it('no preset init exceeds 2x the budget (regression guard)', () => {
-    const presets = ['neighbors', 'dash', 'sages', 'specialists'];
+    const presets = ['default', 'fast', 'mentors', 'specialists'];
     const results: { preset: string; ms: number }[] = [];
 
     for (const preset of presets) {
