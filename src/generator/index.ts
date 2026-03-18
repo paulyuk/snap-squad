@@ -389,6 +389,7 @@ Every architectural choice gets logged to \`.squad/decisions.md\` with:
 - No \`require()\` — ESM-only with \`import\`
 - Sanitize user input before template injection
 - Prefer atomic operations with rollback on failure
+- For code generation and IaC: **gpt-5.4-mini** minimum (if available in region)
 
 ### When I'm Done
 
@@ -747,7 +748,7 @@ These are not suggestions. They are standing orders for every session:
 - **Behavior changed → check docs.** If user-visible behavior shifted, docs must reflect it.
 - **Decision made → log it.** Any trade-off or design choice goes in \`.squad/decisions.md\`.
 - **Milestone reached → journal it.** Update \`JOURNAL.md\` with what happened and why.
-- **Another role needed → dispatch it.** Don't wait to be asked. If docs need updating, dispatch DevRel. If tests are missing, dispatch Tester.
+- **Another role needed → dispatch it.** Don't wait to be asked. If docs need updating, dispatch DevRel. If tests are missing, dispatch Tester. If a milestone was reached, dispatch Scribe. If prompts or evals changed, dispatch Evaluator.
 
 ## Squad Dispatch
 
@@ -825,9 +826,10 @@ Immediately after reading this file, before responding to the user:
 These apply in **every session**, whether or not the user asks:
 
 - **Code changed → tests reviewed.** Don't skip testing because it wasn't mentioned.
-- **Behavior changed → docs updated.** If what the user sees changed, docs must change too.
+- **Behavior changed → dispatch DevRel.** If what the user sees changed, docs must change too.
 - **Trade-off made → decision logged.** Record it in \`.squad/decisions.md\` with context and reasoning.
-- **Milestone reached → journal updated.** \`JOURNAL.md\` captures the story, not just the code.
+- **Milestone reached → dispatch Scribe.** \`JOURNAL.md\` captures the story, not just the code.
+- **Prompts or evals changed → dispatch Evaluator.** Verify eval baselines haven't regressed.
 - **Another role's domain touched → dispatch that role as a sub-agent.** Don't role-switch — use the \`task\` tool.
 
 ## Session Completion Gate
@@ -880,10 +882,10 @@ These fire automatically — they are not optional:
 | Trigger | Action |
 |---------|--------|
 | Code changed | Run \`npm test\` before committing — never commit red |
-| User-visible behavior changed | Update docs and README if affected |
-| Prompt or agent behavior changed | Review eval baselines |
+| User-visible behavior changed | Dispatch DevRel — update docs and README |
+| Prompt or agent behavior changed | Dispatch Evaluator — review eval baselines |
 | Important trade-off made | Log decision to \`.squad/decisions.md\` |
-| Meaningful milestone reached | Update \`JOURNAL.md\` with what happened and why |
+| Meaningful milestone reached | Dispatch Scribe — update \`JOURNAL.md\` with what happened and why |
 | Another role's expertise needed | Dispatch that role as a background sub-agent via \`task\` tool |
 
 ## Before You Respond With "Done"

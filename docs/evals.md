@@ -15,8 +15,12 @@ snap-squad measures the things that decide whether a generated squad is trustwor
 | `test/generator.test.ts` | 6 | File generation coverage for preset output, hook-chain wiring, project context injection, structural/content overwrite rules, and specialist skill references. |
 | `test/validation.test.ts` | 13 | Preset schema invariants, charter/output quality, routing integrity, `JOURNAL.md` generation, and input sanitization. |
 | `test/speed.test.ts` | 8 | Performance budgets for cold init, forced re-init, `list`, plain-English resolution + init, and regression guard ceilings. |
+| `test/hook-chain.test.ts` | 66 | Hook-chain wiring, role-tag enforcement, Always-On Duties, completion gates, secondary routing triggers across all presets. |
+| `test/hook-chain-dispatch.test.ts` | 20 | Dispatch enforcement: `task` tool, `mode: "background"`, charter context, role-tag formatting, routing completeness. |
+| `test/edge-case-analysis.test.ts` | 16 | Edge cases: empty inputs, special characters, boundary conditions, error handling. |
+| `test/charter-evals.test.ts` | 40 | Charter quality/tone/correctness for DevRel, Coder, Scribe. Routing coverage: secondary agent dispatch, explicit role naming, completion gates. |
 
-**Suite total:** 87 tests across 7 files.
+**Suite total:** 229 tests across 11 files.
 
 ## Speed Baselines
 
@@ -99,11 +103,48 @@ This prompt is **repeatable** — it exercises squad routing and dispatch withou
 
 **Interpretation:** 6/6 = hook chain working. 4-5/6 = minor drift. ≤3/6 = dispatch enforcement needs tightening.
 
+## Charter & Routing Quality Evals
+
+Added in v0.9.5. `test/charter-evals.test.ts` grades the quality, tone, and correctness of generated charters for DevRel, Coder, and Scribe — plus routing coverage that ensures secondary agents don't get silently skipped.
+
+### Grounding Sources
+
+| Agent | Grounding | What it teaches |
+|---|---|---|
+| DevRel | Azure-Samples READMEs, Pamela Fox repos/blog | Direct imperative tone, no fluff, honesty rule, test-before-document |
+| Coder | Azure Functions samples (Python/TS/C#/Java), Bicep IaC, Azure skills | Precise prohibitions, security patterns, multi-language awareness, gpt-5.4-mini model floor |
+| Scribe | git-for-pms how-was-this-built.md | Narrative not changelog, timestamped tables, Level-Up gamification, honest about failures |
+
+### Charter Quality Tests
+
+| Area | Tests | What is asserted |
+|---|---:|---|
+| DevRel quality | 3 | Required sections (How I Write, Always-On, Honesty Rule), doc targets (README, CONTRIBUTING) |
+| DevRel tone | 2 | Direct imperative language, no marketing fluff (Azure Samples / Pamela Fox style) |
+| DevRel correctness | 2 | Trigger→action pairs are specific, honesty rule includes verification mechanism |
+| Coder quality | 3 | Required sections, explicit build/test commands (`npx tsc`, `npx vitest run`), completion criteria |
+| Coder tone | 2 | Explicit prohibitions (no `require()`), security patterns (sanitize, rollback) |
+| Coder correctness | 4 | Valid build/test commands, decisions.md reference, docs flag, gpt-5.4-mini model floor for code/IaC |
+| Scribe quality | 2 | All 5 journal sections, markdown table template with required columns |
+| Scribe tone | 4 | Narrative framing, honesty about failures, Level-Up gamification, human quote requirement |
+| Scribe correctness | 3 | Valid git log command, real target files, ≥3 specific numbered rules |
+
+### Routing Dispatch Tests
+
+| Area | Tests | What is asserted |
+|---|---:|---|
+| Work-type coverage | 3 | routing.md maps documentation→DevRel, history→Scribe, evals→Evaluator |
+| Always-On triggers | 3 | All core triggers (code→test, behavior→docs, decision→log, milestone→journal) in AGENTS.md, CLAUDE.md, copilot-instructions.md; eval trigger in copilot-instructions.md |
+| Explicit role naming | 6 | AGENTS.md dispatch names DevRel, Scribe, Evaluator; CLAUDE.md names all three; copilot-instructions.md names all three; "Scribe always runs" principle |
+| Completion gate | 5 | AGENTS.md gate checks docs, journal, decisions, tests; asks "which roles were missed"; CLAUDE.md has matching gate |
+
+**Total: 40 tests** — all pass, ~50ms runtime (lean and fast).
+
 ## Quality Gates
 
 | Gate | Requirement |
 |---|---|
-| Functional baseline | All tests green. Current snapshot: **173/173 passing**. |
+| Functional baseline | All tests green. Current snapshot: **229/229 passing**. |
 | Routing quality | Matcher, accuracy, generator, registry, validation, and E2E suites must remain green. |
 | Performance | All speed tests must stay within budget, and no preset init may exceed the 2× hard ceiling. |
 | Release blockers | No open P0 issues before shipping. |
@@ -112,10 +153,10 @@ This prompt is **repeatable** — it exercises squad routing and dispatch withou
 
 | Field | Value |
 |---|---|
-| Date | 2026-03-15 |
-| Version | 0.9.1 |
-| Total tests | 173 |
-| Pass rate | 100% (173/173) |
-| Test files | 9 |
-| Full-suite runtime | 1.52 s |
+| Date | 2026-03-18 |
+| Version | 0.9.5 |
+| Total tests | 229 |
+| Pass rate | 100% (229/229) |
+| Test files | 11 |
+| Full-suite runtime | 1.82 s |
 | Vitest command | `npx vitest run 2>&1` |

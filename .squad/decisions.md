@@ -51,3 +51,15 @@
 - **Date:** 2026-03-15
 - **Context:** The current hook-chain suite mostly proves that generated files contain required enforcement text, but it does not prove that an assistant actually follows dispatch, startup, and completion instructions at runtime.
 - **Decision:** Score new hook-chain eval prompts primarily on their ability to expose runtime compliance gaps — especially dispatch behavior, startup/routing fidelity, and completion-gate obedience — using a weighted rubric that favors coverage value and behavioral observability over simple textual similarity.
+
+### D-008: Charter quality evals grounded on external taste exemplars
+- **By:** Evaluator
+- **Date:** 2026-03-18
+- **Context:** Generated charters had no quality bar beyond "sections exist." DevRel, Scribe, and Evaluator were being silently skipped at runtime because AGENTS.md and CLAUDE.md only named DevRel and Tester in dispatch examples — Scribe and Evaluator were implicit.
+- **Decision:** (1) Add `test/charter-evals.test.ts` (40 tests) grading quality, tone, and correctness for DevRel, Coder, Scribe charters — grounded on Azure-Samples style, Pamela Fox repos/blog, and git-for-pms build journal format. (2) Fix templates to explicitly name Scribe and Evaluator in dispatch instructions across AGENTS.md, CLAUDE.md, and copilot-instructions.md. (3) Add gpt-5.4-mini as minimum model floor for code generation and IaC in Coder charter.
+
+### D-009: gpt-5.4-mini is the minimum model for code and IaC
+- **By:** Coder
+- **Date:** 2026-03-18
+- **Context:** No model guidance existed in the Coder charter. Code generation and IaC tasks need a minimum capability floor.
+- **Decision:** Coder charter Code Standards now specifies gpt-5.4-mini as the minimum tasteful default for code generation and IaC, contingent on region availability.
