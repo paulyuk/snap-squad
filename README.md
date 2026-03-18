@@ -59,12 +59,12 @@ The catch? Setting up a new squad takes time. Interviews, charters, routing conf
 
 | Preset | Vibe | Agents | Best For |
 |--------|------|--------|----------|
-| [**default**](docs/presets/default.md) | Generalist | Blueprint *(architect)*, Wrench *(dev)*, Lens *(QA)*, Quill *(docs)*, Mosaic *(prompts)*, Relay *(GitOps)*, Val *(light evals)*, Scout *(researcher)*, Ledger *(historian)* | General-purpose projects, reliable building |
-| [**fast**](docs/presets/fast.md) | Speed | Turbo *(architect)*, Bolt *(full-stack)*, Flash *(test + docs)* | Rapid POCs, hackathons, zero fluff |
-| [**mentors**](docs/presets/mentors.md) | Mentor | Polaris *(architect)*, Scriptor *(mentor dev)*, Proof *(test mentor)*, Chronicle *(docs)*, Pattern *(prompts)*, Measure *(evals)*, Scout *(researcher)*, Ledger *(historian)* | Learning, best practices, architecture review |
-| [**specialists**](docs/presets/specialists.md) | Precision | Chuck 🥋 *(debugger)*, Forge *(architect)*, Anvil *(data)*, Chisel *(security)*, Prism *(UI/UX)*, Loom *(infra)*, Caliber *(deep evals)*, Sensei *(skill audit)*, Waza *(skill bench)*, Blitz *(mass ops)*, Recon *(deep research)*, Ledger *(historian)* | DB tuning, security hardening, mass ops, troubleshooting |
+| [**default**](docs/presets/default.md) | Generalist | Architect, Coder, Tester, DevRel, Prompter, GitOps, Evaluator *(light evals)*, Researcher, Scribe | General-purpose projects, reliable building |
+| [**fast**](docs/presets/fast.md) | Speed | Architect, Coder *(full-stack)*, Tester *(test + docs)* | Rapid POCs, hackathons, zero fluff |
+| [**mentors**](docs/presets/mentors.md) | Mentor | Architect, Coder *(mentor dev)*, Tester *(quality mentor)*, DocWriter, Prompter, Evaluator, Researcher, Scribe | Learning, best practices, architecture review |
+| [**specialists**](docs/presets/specialists.md) | Precision | Debugger 🥋, Architect, Backend *(data)*, Security, Frontend *(UI/UX)*, DevOps *(infra)*, Evaluator *(deep evals)*, Auditor *(skill audit)*, EvalRunner *(skill bench)*, Swarm *(mass ops)*, Researcher *(deep research)*, Scribe | DB tuning, security hardening, mass ops, troubleshooting |
 
-> **default** does light evals (Val spot-checks baselines). Need a full eval pipeline? **specialists** brings Caliber for deep eval architecture plus Sensei and Waza for skill benchmarking.
+> **default** does light evals (Evaluator spot-checks baselines). Need a full eval pipeline? **specialists** brings Evaluator for deep eval architecture plus Auditor and EvalRunner for skill benchmarking.
 
 Click any preset name above to see the full roster — every agent's role, personality, routing rules, and when to use them.
 
@@ -80,8 +80,8 @@ your-project/
 │   ├── decisions.md         # Decision log
 │   ├── mcp-config.md        # MCP tool config
 │   └── agents/
-│       ├── blueprint/charter.md
-│       ├── wrench/charter.md
+│       ├── architect/charter.md
+│       ├── coder/charter.md
 │       └── ...
 ├── AGENTS.md                # AI agent instructions (any tool)
 ├── CLAUDE.md                # Claude/Copilot CLI session memory
