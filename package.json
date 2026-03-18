@@ -12,10 +12,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run eval && npm run build",
     "dev": "tsc --watch",
     "test": "vitest run",
     "test:watch": "vitest",
+    "eval": "mkdir -p evals && vitest run --reporter=default --reporter=json --outputFile=evals/results.json && node scripts/eval-report.js",
     "lint": "tsc --noEmit"
   },
   "engines": {

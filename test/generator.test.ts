@@ -99,7 +99,7 @@ describe('Generator', () => {
       overwriteMode: 'structural',
     });
 
-    expect(result.skipped).toEqual(['.squad/decisions.md', 'JOURNAL.md']);
+    expect(result.skipped).toEqual(['.squad/decisions.md', 'JOURNAL.md', '.squad/SCORECARD.md']);
     expect(readFileSync(join(tempDir, '.squad', 'team.md'), 'utf-8')).toContain('Architect');
     expect(readFileSync(decisionsPath, 'utf-8')).toContain('Do not erase this.');
     expect(readFileSync(journalPath, 'utf-8')).toContain('Do not erase this either.');
