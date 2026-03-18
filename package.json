@@ -1,6 +1,6 @@
 {
   "name": "snap-squad",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Get started with Squad faster — ready-made squad presets for instant deployment",
   "type": "module",
   "bin": {
