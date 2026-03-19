@@ -386,12 +386,53 @@ Every architectural choice gets logged to \`.squad/decisions.md\` with:
 
 ### Code Standards
 
-- Build must pass before pushing (\`npx tsc\`)
-- All tests must pass (\`npx vitest run\`)
-- No \`require()\` — ESM-only with \`import\`
 - Sanitize user input before template injection
 - Prefer atomic operations with rollback on failure
 - For code generation and IaC: **gpt-5.4-mini** minimum (if available in region)
+
+### Language Standards
+
+These apply when generating or reviewing code. Teams may override with their own style guides.
+
+**TypeScript / JavaScript**
+- ESM-only (\`import\`), no \`require()\`
+- Strict mode for TypeScript (\`strict: true\` in tsconfig)
+- \`async/await\` throughout, no blocking calls
+- Build: \`npx tsc\` · Test: \`npx vitest run\` (or project equivalent)
+
+**Python**
+- Use \`uv\` for all Python tooling — never raw \`python3\` or \`pip\`
+- \`uv run\`, \`uv pip install\`, \`uv venv\` — not \`pip install\` or \`python -m venv\`
+- Type hints (PEP 484) encouraged
+- \`async/await\` for I/O-bound work
+
+**C# / .NET**
+- Isolated worker model for Azure Functions
+- Nullable reference types enabled
+- \`async Task\` with \`CancellationToken\` propagation
+- \`using\` / \`await using\` for resource cleanup
+- Build: \`dotnet build\` · Test: \`dotnet test\`
+
+**Java**
+- Java 17+ with \`maven\` or \`gradle\`
+- \`Optional<T>\` for nullable returns, never return raw \`null\`
+- Prefer records for DTOs
+- Build: \`mvn clean package\` · Test: \`mvn test\`
+
+**Bicep / IaC**
+- Use Azure Verified Modules (\`br/public:avm/\`) where available
+- Parameterize all configurable values — no hardcoded subscription IDs
+- Managed identities over keys; tag all resources
+- Output critical values for downstream consumption
+
+**PowerShell**
+- Use \`Set-StrictMode -Version Latest\` and \`$ErrorActionPreference = 'Stop'\`
+- Verb-Noun naming (\`Get-Item\`, \`New-Resource\`)
+- Pipeline-friendly output; avoid \`Write-Host\` for data (use \`Write-Output\`)
+- Test with Pester when tests exist
+
+> **Team overrides welcome.** Add your project's style guide, linter config, or coding standards here.
+> This section provides sensible defaults grounded on [Azure-Samples](https://github.com/Azure-Samples/simple-agent-functions-java) patterns.
 
 ### When I'm Done
 
@@ -1119,10 +1160,14 @@ function generateScorecard(arch: Preset): string {
       checks.push('- [ ] No marketing fluff or buzzwords');
       checks.push('- [ ] Every command in docs was tested first');
     } else if (/core dev|full-stack|backend/i.test(role)) {
-      checks.push('- [ ] Code uses ESM imports where applicable');
-      checks.push('- [ ] Error handling present');
+      checks.push('- [ ] Code follows Language Standards in charter (TS, Python, C#, Java, Bicep, PowerShell)');
+      checks.push('- [ ] Python uses `uv` — not raw `pip` or `python3`');
+      checks.push('- [ ] TypeScript uses ESM imports, strict mode');
+      checks.push('- [ ] C#/.NET uses `async Task`, nullable refs, `using` cleanup');
+      checks.push('- [ ] Java uses `Optional<T>`, no raw `null` returns');
+      checks.push('- [ ] Bicep uses AVM modules, managed identities, no hardcoded IDs');
       checks.push('- [ ] Uses gpt-5.4-mini minimum for code generation / IaC');
-      checks.push('- [ ] Build/test commands work');
+      checks.push('- [ ] Build/test commands work for target language');
     } else if (/test|qa/i.test(role)) {
       checks.push('- [ ] Tests cover happy path, edge cases, and error paths');
       checks.push('- [ ] No regressions introduced');

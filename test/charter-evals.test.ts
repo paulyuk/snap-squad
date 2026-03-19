@@ -101,9 +101,8 @@ describe('Charter & Routing Evals', () => {
       expect(coder).toContain('### Always-On Duties');
     });
 
-    it('includes explicit build and test commands', () => {
-      expect(coder).toContain('npx tsc');
-      expect(coder).toContain('npx vitest run');
+    it('has Language Standards section with multi-language coverage', () => {
+      expect(coder).toContain('### Language Standards');
     });
 
     it('has completion criteria', () => {
@@ -123,12 +122,43 @@ describe('Charter & Routing Evals', () => {
       expect(coder).toMatch(/sanitize/i);
       expect(coder).toMatch(/rollback|atomic/i);
     });
+
+    it('leaves room for team overrides (not over-opinionated)', () => {
+      expect(coder).toMatch(/team.*override|style guide/i);
+    });
+  });
+
+  describe('Coder — Language Coverage', () => {
+    // Grounding: Azure-Samples/simple-agent-functions-{lang} patterns
+    const languages = [
+      { name: 'TypeScript', markers: [/typescript/i, /ESM|import/i, /npx tsc/] },
+      { name: 'Python', markers: [/python/i, /uv run|uv pip/i, /type hint/i] },
+      { name: 'C# / .NET', markers: [/C#|\.NET/i, /dotnet build|dotnet test/i] },
+      { name: 'Java', markers: [/java/i, /maven|mvn/i, /Optional/] },
+      { name: 'Bicep / IaC', markers: [/bicep/i, /managed identit/i, /parameterize/i] },
+      { name: 'PowerShell', markers: [/powershell/i, /pester/i, /StrictMode/i] },
+    ];
+
+    for (const { name, markers } of languages) {
+      it(`covers ${name} with actionable standards`, () => {
+        for (const pattern of markers) {
+          expect(coder, `${name}: missing ${pattern}`).toMatch(pattern);
+        }
+      });
+    }
+
+    it('Python standards require uv, not raw pip or python3', () => {
+      // Grounding: user requirement — always uv, never pip directly
+      expect(coder).toMatch(/uv/);
+      expect(coder).toMatch(/never.*python3|never.*pip|not.*pip install/i);
+    });
   });
 
   describe('Coder — Correctness', () => {
-    it('build and test commands are valid for this repo', () => {
+    it('includes build/test commands for multiple languages', () => {
       expect(coder).toContain('npx tsc');
-      expect(coder).toContain('npx vitest run');
+      expect(coder).toContain('dotnet build');
+      expect(coder).toContain('mvn clean package');
     });
 
     it('references decisions.md before starting work', () => {
@@ -140,9 +170,12 @@ describe('Charter & Routing Evals', () => {
     });
 
     it('specifies minimum model for code generation and IaC', () => {
-      // gpt-5.4-mini is the tasteful default for code and IaC work
       expect(coder).toContain('gpt-5.4-mini');
       expect(coder).toMatch(/code generation|IaC/i);
+    });
+
+    it('references Azure-Samples as grounding source', () => {
+      expect(coder).toMatch(/azure.samples/i);
     });
   });
 

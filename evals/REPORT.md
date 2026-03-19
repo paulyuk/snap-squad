@@ -1,24 +1,24 @@
-# Eval Report — snap-squad v0.9.4
+# Eval Report — snap-squad v0.9.5
 
-> Last Known Good (LKG) — generated 2026-03-18 23:45:52 UTC
+> Last Known Good (LKG) — generated 2026-03-19 00:44:29 UTC
 
 ## Summary
 
 | Metric | Value |
 |--------|-------|
-| Version | 0.9.4 |
-| Total tests | 229 |
-| Passed | 229 |
+| Version | 0.9.5 |
+| Total tests | 238 |
+| Passed | 238 |
 | Failed | 0 |
 | Pass rate | 100.0% |
-| Duration | 4.51s |
+| Duration | 4.13s |
 | Verdict | **PASS** ✅ |
 
 ## Results by Category
 
 | Category | Passed | Total | Status |
 |----------|-------:|------:|--------|
-| Charter Evals | 25 | 25 | ✅ |
+| Charter Evals | 34 | 34 | ✅ |
 | Routing Evals | 15 | 15 | ✅ |
 | Hook Chain | 66 | 66 | ✅ |
 | Hook Chain Dispatch | 20 | 20 | ✅ |
@@ -62,20 +62,32 @@ Grades quality, tone, and correctness of generated charters.
 **Coder — Quality** — 3/3 ✅
 
 - ✅ has How I Build, Code Standards, and Always-On Duties sections
-- ✅ includes explicit build and test commands
+- ✅ has Language Standards section with multi-language coverage
 - ✅ has completion criteria
 
-**Coder — Tone** — 2/2 ✅
+**Coder — Tone** — 3/3 ✅
 
 - ✅ has explicit prohibitions (Azure Functions sample style)
 - ✅ emphasizes security and reliability patterns
+- ✅ leaves room for team overrides (not over-opinionated)
 
-**Coder — Correctness** — 4/4 ✅
+**Coder — Language Coverage** — 7/7 ✅
 
-- ✅ build and test commands are valid for this repo
+- ✅ covers TypeScript with actionable standards
+- ✅ covers Python with actionable standards
+- ✅ covers C# / .NET with actionable standards
+- ✅ covers Java with actionable standards
+- ✅ covers Bicep / IaC with actionable standards
+- ✅ covers PowerShell with actionable standards
+- ✅ Python standards require uv, not raw pip or python3
+
+**Coder — Correctness** — 5/5 ✅
+
+- ✅ includes build/test commands for multiple languages
 - ✅ references decisions.md before starting work
 - ✅ flags behavior changes for downstream docs update
 - ✅ specifies minimum model for code generation and IaC
+- ✅ references Azure-Samples as grounding source
 
 **Scribe — Quality** — 2/2 ✅
 
